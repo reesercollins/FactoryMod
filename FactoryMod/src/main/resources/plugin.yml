@@ -1,0 +1,6 @@
+main: reesercollins.FactoryMod.FMPlugin
+name: FactoryMod
+version: 1.0.0
+author: MyNameIsSlick
+description: A 1.13 rewrite of the Civcraft spigot plugin, FactoryMod.
+api-version: 1.13
