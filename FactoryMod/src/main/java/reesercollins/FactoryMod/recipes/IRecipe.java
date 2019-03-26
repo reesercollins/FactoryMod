@@ -38,7 +38,7 @@ public interface IRecipe {
 	 * @param i Inventory which contains the materials to work with
 	 * @param f Factory which is run
 	 */
-	public void applyEffect(Inventory i, ProductionFactory f);
+	public void applyEffect(Inventory i, ProductionFactory pf);
 
 	/**
 	 * Each implementation of this interface has to specify a unique identifier,
