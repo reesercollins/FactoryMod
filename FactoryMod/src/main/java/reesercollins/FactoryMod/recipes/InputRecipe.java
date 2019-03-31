@@ -17,14 +17,12 @@ import reesercollins.FactoryMod.utils.LoggingUtils;
 
 public abstract class InputRecipe implements IRecipe {
 
-	protected String name;
 	protected int productionTime;
 	protected ItemMap input;
 	protected int fuelConsumptionInterval = -1;
 	protected String identifier;
 
-	public InputRecipe(String identifier, String name, int productionTime, ItemMap input) {
-		this.name = name;
+	public InputRecipe(String identifier, int productionTime, ItemMap input) {
 		this.productionTime = productionTime;
 		this.input = input;
 		this.identifier = identifier;
@@ -60,10 +58,6 @@ public abstract class InputRecipe implements IRecipe {
 	 *         this recipe
 	 */
 	public abstract List<ItemStack> getOutputRepresentation(Inventory i, ProductionFactory pf);
-
-	public String getName() {
-		return name;
-	}
 
 	public int getFuelConsumptionInterval() {
 		return fuelConsumptionInterval;
@@ -130,11 +124,11 @@ public abstract class InputRecipe implements IRecipe {
 	}
 
 	protected void logBeforeRecipeRun(Inventory i, Factory f) {
-		LoggingUtils.logInventory(i, "Before executing recipe " + name + " for " + f.getLogData());
+		LoggingUtils.logInventory(i, "Before executing recipe " + getType() + " for " + f.getLogData());
 	}
 
 	protected void logAfterRecipeRun(Inventory i, Factory f) {
-		LoggingUtils.logInventory(i, "After executing recipe " + name + " for " + f.getLogData());
+		LoggingUtils.logInventory(i, "After executing recipe " + getType() + " for " + f.getLogData());
 	}
 
 	@Override

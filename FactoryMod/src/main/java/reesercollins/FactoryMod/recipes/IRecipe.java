@@ -5,12 +5,28 @@ import org.bukkit.inventory.Inventory;
 import reesercollins.FactoryMod.factories.ProductionFactory;
 
 public interface IRecipe {
+	
+	public enum RecipeType {
+		PRODUCTION,
+		COMPACT,
+		DECOMPACT,
+		REPAIR,
+		UPGRADE,
+		AOEREPAIR,
+		PYLON,
+		ENCHANT,
+		RANDOM,
+		COSTRETURN,
+		LOREENCHANT,
+		RECIPEMODIFIERUPGRADE,
+		DUMMY;
+	}
 
 	/**
 	 * @return The identifier for this recipe, which is used both internally and to
 	 *         display the recipe to a player
 	 */
-	public String getName();
+	public RecipeType getType();
 
 	/**
 	 * @return A unique identifier for this recipe. This should not be used for
@@ -40,11 +56,4 @@ public interface IRecipe {
 	 */
 	public void applyEffect(Inventory i, ProductionFactory pf);
 
-	/**
-	 * Each implementation of this interface has to specify a unique identifier,
-	 * which is used to identify instances of this recipe in the configuration
-	 * 
-	 * @return Unique identifier for the implementation
-	 */
-	public String getTypeIdentifier();
 }

@@ -48,9 +48,9 @@ public class ProductionFactory extends Factory {
 	private static HashSet<ProductionFactory> pylonFactories;
 
 	public ProductionFactory(IInteractionManager im, IRepairManager rm, IPowerManager ipm,
-			ProductionStructure mbs, int updateTime, String name, List<IRecipe> recipes,
+			ProductionStructure mbs, int updateTime, FactoryType type, List<IRecipe> recipes,
 			double citadelBreakReduction) {
-		super(im, rm, ipm, mbs, updateTime, name);
+		super(im, rm, ipm, mbs, updateTime, type);
 		this.active = false;
 		this.runCount = new HashMap<IRecipe, Integer>();
 		this.recipeLevel = new HashMap<IRecipe, Integer>();
@@ -144,7 +144,7 @@ public class ProductionFactory extends Factory {
 					return;
 				} else {
 					if (p != null) {
-						p.sendMessage(ChatColor.GOLD + "Automatically selected recipe " + autoSelected.getName());
+						p.sendMessage(ChatColor.GOLD + "Automatically selected recipe " + autoSelected.getType());
 					}
 					setRecipe(autoSelected);
 				}
@@ -170,7 +170,7 @@ public class ProductionFactory extends Factory {
 			}
 			return;
 		}
-//		if (!onStartUp && currentRecipe instanceof Upgraderecipe && FMPlugin.getManager().isCitadelEnabled()) {
+//		if (!onStartUp && currentRecipe instanceof UpgradeRecipe && FMPlugin.getManager().isCitadelEnabled()) {
 //			// only allow permitted members to upgrade the factory
 //			ReinforcementManager rm = Citadel.getReinforcementManager();
 //			PlayerReinforcement rein = (PlayerReinforcement) rm.getReinforcement(mbs.getCenter());
@@ -199,7 +199,7 @@ public class ProductionFactory extends Factory {
 				p.sendMessage(
 						ChatColor.RED + "You don't have enough fuel, the factory will run out of it before completing");
 			}
-			p.sendMessage(ChatColor.GREEN + "Activated " + name + " with recipe: " + currentRecipe.getName());
+			p.sendMessage(ChatColor.GREEN + "Activated " + type + " with recipe: " + currentRecipe.getType());
 			activator = p.getUniqueId();
 		}
 		activate();
@@ -247,6 +247,13 @@ public class ProductionFactory extends Factory {
 	 */
 	public Block getChest() {
 		return ((ProductionStructure) mbs).getChest();
+	}
+	
+	/**
+	 * @return The crafting table of this factory
+	 */
+	public Block getCraftingTable() {
+		return ((ProductionStructure) mbs).getCraftingTable();
 	}
 
 	/**
@@ -323,7 +330,7 @@ public class ProductionFactory extends Factory {
 					}
 					// if there is no fuel Available turn off the factory
 					else {
-						sendActivatorMessage(ChatColor.GOLD + name + " deactivated, because it ran out of fuel");
+						sendActivatorMessage(ChatColor.GOLD + type.toString() + " deactivated, because it ran out of fuel");
 						deactivate();
 					}
 				}
@@ -331,16 +338,16 @@ public class ProductionFactory extends Factory {
 				// if the production timer has reached the recipes production
 				// time remove input from chest, and add output material
 				else if (currentProductionTimer >= currentRecipe.getProductionTime()) {
-					LoggingUtils.log("Executing recipe " + currentRecipe.getName() + " for " + getLogData());
+					LoggingUtils.log("Executing recipe " + currentRecipe.getType() + " for " + getLogData());
 					RecipeExecuteEvent ree = new RecipeExecuteEvent(this, (InputRecipe) currentRecipe);
 					Bukkit.getPluginManager().callEvent(ree);
 					if (ree.isCancelled()) {
-						LoggingUtils.log("Executing recipe " + currentRecipe.getName() + " for " + getLogData()
+						LoggingUtils.log("Executing recipe " + currentRecipe.getType() + " for " + getLogData()
 								+ " was cancelled over the event");
 						deactivate();
 						return;
 					}
-					sendActivatorMessage(ChatColor.GOLD + currentRecipe.getName() + " in " + name + " completed");
+					sendActivatorMessage(ChatColor.GOLD + currentRecipe.getType().toString() + " in " + type + " completed");
 					if (currentRecipe instanceof UpgradeRecipe || currentRecipe instanceof RecipeScalingUpgradeRecipe) {
 						// this if else might look a bit weird, but because
 						// upgrading changes the current recipe and a lot of
@@ -355,7 +362,7 @@ public class ProductionFactory extends Factory {
 					currentProductionTimer = 0;
 					if (currentRecipe instanceof RepairRecipe && rm.atFullHealth()) {
 						// already at full health, dont try to repair further
-						sendActivatorMessage(ChatColor.GOLD + name + " repaired to full health");
+						sendActivatorMessage(ChatColor.GOLD + type.toString() + " repaired to full health");
 						deactivate();
 						return;
 					}
@@ -365,8 +372,8 @@ public class ProductionFactory extends Factory {
 						if (!hasInputMaterials() && isAutoSelect()) {
 							IRecipe nextOne = getAutoSelectRecipe();
 							if (nextOne != null) {
-								sendActivatorMessage(ChatColor.GREEN + name + " automatically switched to recipe "
-										+ nextOne.getName() + " and began running it");
+								sendActivatorMessage(ChatColor.GREEN + type.toString() + " automatically switched to recipe "
+										+ nextOne.getType() + " and began running it");
 								currentRecipe = nextOne;
 							} else {
 								deactivate();
@@ -381,11 +388,11 @@ public class ProductionFactory extends Factory {
 					}
 				}
 			} else {
-				sendActivatorMessage(ChatColor.GOLD + name + " deactivated, because it ran out of required materials");
+				sendActivatorMessage(ChatColor.GOLD + type.toString() + " deactivated, because it ran out of required materials");
 				deactivate();
 			}
 		} else {
-			sendActivatorMessage(ChatColor.GOLD + name + " deactivated, because the factory was destroyed");
+			sendActivatorMessage(ChatColor.GOLD + type.toString() + " deactivated, because the factory was destroyed");
 			deactivate();
 		}
 	}
@@ -495,13 +502,13 @@ public class ProductionFactory extends Factory {
 		pylonFactories.remove(f);
 	}
 
-	public void upgrade(String name, List<IRecipe> recipes, ItemStack fuel, int fuelConsumptionIntervall,
+	public void upgrade(FactoryType type, List<IRecipe> recipes, ItemStack fuel, int fuelConsumptionIntervall,
 			int updateTime, int maximumHealth, int damageAmountPerDecayIntervall, long gracePeriod,
 			double citadelBreakReduction) {
-		LoggingUtils.log("Upgrading " + getLogData() + " to " + name);
+		LoggingUtils.log("Upgrading " + getLogData() + " to " + type);
 		pylonFactories.remove(this);
 		deactivate();
-		this.name = name;
+		this.type = type;
 		this.recipes = recipes;
 		this.updateTime = updateTime;
 		this.citadelBreakReduction = citadelBreakReduction;

@@ -8,26 +8,34 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.Chest;
+import org.bukkit.entity.Player;
 
 import reesercollins.FactoryMod.builders.IFactoryBuilder;
 import reesercollins.FactoryMod.builders.ProductionBuilder;
 import reesercollins.FactoryMod.factories.Factory;
+import reesercollins.FactoryMod.factories.Factory.FactoryType;
 import reesercollins.FactoryMod.factories.ProductionFactory;
 import reesercollins.FactoryMod.itemHandling.ItemMap;
 import reesercollins.FactoryMod.recipes.IRecipe;
 import reesercollins.FactoryMod.recipes.UpgradeRecipe;
 import reesercollins.FactoryMod.structures.MultiBlockStructure;
+import reesercollins.FactoryMod.structures.ProductionStructure;
+import reesercollins.FactoryMod.utils.FileManager;
+import reesercollins.FactoryMod.utils.LoggingUtils;
 
 public class FactoryManager {
 
 	private FMPlugin plugin;
+	private FileManager fileManager;
 	private HashSet<Factory> factories;
 	private HashMap<Location, Factory> locations;
 	private Map<String, IRecipe> recipes;
-	private HashMap<String, IFactoryBuilder> builders;
+	private HashMap<FactoryType, IFactoryBuilder> builders;
 	private HashSet<Material> possibleCenterBlocks;
 	private HashSet<Material> possibleInteractionBlocks;
 	private Material factoryInteractionMaterial;
@@ -39,13 +47,14 @@ public class FactoryManager {
 	public FactoryManager(FMPlugin plugin, Material factoryInteractionMaterial, boolean logInventories,
 			Map<String, String> factoryRenames) {
 		this.plugin = plugin;
+		this.fileManager = new FileManager(this, factoryRenames);
 		this.factoryInteractionMaterial = factoryInteractionMaterial;
 		this.logInventories = logInventories;
 
 		factories = new HashSet<Factory>();
 		locations = new HashMap<Location, Factory>();
 		recipes = new HashMap<String, IRecipe>();
-		builders = new HashMap<String, IFactoryBuilder>();
+		builders = new HashMap<FactoryType, IFactoryBuilder>();
 		possibleCenterBlocks = new HashSet<Material>();
 		possibleInteractionBlocks = new HashSet<Material>();
 		factoryCreationRecipes = new HashMap<Class<? extends MultiBlockStructure>, HashMap<ItemMap, IFactoryBuilder>>();
@@ -104,7 +113,7 @@ public class FactoryManager {
 	 */
 	public ItemMap getSetupCost(Class<? extends MultiBlockStructure> c, String name) {
 		for (Entry<ItemMap, IFactoryBuilder> entry : factoryCreationRecipes.get(c).entrySet()) {
-			if (entry.getValue().getName().equals(name)) {
+			if (entry.getValue().getType().equals(name)) {
 				return entry.getKey();
 			}
 		}
@@ -208,15 +217,15 @@ public class FactoryManager {
 			factoryCreationRecipes.put(blockStructureClass, builders);
 		}
 		builders.put(recipe, builder);
-		this.builders.put(builder.getName(), builder);
+		this.builders.put(builder.getType(), builder);
 	}
 
 	public void addFactoryUpgradeBuilder(IFactoryBuilder builder) {
-		builders.put(builder.getName(), builder);
+		builders.put(builder.getType(), builder);
 	}
 
 	public ItemMap getTotalSetupCost(Factory f) {
-		return getTotalSetupCost(getBuilder(f.getName()));
+		return getTotalSetupCost(getBuilder(f.getType()));
 	}
 
 	public ItemMap getTotalSetupCost(IFactoryBuilder b) {
@@ -246,8 +255,8 @@ public class FactoryManager {
 					if (recipe instanceof UpgradeRecipe && ((UpgradeRecipe) recipe).getBuilder() == builder) {
 						map = calculateTotalSetupCost(superBuilder);
 						if (map == null) {
-							plugin.warning("Could not calculate total setupcost for " + builder.getName()
-									+ ". It's parent factory  " + superBuilder.getName() + " is impossible to set up");
+							plugin.warning("Could not calculate total setupcost for " + builder.getType()
+									+ ". It's parent factory  " + superBuilder.getType() + " is impossible to set up");
 							break;
 						}
 						map = map.clone(); // so we dont mess with the original
@@ -260,6 +269,141 @@ public class FactoryManager {
 			}
 		}
 		return map;
+	}
+
+	/**
+	 * Attempts to create a factory with the given block as new center block. If all
+	 * blocks for a specific structure are there and other conditions needed for the
+	 * factory type are fullfilled, the factory is created and added to the manager
+	 * 
+	 * @param b Center block
+	 * @param p Player attempting to create the factory
+	 */
+	public void attemptCreation(Block b, Player p) {
+		// this method should probably be taken apart and the individual logic should be
+		// exported in
+		// a class that fits each factory type
+		if (!factoryExistsAt(b.getLocation())) {
+			// Cycle through possible structures here
+			if (b.getType() == Material.CRAFTING_TABLE) {
+				ProductionStructure ps = new ProductionStructure(b);
+				if (ps.isValid()) {
+					if (ps.blockedByExistingFactory()) {
+						p.sendMessage(ChatColor.RED
+								+ "At least one of the blocks of this factory is already part of another factory");
+						return;
+					}
+					HashMap<ItemMap, IFactoryBuilder> builders = factoryCreationRecipes.get(ProductionStructure.class);
+					if (builders != null) {
+						IFactoryBuilder builder = null;
+						for (Entry<ItemMap, IFactoryBuilder> entry : builders.entrySet()) {
+							if (entry.getKey()
+									.containedExactlyIn(((Chest) (ps.getChest().getState())).getInventory())) {
+								builder = entry.getValue();
+								break;
+							}
+						}
+						if (builder != null) {
+							Factory f = builder.build(ps, p);
+							if (f != null) {
+								((Chest) (ps.getChest().getState())).getInventory().clear();
+								addFactory(f);
+								p.sendMessage(ChatColor.GREEN + "Successfully created " + f.getType());
+								LoggingUtils.log(f.getLogData() + " was created by " + p.getName());
+							}
+						} else {
+							p.sendMessage(ChatColor.RED + "There is no factory with the given creation materials");
+						}
+					}
+					return;
+				}
+			}
+//			if (b.getType() == Material.DISPENSER) {
+//				PipeStructure ps = new PipeStructure(b);
+//				if (ps.isComplete()) {
+//					if (ps.blockedByExistingFactory()) {
+//						p.sendMessage(ChatColor.RED
+//								+ "At least one of the blocks of this factory is already part of another factory");
+//						return;
+//					}
+//					HashMap<ItemMap, IFactoryEgg> eggs = factoryCreationRecipes.get(PipeStructure.class);
+//					if (eggs != null) {
+//						IFactoryEgg egg = null;
+//						for (Entry<ItemMap, IFactoryEgg> entry : eggs.entrySet()) {
+//							if (entry.getKey()
+//									.containedExactlyIn((((Dispenser) (ps.getStart().getState())).getInventory()))) {
+//								egg = entry.getValue();
+//								break;
+//							}
+//						}
+//						if (egg != null) {
+//							if (ps.getGlassColor() != ((PipeEgg) egg).getColor()) {
+//								p.sendMessage(ChatColor.RED + "You dont have the right color of glass for this pipe");
+//								return;
+//							}
+//							if (ps.getLength() > ((PipeEgg) egg).getMaximumLength()) {
+//								p.sendMessage(ChatColor.RED + "You cant make pipes of this type, which are that long");
+//								return;
+//							}
+//							Factory f = egg.hatch(ps, p);
+//							if (f != null) {
+//								((Dispenser) (ps.getStart().getState())).getInventory().clear();
+//								addFactory(f);
+//								p.sendMessage(ChatColor.GREEN + "Successfully created " + f.getName());
+//								LoggingUtils.log(f.getLogData() + " was created by " + p.getName());
+//								FactoryMod.sendResponse("PipeCreation", p);
+//							}
+//
+//						} else {
+//							p.sendMessage(ChatColor.RED + "There is no pipe with the given creation materials");
+//							FactoryMod.sendResponse("WrongPipeCreationItems", p);
+//						}
+//					}
+//					return;
+//				} else {
+//					p.sendMessage(ChatColor.RED + "This pipe is not set up the right way");
+//					FactoryMod.sendResponse("WrongPipeBlockSetup", p);
+//				}
+//			}
+//			if (b.getType() == Material.DROPPER) {
+//				BlockFurnaceStructure bfs = new BlockFurnaceStructure(b);
+//				if (bfs.isComplete()) {
+//					if (bfs.blockedByExistingFactory()) {
+//						p.sendMessage(ChatColor.RED
+//								+ "At least one of the blocks of this factory is already part of another factory");
+//						return;
+//					}
+//					HashMap<ItemMap, IFactoryEgg> eggs = factoryCreationRecipes.get(BlockFurnaceStructure.class);
+//					if (eggs != null) {
+//						IFactoryEgg egg = null;
+//						for (Entry<ItemMap, IFactoryEgg> entry : eggs.entrySet()) {
+//							if (entry.getKey().containedExactlyIn(
+//									((Dropper) (bfs.getCenter().getBlock().getState())).getInventory())) {
+//								egg = entry.getValue();
+//								break;
+//							}
+//						}
+//						if (egg != null) {
+//							Factory f = egg.hatch(bfs, p);
+//							if (f != null) {
+//								((Dropper) (bfs.getCenter().getBlock().getState())).getInventory().clear();
+//								addFactory(f);
+//								p.sendMessage(ChatColor.GREEN + "Successfully created " + f.getName());
+//								LoggingUtils.log(f.getLogData() + " was created by " + p.getName());
+//								FactoryMod.sendResponse("SorterCreation", p);
+//							}
+//
+//						} else {
+//							p.sendMessage(ChatColor.RED + "There is no sorter with the given creation materials");
+//							FactoryMod.sendResponse("WrongSorterCreationItems", p);
+//						}
+//					}
+//				} else {
+//					p.sendMessage(ChatColor.RED + "This sorter is not set up the right way");
+//					FactoryMod.sendResponse("WrongSorterBlockSetup", p);
+//				}
+//			}
+		}
 	}
 
 	/**
@@ -288,26 +432,38 @@ public class FactoryManager {
 	}
 
 	/**
-	 * Gets a specific factory builder based on it's name
+	 * Gets all factories which currently exist. Do not mess with the hashset
+	 * returned as it is used in other places
 	 * 
-	 * @param name Name of the builder
+	 * @return All existing factory instances
+	 */
+	public HashSet<Factory> getAllFactories() {
+		synchronized (factories) {
+			return new HashSet<Factory>(factories);
+		}
+	}
+
+	/**
+	 * Gets a specific factory builder based on it's type
+	 * 
+	 * @param name Type of builder
 	 * @return The builder with the given name or null if no such builder exists
 	 */
-	public IFactoryBuilder getBuilder(String name) {
-		return builders.get(name);
+	public IFactoryBuilder getBuilder(FactoryType type) {
+		return builders.get(type);
 	}
 
 	/**
 	 * @return All builders contained in this manager
 	 */
-	public HashMap<String, IFactoryBuilder> getAllBuilders() {
+	public HashMap<FactoryType, IFactoryBuilder> getAllBuilders() {
 		return builders;
 	}
 
 	/**
 	 * Gets the recipe with the given identifier, if it exists
 	 * 
-	 * @param name Identifier of the recipe
+	 * @param type Identifier of the recipe
 	 * @return Recipe with the given identifier or null if either the recipe doesn't
 	 *         exist or the given string was null
 	 */
@@ -325,6 +481,16 @@ public class FactoryManager {
 	 */
 	public void registerRecipe(IRecipe recipe) {
 		recipes.put(recipe.getIdentifier(), recipe);
+	}
+
+	public void saveFactories() {
+		plugin.info("Attempting to save factory data");
+		fileManager.save(getAllFactories());
+	}
+
+	public void loadFactories() {
+		plugin.info("Attempting to load factory data");
+		fileManager.load(builders);
 	}
 
 }

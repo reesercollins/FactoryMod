@@ -4,27 +4,36 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
 
 import reesercollins.FactoryMod.FMPlugin;
 import reesercollins.FactoryMod.factories.Factory;
+import reesercollins.FactoryMod.factories.Factory.FactoryType;
 
 public class ProtectedBlock {
 
 	private Block block;
 	private Class<? extends Factory> factoryClass;
-	private String factoryType;
-	private HashMap<Player, List<FactoryPermission>> permissions;
+	private FactoryType factoryType;
+	private HashMap<OfflinePlayer, List<FactoryPermission>> permissions;
 
 	public ProtectedBlock(Block block) {
 		this.block = block;
-		this.factoryClass = FMPlugin.getManager().getFactoryAt(block).getClass();
-		this.factoryType = FMPlugin.getManager().getFactoryAt(block).getName();
+		Factory fac = FMPlugin.getManager().getFactoryAt(block);
+		if (fac != null) {
+			this.factoryClass = fac.getClass();
+			this.factoryType = fac.getType();
+		}
 	}
 
 	public ProtectedBlock(Location location) {
 		this(location.getBlock());
+	}
+
+	public ProtectedBlock(Block block, FactoryType type) {
+		this.block = block;
+		this.factoryType = type;
 	}
 
 	/**
@@ -42,14 +51,14 @@ public class ProtectedBlock {
 	}
 
 	/**
-	 * @return The result of the getName() function on the factory this block
+	 * @return The result of the getType() function on the factory this block
 	 *         represents.
 	 */
-	public String getFactoryType() {
+	public FactoryType getFactoryType() {
 		return factoryType;
 	}
-	
-	public HashMap<Player, List<FactoryPermission>> getPermissions() {
+
+	public HashMap<OfflinePlayer, List<FactoryPermission>> getPermissions() {
 		return permissions;
 	}
 
@@ -61,7 +70,7 @@ public class ProtectedBlock {
 	 * @param permission The permission being searched for
 	 * @return True if the player has permission, false if not
 	 */
-	public boolean playerHasPermission(Player player, FactoryPermission permission) {
+	public boolean playerHasPermission(OfflinePlayer player, FactoryPermission permission) {
 		List<FactoryPermission> perms = permissions.get(player);
 		if (perms == null) {
 			return false;
@@ -77,7 +86,7 @@ public class ProtectedBlock {
 	 * @param player     The player to add the permission to
 	 * @param permission The permission to be added
 	 */
-	public void addPermissionToPlayer(Player player, FactoryPermission permission) {
+	public void addPermissionToPlayer(OfflinePlayer player, FactoryPermission permission) {
 		List<FactoryPermission> perms = permissions.get(player);
 		if (perms == null || perms.contains(permission)) {
 			return;
@@ -93,7 +102,7 @@ public class ProtectedBlock {
 	 * @param player     The player to remove the permission from
 	 * @param permission The permission to be removed
 	 */
-	public void removePermissionFromPlayer(Player player, FactoryPermission permission) {
+	public void removePermissionFromPlayer(OfflinePlayer player, FactoryPermission permission) {
 		List<FactoryPermission> perms = permissions.get(player);
 		if (perms == null || !perms.contains(permission)) {
 			return;

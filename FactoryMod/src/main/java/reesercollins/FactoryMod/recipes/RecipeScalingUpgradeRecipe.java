@@ -19,9 +19,9 @@ public class RecipeScalingUpgradeRecipe extends InputRecipe {
 	private int newRank;
 	private RecipeScalingUpgradeRecipe followUpRecipe;
 
-	public RecipeScalingUpgradeRecipe(String identifier, String name, int productionTime, ItemMap input,
+	public RecipeScalingUpgradeRecipe(String identifier, int productionTime, ItemMap input,
 			ProductionRecipe toUpgrade, int newRank, RecipeScalingUpgradeRecipe followUpRecipe) {
-		super(identifier, name, productionTime, input);
+		super(identifier, productionTime, input);
 		this.toUpgrade = toUpgrade;
 		this.newRank = newRank;
 		this.followUpRecipe = followUpRecipe;
@@ -73,8 +73,8 @@ public class RecipeScalingUpgradeRecipe extends InputRecipe {
 	}
 
 	@Override
-	public String getTypeIdentifier() {
-		return "RECIPEMODIFIERUPGRADE";
+	public RecipeType getType() {
+		return RecipeType.RECIPEMODIFIERUPGRADE;
 	}
 
 	@Override
@@ -102,9 +102,9 @@ public class RecipeScalingUpgradeRecipe extends InputRecipe {
 			return is;
 		}
 		if (newRank == 1) {
-			lore.add(ChatColor.GOLD + "Unlock " + toUpgrade.getName());
+			lore.add(ChatColor.GOLD + "Unlock " + toUpgrade.getType());
 		} else {
-			lore.add(ChatColor.GOLD + "Upgrade " + toUpgrade.getName() + " to rank " + newRank);
+			lore.add(ChatColor.GOLD + "Upgrade " + toUpgrade.getType() + " to rank " + newRank);
 		}
 		lore.add(ChatColor.GOLD + "Up to " + toUpgrade.getModifier().getMaximumMultiplierForRank(newRank)
 				+ " output multiplier");

@@ -4,6 +4,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 import reesercollins.FactoryMod.factories.Factory;
+import reesercollins.FactoryMod.factories.Factory.FactoryType;
 import reesercollins.FactoryMod.structures.MultiBlockStructure;
 
 public interface IFactoryBuilder {
@@ -34,7 +35,7 @@ public interface IFactoryBuilder {
 	 * 
 	 * @return The name of this builder and its factory
 	 */
-	public String getName();
+	public FactoryType getType();
 
 	/**
 	 * When destroyed completely a factory may return a part of it's setup cost.
