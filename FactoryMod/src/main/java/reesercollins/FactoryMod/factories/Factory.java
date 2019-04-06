@@ -37,6 +37,7 @@ public abstract class Factory implements Runnable {
 	
 	public enum FactoryType {
 		PRODUCTION,
+		PRODUCTION_UPGRADE,
 		SORTER,
 		PIPE;
 	}

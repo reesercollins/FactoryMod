@@ -397,6 +397,12 @@ public class FileManager {
 //				manager.addFactory(s);
 //				counter++;
 //				break;
+			case PIPE:
+				break;
+			case SORTER:
+				break;
+			default:
+				break;
 			}
 		}
 		plugin.info("Loaded " + counter + " factory from save file");

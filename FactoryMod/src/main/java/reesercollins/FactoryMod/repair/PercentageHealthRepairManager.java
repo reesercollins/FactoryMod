@@ -1,6 +1,13 @@
 package reesercollins.FactoryMod.repair;
 
+import java.util.Map.Entry;
+
+import org.bukkit.inventory.ItemStack;
+
+import reesercollins.FactoryMod.FMPlugin;
 import reesercollins.FactoryMod.factories.Factory;
+import reesercollins.FactoryMod.itemHandling.ItemMap;
+import reesercollins.FactoryMod.utils.LoggingUtils;
 
 public class PercentageHealthRepairManager implements IRepairManager {
 
@@ -57,13 +64,34 @@ public class PercentageHealthRepairManager implements IRepairManager {
 		breakTime = 0;
 	}
 
+	public static void returnStuff(Factory factory) {
+		double rate = FMPlugin.getManager().getBuilder(factory.getName()).getReturnRate();
+		if (rate == 0.0) {
+			return;
+		}
+		for (Entry<ItemStack, Integer> items : FMPlugin.getManager().getTotalSetupCost(factory).getEntrySet()) {
+			int returnAmount = (int) (items.getValue() * rate);
+			ItemMap im = new ItemMap();
+			im.addItemAmount(items.getKey(), returnAmount);
+			for (ItemStack is : im.getItemStackRepresentation()) {
+				factory.getMultiBlockStructure().getCenter().getWorld()
+						.dropItemNaturally(factory.getMultiBlockStructure().getCenter(), is);
+			}
+		}
+	}
+
 	@Override
 	public void breakIt() {
 		health = 0;
 		if (breakTime == 0) {
 			breakTime = System.currentTimeMillis();
 		}
-		// TODO Finish
+		if (factory.getMultiBlockStructure().releventBlocksDestroyed()) {
+			LoggingUtils.log(factory.getLogData() + " removed because blocks were destroyed");
+			FMPlugin.getManager().removeFactory(factory);
+			returnStuff(factory);
+		}
+
 	}
 
 	@Override

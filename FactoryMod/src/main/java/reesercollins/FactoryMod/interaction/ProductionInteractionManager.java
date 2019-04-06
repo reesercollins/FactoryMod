@@ -1,22 +1,29 @@
 package reesercollins.FactoryMod.interaction;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockRedstoneEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import reesercollins.FactoryMod.FMPlugin;
 import reesercollins.FactoryMod.factories.ProductionFactory;
 import reesercollins.FactoryMod.interaction.clickable.Clickable;
 import reesercollins.FactoryMod.interaction.clickable.ClickableInventory;
+import reesercollins.FactoryMod.interaction.clickable.DecorationStack;
 import reesercollins.FactoryMod.itemHandling.ItemMap;
+import reesercollins.FactoryMod.recipes.IRecipe;
 import reesercollins.FactoryMod.recipes.InputRecipe;
+import reesercollins.FactoryMod.recipes.ProductionRecipe;
 import reesercollins.FactoryMod.repair.PercentageHealthRepairManager;
 
 public class ProductionInteractionManager implements IInteractionManager {
@@ -78,11 +85,7 @@ public class ProductionInteractionManager implements IInteractionManager {
 				}
 				index = 44;
 				for (ItemStack is : output) {
-					Clickable c = new Clickable(is) {
-						@Override
-						public void clicked(Player p) {
-						}
-					};
+					Clickable c = new DecorationStack(is);
 					ci.setSlot(c, index);
 					index++;
 				}
@@ -112,9 +115,88 @@ public class ProductionInteractionManager implements IInteractionManager {
 					p.sendMessage(ChatColor.GOLD + "It will break permanently in " + time);
 				}
 			}
-		}
-		if (b.equals(pf.getCraftingTable())) {
-			
+		} else if (b.equals(pf.getCraftingTable())) {
+			int rows = (pf.getRecipes().size() / 9) + 1;
+			ClickableInventory ci = new ClickableInventory(rows * 9, "Select a recipe");
+			for (IRecipe rec : pf.getRecipes()) {
+				InputRecipe recipe = (InputRecipe) rec;
+				ItemStack recStack = recipe.getRecipeRepresentation();
+				int runcount = pf.getRunCount(recipe);
+
+				ItemMeta recMeta = recStack.getItemMeta();
+				List<String> lore = new ArrayList<String>();
+				lore.add(ChatColor.AQUA + "Ran " + runcount + " times");
+
+				if (recipe instanceof ProductionRecipe) {
+					ProductionRecipe prod = (ProductionRecipe) recipe;
+					if (prod.getModifier() != null) {
+						lore.add(ChatColor.BOLD + "" + ChatColor.GOLD + pf.getRecipeLevel(recipe) + " ★");
+						lore.add(ChatColor.GREEN + decimalFormatting
+								.format(prod.getModifier().getFactor(pf.getRecipeLevel(recipe), runcount)));
+					}
+				}
+				recMeta.setLore(lore);
+				recStack.setItemMeta(recMeta);
+
+				Clickable c = new Clickable(recStack) {
+
+					@Override
+					public void clicked(Player p) {
+						if (pf.isActive()) {
+							p.sendMessage(ChatColor.RED + "You can't switch recipes while the factory is running!");
+						} else {
+							pf.setRecipe(recipes.get(this));
+							p.sendMessage(ChatColor.GREEN + "Switched recipe to " + recipes.get(this).getName());
+						}
+					}
+
+				};
+
+				recipes.put(c, recipe);
+				ci.addSlot(c);
+
+				ItemStack autoSelectStack = new ItemStack(
+						pf.isAutoSelect() ? Material.EMERALD_BLOCK : Material.REDSTONE_BLOCK);
+				ItemMeta autoSelectMeta = autoSelectStack.getItemMeta();
+				autoSelectMeta.setDisplayName("Toggle auto select");
+				autoSelectMeta.setLore(new ArrayList<String>(Arrays.asList(
+						ChatColor.GOLD + "Auto select will make the factory automatically select any "
+								+ "recipe it can run whenever you activate it.",
+						ChatColor.AQUA + "Click to turn it " + (pf.isAutoSelect() ? "off" : "on"))));
+				Clickable autoSelectClick = new Clickable(autoSelectStack) {
+
+					@Override
+					public void clicked(Player p) {
+						p.sendMessage(ChatColor.GREEN + "Turned auto select " + (pf.isAutoSelect() ? "off" : "on")
+								+ " for " + pf.getName());
+						pf.setAutoSelect(!pf.isAutoSelect());
+					}
+				};
+				ci.setSlot(autoSelectClick, (rows * 9) - 2);
+				ItemStack menuStack = new ItemStack(Material.PAINTING);
+				ItemMeta menuMeta = menuStack.getItemMeta();
+				menuMeta.setDisplayName("Open Menu");
+				menuMeta.setLore(
+						new ArrayList<String>(Arrays.asList(ChatColor.LIGHT_PURPLE + "Click to open a detailed menu")));
+				menuStack.setItemMeta(menuMeta);
+				Clickable menuC = new Clickable(menuStack) {
+					@Override
+					public void clicked(Player p) {
+						FMPlugin.getMenuBuilder().openFactoryBrowser(p, pf.getName());
+					}
+				};
+				ci.setSlot(menuC, (rows * 9) - 1);
+
+				ci.showInventory(p);
+				return;
+			}
+		} else if (b.equals(pf.getFurnace())) {
+			if (pf.isActive()) {
+				pf.deactivate();
+				p.sendMessage(ChatColor.RED + "Deactivated " + pf.getName());
+			} else {
+				pf.attemptToActivate(p, false);
+			}
 		}
 	}
 

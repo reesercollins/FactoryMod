@@ -492,4 +492,15 @@ public class FactoryManager {
 		fileManager.load(builders);
 	}
 
+	/**
+	 * Called when the plugin is deactivated to first save all factories and then
+	 * deactivate them, so the deactivated block state is saved
+	 */
+	public void shutDown() {
+		saveFactories();
+		for (Factory f : factories) {
+			f.deactivate();
+		}
+	}
+
 }

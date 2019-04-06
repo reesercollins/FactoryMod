@@ -2,8 +2,10 @@ package reesercollins.FactoryMod;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -22,10 +24,13 @@ import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import com.google.common.collect.Lists;
 
 import reesercollins.FactoryMod.builders.IFactoryBuilder;
+import reesercollins.FactoryMod.builders.ProductionBuilder;
+import reesercollins.FactoryMod.factories.Factory.FactoryType;
 import reesercollins.FactoryMod.itemHandling.ItemMap;
 import reesercollins.FactoryMod.recipes.IRecipe;
 import reesercollins.FactoryMod.recipes.IRecipe.RecipeType;
@@ -36,6 +41,8 @@ import reesercollins.FactoryMod.recipes.RecipeScalingUpgradeRecipe;
 import reesercollins.FactoryMod.recipes.RepairRecipe;
 import reesercollins.FactoryMod.recipes.UpgradeRecipe;
 import reesercollins.FactoryMod.recipes.scaling.ProductionRecipeModifier;
+import reesercollins.FactoryMod.structures.ProductionStructure;
+import reesercollins.FactoryMod.utils.FactoryGarbageCollector;
 
 public class ConfigParser {
 
@@ -56,6 +63,7 @@ public class ConfigParser {
 	private long defaultBreakGracePeriod;
 	private int defaultDamagePerBreakPeriod;
 	private int defaultHealth;
+	private String defaultMenuFactory;
 	private long savingInterval;
 	private boolean useYamlIdentifiers;
 	private HashMap<String, IFactoryBuilder> upgradeBuilders;
@@ -95,9 +103,39 @@ public class ConfigParser {
 		defaultDamagePerBreakPeriod = config.getInt("default_decay_amount", 21);
 		savingInterval = parseTime(config.getString("saving_interval", "15m"));
 
+		if (savingInterval != -1) {
+			new BukkitRunnable() {
+				@Override
+				public void run() {
+					FMPlugin.getManager().saveFactories();
+				}
+			}.runTaskTimerAsynchronously(plugin, savingInterval, savingInterval);
+		}
+
+		defaultMenuFactory = config.getString("default_menu_factory");
+		int globalPylonLimit = config.getInt("global_pylon_limit");
+		PylonRecipe.setGlobalLimit(globalPylonLimit);
+
 		manager = new FactoryManager(plugin, factoryInteractionMaterial, logInventories, null);
 
-		return null;
+		upgradeBuilders = new HashMap<String, IFactoryBuilder>();
+		recipeLists = new HashMap<IFactoryBuilder, List<String>>();
+		recipeScalingUpgradeMapping = new HashMap<RecipeScalingUpgradeRecipe, String[]>();
+		parseFactories(config.getConfigurationSection("factories"));
+		parseRecipes(config.getConfigurationSection("recipes"));
+		assignRecipeScalingRecipes();
+		assignRecipesToFactories();
+		enableFactoryDecay(config);
+		manager.calculateTotalSetupCosts();
+
+		plugin.info("Parsed complete config");
+		return manager;
+	}
+
+	public void enableFactoryDecay(ConfigurationSection config) {
+		long interval = parseTime(config.getString("decay_interval"));
+		plugin.getServer().getScheduler().runTaskTimerAsynchronously(plugin, new FactoryGarbageCollector(), interval,
+				interval);
 	}
 
 	/**
@@ -112,6 +150,9 @@ public class ConfigParser {
 	 * @return Time value in ticks
 	 */
 	public static long parseTime(String arg) {
+		if (arg == null) {
+			return 0l;
+		}
 		long result = 0;
 		try {
 			result += Long.parseLong(arg);
@@ -249,7 +290,7 @@ public class ConfigParser {
 				for (String enchantKey : current.getConfigurationSection("enchants").getKeys(false)) {
 					ConfigurationSection enchantConfig = current.getConfigurationSection("enchants")
 							.getConfigurationSection(enchantKey);
-					NamespacedKey enchantmentKey = NamespacedKey.minecraft(enchantConfig.getString("enchant"));
+					NamespacedKey enchantmentKey = NamespacedKey.minecraft(enchantConfig.getString("enchant").toLowerCase());
 					if (enchantmentKey == null) {
 						plugin.error("Failed to find enchantment with key " + enchantConfig.getString("enchant"),
 								false);
@@ -491,7 +532,8 @@ public class ConfigParser {
 		}
 		RecipeType type = RecipeType.valueOf(typeString);
 		if (type == null) {
-			plugin.warning("Invalid type specified for recipe at " + config.getCurrentPath() + ". Skipping the recipe.");
+			plugin.warning(
+					"Invalid type specified for recipe at " + config.getCurrentPath() + ". Skipping the recipe.");
 			return null;
 		}
 		ConfigurationSection inputSection = config.getConfigurationSection("input");
@@ -778,6 +820,152 @@ public class ConfigParser {
 		return result;
 	}
 
+	public void assignRecipesToFactories() {
+		HashSet<IRecipe> usedRecipes = new HashSet<IRecipe>();
+		for (Entry<IFactoryBuilder, List<String>> entry : recipeLists.entrySet()) {
+			if (entry.getKey() instanceof ProductionBuilder) {
+				List<IRecipe> recipeList = new LinkedList<IRecipe>();
+				for (String recipeName : entry.getValue()) {
+					IRecipe rec = recipes.get(recipeName);
+//					if (rec instanceof DummyParsingRecipe) {
+//						plugin.warning("You can't add dummy recipes to factories! Maybe you are the dummy here?");
+//						continue;
+//					}
+					if (rec != null) {
+						recipeList.add(rec);
+						usedRecipes.add(rec);
+					} else {
+						plugin.warning("Could not find specified recipe " + recipeName + " for factory "
+								+ entry.getKey().getName());
+					}
+				}
+				((ProductionBuilder) entry.getKey()).setRecipes(recipeList);
+			}
+		}
+		for (IRecipe reci : recipes.values()) {
+			if (!usedRecipes.contains(reci)) {
+				plugin.warning(
+						"The recipe " + reci.getName() + " is specified in the config, but not used in any factory");
+			}
+		}
+	}
+
+	/**
+	 * Parses all factories
+	 * 
+	 * @param config        ConfigurationSection to parse the factories from
+	 * @param defaultUpdate default interval in ticks how often factories update,
+	 *                      each factory can choose to define an own value or to use
+	 *                      the default instead
+	 */
+	private void parseFactories(ConfigurationSection config) {
+		for (String key : config.getKeys(false)) {
+			parseFactory(config.getConfigurationSection(key));
+		}
+
+	}
+
+	/**
+	 * Parses a single factory and turns it into a factory egg which is add to the
+	 * manager
+	 * 
+	 * @param config        ConfigurationSection to parse the factory from
+	 * @param defaultUpdate default interval in ticks how often factories update,
+	 *                      each factory can choose to define an own value or to use
+	 *                      the default instead
+	 */
+	private void parseFactory(ConfigurationSection config) {
+		IFactoryBuilder builder = null;
+		String typeStr = config.getString("type");
+		if (typeStr == null) {
+			plugin.warning("No type specified for factory at " + config.getCurrentPath() + ". Skipping it.");
+			return;
+		}
+		FactoryType type = FactoryType.valueOf(typeStr);
+		if (type == null) {
+			plugin.warning("Invalid type specified for factory at " + config.getCurrentPath() + ". Skipping it.");
+			return;
+		}
+		switch (type) {
+		case PRODUCTION:
+			builder = parseProductionFactory(config);
+			if (builder == null) {
+				break;
+			}
+			ItemMap setupCost = parseItemMap(config.getConfigurationSection("setupcost"));
+			if (setupCost.getTotalUniqueItemAmount() > 0) {
+				manager.addFactoryCreationBuilder(ProductionStructure.class, setupCost, builder);
+			} else {
+				plugin.warning(String.format("Production factory %s specified with no setup cost, skipping",
+						builder.getName()));
+			}
+			break;
+		case PRODUCTION_UPGRADE:
+			builder = parseProductionFactory(config);
+			if (builder == null) {
+				break;
+			}
+			upgradeBuilders.put(builder.getName(), builder);
+			manager.addFactoryUpgradeBuilder(builder);
+			break;
+		case PIPE:
+			break;
+		case SORTER:
+			break;
+		default:
+			break;
+		}
+		if (builder != null) {
+			plugin.info("Parsed factory " + builder.getName());
+		} else {
+			plugin.warning(String.format("Failed to set up factory %s", config.getCurrentPath()));
+		}
+	}
+
+	public IFactoryBuilder parseProductionFactory(ConfigurationSection config) {
+		String name = config.getString("name");
+		double returnRate = config.getDouble("return_rate", defaultReturnRate);
+		;
+		int update;
+		if (config.contains("updatetime")) {
+			update = (int) parseTime(config.getString("updatetime"));
+		} else {
+			update = defaultUpdateTime;
+		}
+		ItemStack fuel;
+		if (config.contains("fuel")) {
+			ItemMap tfuel = parseItemMap(config.getConfigurationSection("fuel"));
+			if (tfuel.getTotalUniqueItemAmount() > 0) {
+				fuel = tfuel.getItemStackRepresentation().get(0);
+			} else {
+				plugin.warning("Custom fuel was specified incorrectly for " + name);
+				fuel = defaultFuel;
+			}
+		} else {
+			fuel = defaultFuel;
+		}
+		int health = config.getInt("health", defaultHealth);
+		int fuelInterval;
+		if (config.contains("fuel_consumption_interval")) {
+			fuelInterval = (int) parseTime(config.getString("fuel_consumption_interval"));
+		} else {
+			fuelInterval = defaultFuelConsumptionTime;
+		}
+		long gracePeriod;
+		if (config.contains("grace_period")) {
+			// milliseconds
+			gracePeriod = 50 * parseTime(config.getString("grace_period"));
+		} else {
+			gracePeriod = defaultBreakGracePeriod;
+		}
+		int healthPerDamageInterval = config.getInt("decay_amount", defaultDamagePerBreakPeriod);
+		double citadelBreakReduction = config.getDouble("citadelBreakReduction", 1.0);
+		ProductionBuilder builder = new ProductionBuilder(name, update, null, fuel, fuelInterval, returnRate, health,
+				gracePeriod, healthPerDamageInterval, citadelBreakReduction);
+		recipeLists.put(builder, config.getStringList("recipes"));
+		return builder;
+	}
+
 	private ProductionRecipeModifier parseProductionRecipeModifier(ConfigurationSection config) {
 		ProductionRecipeModifier modi = new ProductionRecipeModifier();
 		if (config == null) {
@@ -798,6 +986,42 @@ public class ConfigParser {
 			modi.addConfig(minimumRunAmount, maximumRunAmount, minimumMultiplier, maximumMultiplier, rank);
 		}
 		return modi;
+	}
+
+	private void assignRecipeScalingRecipes() {
+		for (Entry<RecipeScalingUpgradeRecipe, String[]> entry : recipeScalingUpgradeMapping.entrySet()) {
+			IRecipe prod = recipes.get(entry.getValue()[0]);
+			if (prod == null) {
+				plugin.warning("The recipe " + entry.getValue()[0] + ", which the recipe " + entry.getKey().getName()
+						+ " is supposed to upgrade doesnt exist");
+				continue;
+			}
+			if (!(prod instanceof ProductionRecipe)) {
+				plugin.warning("The recipe " + entry.getKey().getName()
+						+ " has a non production recipe specified as recipe to upgrade, this doesnt work");
+				continue;
+			}
+			entry.getKey().setUpgradedRecipe((ProductionRecipe) prod);
+			String followUp = entry.getValue()[1];
+			if (followUp != null) {
+				IRecipe followRecipe = recipes.get(followUp);
+				if (followRecipe == null) {
+					plugin.warning("The recipe " + entry.getValue()[0] + ", which the recipe "
+							+ entry.getKey().getName() + " is supposed to use as follow up recipe doesnt exist");
+					continue;
+				}
+				if (!(followRecipe instanceof RecipeScalingUpgradeRecipe)) {
+					plugin.warning("The recipe " + entry.getKey().getName()
+							+ " has a non recipe scaling upgrade recipe specified as recipe to follow up with, this doesnt work");
+					continue;
+				}
+				entry.getKey().setFollowUpRecipe((RecipeScalingUpgradeRecipe) followRecipe);
+			}
+		}
+	}
+
+	public String getDefaultMenuFactory() {
+		return defaultMenuFactory;
 	}
 
 }
