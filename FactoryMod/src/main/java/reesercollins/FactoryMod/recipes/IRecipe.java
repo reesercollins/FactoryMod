@@ -26,7 +26,7 @@ public interface IRecipe {
 	 * @return The identifier for this recipe, which is used both internally and to
 	 *         display the recipe to a player
 	 */
-	public RecipeType getType();
+	public String getName();
 
 	/**
 	 * @return A unique identifier for this recipe. This should not be used for

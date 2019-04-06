@@ -18,7 +18,6 @@ import org.bukkit.entity.Player;
 import reesercollins.FactoryMod.builders.IFactoryBuilder;
 import reesercollins.FactoryMod.builders.ProductionBuilder;
 import reesercollins.FactoryMod.factories.Factory;
-import reesercollins.FactoryMod.factories.Factory.FactoryType;
 import reesercollins.FactoryMod.factories.ProductionFactory;
 import reesercollins.FactoryMod.itemHandling.ItemMap;
 import reesercollins.FactoryMod.recipes.IRecipe;
@@ -35,7 +34,7 @@ public class FactoryManager {
 	private HashSet<Factory> factories;
 	private HashMap<Location, Factory> locations;
 	private Map<String, IRecipe> recipes;
-	private HashMap<FactoryType, IFactoryBuilder> builders;
+	private HashMap<String, IFactoryBuilder> builders;
 	private HashSet<Material> possibleCenterBlocks;
 	private HashSet<Material> possibleInteractionBlocks;
 	private Material factoryInteractionMaterial;
@@ -54,7 +53,7 @@ public class FactoryManager {
 		factories = new HashSet<Factory>();
 		locations = new HashMap<Location, Factory>();
 		recipes = new HashMap<String, IRecipe>();
-		builders = new HashMap<FactoryType, IFactoryBuilder>();
+		builders = new HashMap<String, IFactoryBuilder>();
 		possibleCenterBlocks = new HashSet<Material>();
 		possibleInteractionBlocks = new HashSet<Material>();
 		factoryCreationRecipes = new HashMap<Class<? extends MultiBlockStructure>, HashMap<ItemMap, IFactoryBuilder>>();
@@ -113,7 +112,7 @@ public class FactoryManager {
 	 */
 	public ItemMap getSetupCost(Class<? extends MultiBlockStructure> c, String name) {
 		for (Entry<ItemMap, IFactoryBuilder> entry : factoryCreationRecipes.get(c).entrySet()) {
-			if (entry.getValue().getType().equals(name)) {
+			if (entry.getValue().getName().equals(name)) {
 				return entry.getKey();
 			}
 		}
@@ -217,15 +216,15 @@ public class FactoryManager {
 			factoryCreationRecipes.put(blockStructureClass, builders);
 		}
 		builders.put(recipe, builder);
-		this.builders.put(builder.getType(), builder);
+		this.builders.put(builder.getName(), builder);
 	}
 
 	public void addFactoryUpgradeBuilder(IFactoryBuilder builder) {
-		builders.put(builder.getType(), builder);
+		builders.put(builder.getName(), builder);
 	}
 
 	public ItemMap getTotalSetupCost(Factory f) {
-		return getTotalSetupCost(getBuilder(f.getType()));
+		return getTotalSetupCost(getBuilder(f.getName()));
 	}
 
 	public ItemMap getTotalSetupCost(IFactoryBuilder b) {
@@ -255,8 +254,8 @@ public class FactoryManager {
 					if (recipe instanceof UpgradeRecipe && ((UpgradeRecipe) recipe).getBuilder() == builder) {
 						map = calculateTotalSetupCost(superBuilder);
 						if (map == null) {
-							plugin.warning("Could not calculate total setupcost for " + builder.getType()
-									+ ". It's parent factory  " + superBuilder.getType() + " is impossible to set up");
+							plugin.warning("Could not calculate total setupcost for " + builder.getName()
+									+ ". It's parent factory  " + superBuilder.getName() + " is impossible to set up");
 							break;
 						}
 						map = map.clone(); // so we dont mess with the original
@@ -308,7 +307,7 @@ public class FactoryManager {
 							if (f != null) {
 								((Chest) (ps.getChest().getState())).getInventory().clear();
 								addFactory(f);
-								p.sendMessage(ChatColor.GREEN + "Successfully created " + f.getType());
+								p.sendMessage(ChatColor.GREEN + "Successfully created " + f.getName());
 								LoggingUtils.log(f.getLogData() + " was created by " + p.getName());
 							}
 						} else {
@@ -444,19 +443,19 @@ public class FactoryManager {
 	}
 
 	/**
-	 * Gets a specific factory builder based on it's type
+	 * Gets a specific factory builder based on it's name
 	 * 
-	 * @param name Type of builder
+	 * @param name Name of builder
 	 * @return The builder with the given name or null if no such builder exists
 	 */
-	public IFactoryBuilder getBuilder(FactoryType type) {
-		return builders.get(type);
+	public IFactoryBuilder getBuilder(String name) {
+		return builders.get(name);
 	}
 
 	/**
 	 * @return All builders contained in this manager
 	 */
-	public HashMap<FactoryType, IFactoryBuilder> getAllBuilders() {
+	public HashMap<String, IFactoryBuilder> getAllBuilders() {
 		return builders;
 	}
 

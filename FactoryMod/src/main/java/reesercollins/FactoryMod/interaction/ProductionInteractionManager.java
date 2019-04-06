@@ -16,11 +16,8 @@ import reesercollins.FactoryMod.factories.ProductionFactory;
 import reesercollins.FactoryMod.interaction.clickable.Clickable;
 import reesercollins.FactoryMod.interaction.clickable.ClickableInventory;
 import reesercollins.FactoryMod.itemHandling.ItemMap;
-import reesercollins.FactoryMod.protection.FactoryPermission;
-import reesercollins.FactoryMod.protection.ProtectedBlock;
 import reesercollins.FactoryMod.recipes.InputRecipe;
 import reesercollins.FactoryMod.repair.PercentageHealthRepairManager;
-import reesercollins.FactoryMod.utils.FileManager;
 
 public class ProductionInteractionManager implements IInteractionManager {
 
@@ -51,14 +48,14 @@ public class ProductionInteractionManager implements IInteractionManager {
 		if (p.getInventory().getItemInMainHand().getType() != FMPlugin.getManager().getFactoryInteractionMaterial()) {
 			return;
 		}
-		ProtectedBlock block = FileManager.getBlockProtection(b.getLocation());
-		if (!block.playerHasPermission(p, FactoryPermission.USE_FACTORY)) {
-			p.sendMessage(ChatColor.RED + "You do not have permission to interact with this factory.");
-			return;
-		}
+//		ProtectedBlock block = FileManager.getBlockProtection(b.getLocation());
+//		if (!block.playerHasPermission(p, FactoryPermission.USE_FACTORY)) {
+//			p.sendMessage(ChatColor.RED + "You do not have permission to interact with this factory.");
+//			return;
+//		}
 		if (b.equals(pf.getChest())) {
 			if (p.isSneaking()) {
-				ClickableInventory ci = new ClickableInventory(54, pf.getCurrentRecipe().getType().toString());
+				ClickableInventory ci = new ClickableInventory(54, pf.getCurrentRecipe().getName());
 				List<ItemStack> input = ((InputRecipe) pf.getCurrentRecipe()).getInputRepresentation(pf.getInventory(),
 						pf);
 				if (input.size() > 18) {
@@ -91,13 +88,13 @@ public class ProductionInteractionManager implements IInteractionManager {
 				}
 				ci.showInventory(p);
 			} else {
-				p.sendMessage(ChatColor.GOLD + pf.getType().toString() + " currently turned " + (pf.isActive() ? "on" : "off"));
+				p.sendMessage(ChatColor.GOLD + pf.getName() + " currently turned " + (pf.isActive() ? "on" : "off"));
 				if (pf.isActive()) {
 					p.sendMessage(ChatColor.GOLD
 							+ String.valueOf((pf.getCurrentRecipe().getProductionTime() - pf.getRunningTime()) / 20)
 							+ " seconds remaining until current run is complete");
 				}
-				p.sendMessage(ChatColor.GOLD + "Currently selected recipe: " + pf.getCurrentRecipe().getType());
+				p.sendMessage(ChatColor.GOLD + "Currently selected recipe: " + pf.getCurrentRecipe().getName());
 				p.sendMessage(ChatColor.GOLD + "Currently at " + pf.getRepairManager().getHealth() + " health");
 
 				if (pf.getRepairManager().inDisrepair()) {

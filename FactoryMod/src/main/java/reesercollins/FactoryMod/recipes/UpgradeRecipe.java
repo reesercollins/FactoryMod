@@ -23,8 +23,8 @@ public class UpgradeRecipe extends InputRecipe {
 
 	private IFactoryBuilder builder;
 
-	public UpgradeRecipe(String identifier, int productionTime, ItemMap input, IFactoryBuilder builder) {
-		super(identifier, productionTime, input);
+	public UpgradeRecipe(String identifier, String name, int productionTime, ItemMap input, IFactoryBuilder builder) {
+		super(identifier, name, productionTime, input);
 		this.builder = builder;
 	}
 
@@ -33,7 +33,7 @@ public class UpgradeRecipe extends InputRecipe {
 		if (input.isContainedIn(i)) {
 			if (input.removeSafelyFrom(i)) {
 				ProductionBuilder e = (ProductionBuilder) builder;
-				pf.upgrade(e.getType(), e.getRecipes(), e.getFuel(), e.getFuelConsumptionInterval(), e.getUpdateTime(),
+				pf.upgrade(e.getName(), e.getRecipes(), e.getFuel(), e.getFuelConsumptionInterval(), e.getUpdateTime(),
 						e.getMaximumHealth(), e.getDamagePerDamagingPeriod(), e.getBreakGracePeriod(),
 						e.getBreakReduction());
 			}
@@ -48,7 +48,7 @@ public class UpgradeRecipe extends InputRecipe {
 		ItemMeta im = res.getItemMeta();
 		im.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		im.setDisplayName(getType().toString());
+		im.setDisplayName(getName());
 		res.setItemMeta(im);
 		return res;
 	}
@@ -87,7 +87,7 @@ public class UpgradeRecipe extends InputRecipe {
 
 		ItemStack cr = new ItemStack(Material.CRAFTING_TABLE);
 		ItemMeta crMeta = cr.getItemMeta();
-		crMeta.setDisplayName(builder.getType().toString());
+		crMeta.setDisplayName(builder.getName());
 		crMeta.setLore(
 				new ArrayList<String>(Arrays.asList(ChatColor.LIGHT_PURPLE + "Upgrade to get new and better recipes")));
 		cr.setItemMeta(crMeta);
@@ -95,11 +95,11 @@ public class UpgradeRecipe extends InputRecipe {
 
 		ItemStack fur = new ItemStack(Material.FURNACE);
 		ItemMeta furMeta = fur.getItemMeta();
-		furMeta.setDisplayName(builder.getType().toString());
+		furMeta.setDisplayName(builder.getName());
 		List<String> furLore = new ArrayList<String>();
 		furLore.add(ChatColor.LIGHT_PURPLE + "Recipes:");
 		for (IRecipe rec : ((ProductionBuilder) builder).getRecipes()) {
-			furLore.add(ChatColor.YELLOW + rec.getType().toString());
+			furLore.add(ChatColor.YELLOW + rec.getName());
 		}
 		furMeta.setLore(furLore);
 		fur.setItemMeta(furMeta);
@@ -111,7 +111,7 @@ public class UpgradeRecipe extends InputRecipe {
 		cheLore.add(ChatColor.LIGHT_PURPLE + "Careful, you can not");
 		cheLore.add(ChatColor.LIGHT_PURPLE + "revert upgrades!");
 		cheMeta.setLore(cheLore);
-		cheMeta.setDisplayName(builder.getType().toString());
+		cheMeta.setDisplayName(builder.getName());
 		che.setItemMeta(cheMeta);
 		res.add(che);
 		return res;
@@ -119,11 +119,6 @@ public class UpgradeRecipe extends InputRecipe {
 
 	public IFactoryBuilder getBuilder() {
 		return builder;
-	}
-
-	@Override
-	public RecipeType getType() {
-		return RecipeType.UPGRADE;
 	}
 
 }

@@ -459,7 +459,7 @@ public class ConfigParser {
 		if (config.isString("inherit") && useYamlIdentifiers) {
 			parentRecipe = recipes.get(config.get("inherit"));
 		}
-		String name = config.getString("name", (parentRecipe != null) ? parentRecipe.getType().name() : null);
+		String name = config.getString("name", (parentRecipe != null) ? parentRecipe.getName() : null);
 		if (name == null) {
 			plugin.warning("No name specified for recipe at " + config.getCurrentPath() + ". Skipping the recipe.");
 			return null;
@@ -484,7 +484,7 @@ public class ConfigParser {
 		} else {
 			productionTime = parentRecipe.getProductionTime();
 		}
-		String typeString = config.getString("type", (parentRecipe != null) ? parentRecipe.getType().name() : null);
+		String typeString = config.getString("type", (parentRecipe != null) ? parentRecipe.getName() : null);
 		if (typeString == null) {
 			plugin.warning("No type specified for recipe at " + config.getCurrentPath() + ". Skipping the recipe.");
 			return null;
@@ -524,7 +524,7 @@ public class ConfigParser {
 			if (modi == null && parentRecipe instanceof ProductionRecipe) {
 				modi = ((ProductionRecipe) parentRecipe).getModifier().clone();
 			}
-			result = new ProductionRecipe(identifier, productionTime, input, output, modi);
+			result = new ProductionRecipe(identifier, name, productionTime, input, output, modi);
 			break;
 //		case COMPACT:
 //			String compactedLore = config.getString("compact_lore",
@@ -576,7 +576,7 @@ public class ConfigParser {
 				plugin.warning("Health gained from repair recipe " + name
 						+ " is set to or was defaulted to 0, this might not be what was intended");
 			}
-			result = new RepairRecipe(identifier, productionTime, input, health);
+			result = new RepairRecipe(identifier, name, productionTime, input, health);
 			break;
 		case UPGRADE:
 			String upgradeName = config.getString("factory");
@@ -594,7 +594,7 @@ public class ConfigParser {
 				plugin.warning("Could not find factory " + upgradeName + " for upgrade recipe " + name);
 				result = null;
 			} else {
-				result = new UpgradeRecipe(identifier, productionTime, input, builder);
+				result = new UpgradeRecipe(identifier, name, productionTime, input, builder);
 			}
 			break;
 //		case "AOEREPAIR":
@@ -629,7 +629,7 @@ public class ConfigParser {
 			}
 			int weight = config.getInt("weight",
 					(parentRecipe instanceof PylonRecipe) ? ((PylonRecipe) parentRecipe).getWeight() : 20);
-			result = new PylonRecipe(identifier, productionTime, input, outputMap, weight);
+			result = new PylonRecipe(identifier, name, productionTime, input, outputMap, weight);
 			break;
 //		case "ENCHANT":
 //			Enchantment enchant = Enchantment.getByName(config.getString("enchant",
@@ -758,7 +758,7 @@ public class ConfigParser {
 				return null;
 			}
 			String followUpRecipe = config.getString("followUpRecipe");
-			result = new RecipeScalingUpgradeRecipe(identifier, productionTime, input, null, rank, null);
+			result = new RecipeScalingUpgradeRecipe(identifier, name, productionTime, input, null, rank, null);
 			String[] data = { toUpgrade, followUpRecipe };
 			recipeScalingUpgradeMapping.put((RecipeScalingUpgradeRecipe) result, data);
 			break;

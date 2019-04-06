@@ -20,8 +20,8 @@ public class RepairRecipe extends InputRecipe {
 
 	private int healthPerRun;
 
-	public RepairRecipe(String identifier, int productionTime, ItemMap input, int healthPerRun) {
-		super(identifier, productionTime, input);
+	public RepairRecipe(String identifier, String name, int productionTime, ItemMap input, int healthPerRun) {
+		super(identifier, name, productionTime, input);
 		this.healthPerRun = healthPerRun;
 	}
 
@@ -58,18 +58,13 @@ public class RepairRecipe extends InputRecipe {
 	public ItemStack getRecipeRepresentation() {
 		ItemStack res = new ItemStack(Material.GOLDEN_APPLE);
 		ItemMeta resResult = res.getItemMeta();
-		resResult.setDisplayName(getType().toString());
+		resResult.setDisplayName(getName());
 		res.setItemMeta(resResult);
 		return res;
 	}
 
 	public int getHealth() {
 		return healthPerRun;
-	}
-
-	@Override
-	public RecipeType getType() {
-		return RecipeType.REPAIR;
 	}
 
 }

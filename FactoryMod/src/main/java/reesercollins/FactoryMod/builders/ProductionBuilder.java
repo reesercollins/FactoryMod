@@ -11,19 +11,17 @@ import org.bukkit.inventory.ItemStack;
 
 import reesercollins.FactoryMod.FMPlugin;
 import reesercollins.FactoryMod.factories.Factory;
-import reesercollins.FactoryMod.factories.Factory.FactoryType;
 import reesercollins.FactoryMod.factories.ProductionFactory;
 import reesercollins.FactoryMod.interaction.ProductionInteractionManager;
 import reesercollins.FactoryMod.power.FurnacePowerManager;
 import reesercollins.FactoryMod.recipes.IRecipe;
-import reesercollins.FactoryMod.recipes.IRecipe.RecipeType;
 import reesercollins.FactoryMod.repair.PercentageHealthRepairManager;
 import reesercollins.FactoryMod.structures.MultiBlockStructure;
 import reesercollins.FactoryMod.structures.ProductionStructure;
 
 public class ProductionBuilder implements IFactoryBuilder {
 
-	private FactoryType type;
+	private String name;
 	private int updateTime;
 	private List<IRecipe> recipes;
 	private ItemStack fuel;
@@ -34,10 +32,10 @@ public class ProductionBuilder implements IFactoryBuilder {
 	private double returnRateOnDestruction;
 	private double breakReduction;
 
-	public ProductionBuilder(FactoryType type, int updateTime, List<IRecipe> recipes, ItemStack fuel,
+	public ProductionBuilder(String name, int updateTime, List<IRecipe> recipes, ItemStack fuel,
 			int fuelConsumptionInterval, double returnRateOnDestruction, int maximumHealth, long breakGracePeriod,
 			int healthPerDamagePeriod, double breakReduction) {
-		this.type = type;	
+		this.name = name;	
 		this.updateTime = updateTime;
 		this.recipes = recipes;
 		this.fuel = fuel;
@@ -85,7 +83,7 @@ public class ProductionBuilder implements IFactoryBuilder {
 		return breakReduction;
 	}
 
-	public Factory revive(List<Location> blocks, int health, RecipeType selectedRecipe, int productionTimer, long breakTime,
+	public Factory revive(List<Location> blocks, int health, String selectedRecipe, int productionTimer, long breakTime,
 			List<String> recipeStrings) {
 		ProductionStructure ps = new ProductionStructure(blocks);
 		FurnacePowerManager fpm = new FurnacePowerManager(ps.getFurnace(), fuel, fuelConsumptionInterval);
@@ -111,12 +109,12 @@ public class ProductionBuilder implements IFactoryBuilder {
 				}
 			}
 		}
-		ProductionFactory pf = new ProductionFactory(pim, phrm, fpm, ps, updateTime, type, currRecipes,
+		ProductionFactory pf = new ProductionFactory(pim, phrm, fpm, ps, updateTime, name, currRecipes,
 				breakReduction);
 		pim.setFactory(pf);
 		phrm.setFactory(pf);
 		for (IRecipe recipe : currRecipes) {
-			if (recipe.getType().equals(selectedRecipe)) {
+			if (recipe.getName().equals(selectedRecipe)) {
 				pf.setRecipe(recipe);
 			}
 		}
@@ -139,7 +137,7 @@ public class ProductionBuilder implements IFactoryBuilder {
 		ProductionInteractionManager pim = new ProductionInteractionManager();
 		PercentageHealthRepairManager phrm = new PercentageHealthRepairManager(maximumHealth, maximumHealth, 0,
 				healthPerDamagePeriod, breakGracePeriod);
-		ProductionFactory pf = new ProductionFactory(pim, phrm, fpm, ps, updateTime, type, recipes, breakReduction);
+		ProductionFactory pf = new ProductionFactory(pim, phrm, fpm, ps, updateTime, name, recipes, breakReduction);
 		pim.setFactory(pf);
 		phrm.setFactory(pf);
 		if (recipes.size() != 0) {
@@ -158,8 +156,8 @@ public class ProductionBuilder implements IFactoryBuilder {
 	}
 
 	@Override
-	public FactoryType getType() {
-		return type;
+	public String getName() {
+		return name;
 	}
 
 	@Override

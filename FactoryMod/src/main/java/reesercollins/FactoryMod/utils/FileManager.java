@@ -1,21 +1,17 @@
 package reesercollins.FactoryMod.utils;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -27,10 +23,7 @@ import reesercollins.FactoryMod.builders.ProductionBuilder;
 import reesercollins.FactoryMod.factories.Factory;
 import reesercollins.FactoryMod.factories.Factory.FactoryType;
 import reesercollins.FactoryMod.factories.ProductionFactory;
-import reesercollins.FactoryMod.protection.FactoryPermission;
-import reesercollins.FactoryMod.protection.ProtectedBlock;
 import reesercollins.FactoryMod.recipes.IRecipe;
-import reesercollins.FactoryMod.recipes.IRecipe.RecipeType;
 import reesercollins.FactoryMod.repair.PercentageHealthRepairManager;
 
 public class FileManager {
@@ -52,82 +45,78 @@ public class FileManager {
 		backup = new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "factoryDataPreviousSave.yml");
 	}
 
-	public static ProtectedBlock getBlockProtection(Location location) {
-		File worldFile = new File(FMPlugin.getInstance().getDataFolder().getAbsolutePath() + File.separator
-				+ "protections" + File.separator + location.getWorld().getName() + ".yml");
-		if (!worldFile.exists()) {
-			return null;
-		}
-		try {
-			YamlConfiguration config = YamlConfiguration.loadConfiguration(worldFile);
-			ConfigurationSection blockSection = config.getConfigurationSection(
-					location.getBlock().getX() + "-" + location.getBlock().getY() + "-" + location.getBlock().getZ());
-			if (blockSection == null) {
-				return null;
-			}
-			String typeString = blockSection.getString("type");
-			if (typeString == null) {
-				return null;
-			}
-			FactoryType type = FactoryType.valueOf(typeString);
-			if (type == null) {
-				return null;
-			}
-			ProtectedBlock block = new ProtectedBlock(location.getBlock(), type);
-			
-			ConfigurationSection permissions = blockSection.getConfigurationSection("permissions");
-			for (String key : permissions.getKeys(false)) {
-				OfflinePlayer p = FMPlugin.getInstance().getServer().getOfflinePlayer(UUID.fromString(key));
-				List<String> perms = permissions.getStringList(key);
-				if (perms == null || perms.isEmpty()) {
-					continue;
-				}
-				for (String perm : perms) {
-					FactoryPermission fPerm = FactoryPermission.valueOf(perm);
-					if (fPerm != null) {
-						block.addPermissionToPlayer(p, fPerm);
-					}
-				}
-			}
-			return block;
-		} catch (Exception e) {
-			FMPlugin.getInstance().error("Error when loading block protection " + worldFile.getAbsolutePath(), false);
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	public static void saveBlockProtection(ProtectedBlock block) {
-		File worldFile = new File(FMPlugin.getInstance().getDataFolder().getAbsolutePath() + File.separator
-				+ "protections" + File.separator + block.getBlock().getWorld().getName() + ".yml");
-		if (!worldFile.exists()) {
-			worldFile.mkdirs();
-			try {
-				worldFile.createNewFile();
-			} catch (IOException e) {
-				FMPlugin.getInstance().error("Unable to create file " + worldFile.getAbsolutePath(), false);
-				e.printStackTrace();
-				return;
-			}
-		}
-		try {
-			YamlConfiguration config = YamlConfiguration.loadConfiguration(worldFile);
-			ConfigurationSection blockSection = config.createSection(
-					block.getBlock().getX() + "-" + block.getBlock().getY() + "-" + block.getBlock().getZ());
-			blockSection.set("type", block.getFactoryType());
-			ConfigurationSection permissionsSection = blockSection.createSection("permissions");
-			for (Entry<OfflinePlayer, List<FactoryPermission>> entry : block.getPermissions().entrySet()) {
-				List<String> permNames = new ArrayList<String>();
-				for (FactoryPermission perm : entry.getValue()) {
-					permNames.add(perm.toString());
-				}
-				permissionsSection.set(entry.getKey().getUniqueId().toString(), permNames);
-			}
-		} catch (Exception e) {
-			FMPlugin.getInstance().error("Error when saving block protection " + worldFile.getAbsolutePath(), false);
-			e.printStackTrace();
-		}
-	}
+//	public static ProtectedBlock getBlockProtection(Location location) {
+//		File worldFile = new File(FMPlugin.getInstance().getDataFolder().getAbsolutePath() + File.separator
+//				+ "protections" + File.separator + location.getWorld().getName() + ".yml");
+//		if (!worldFile.exists()) {
+//			return null;
+//		}
+//		try {
+//			YamlConfiguration config = YamlConfiguration.loadConfiguration(worldFile);
+//			ConfigurationSection blockSection = config.getConfigurationSection(
+//					location.getBlock().getX() + "-" + location.getBlock().getY() + "-" + location.getBlock().getZ());
+//			if (blockSection == null) {
+//				return null;
+//			}
+//			String name = blockSection.getString("name");
+//			if (name == null) {
+//				return null;
+//			}
+//			ProtectedBlock block = new ProtectedBlock(location.getBlock(), name);
+//			
+//			ConfigurationSection permissions = blockSection.getConfigurationSection("permissions");
+//			for (String key : permissions.getKeys(false)) {
+//				OfflinePlayer p = FMPlugin.getInstance().getServer().getOfflinePlayer(UUID.fromString(key));
+//				List<String> perms = permissions.getStringList(key);
+//				if (perms == null || perms.isEmpty()) {
+//					continue;
+//				}
+//				for (String perm : perms) {
+//					FactoryPermission fPerm = FactoryPermission.valueOf(perm);
+//					if (fPerm != null) {
+//						block.addPermissionToPlayer(p, fPerm);
+//					}
+//				}
+//			}
+//			return block;
+//		} catch (Exception e) {
+//			FMPlugin.getInstance().error("Error when loading block protection " + worldFile.getAbsolutePath(), false);
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
+//
+//	public static void saveBlockProtection(ProtectedBlock block) {
+//		File worldFile = new File(FMPlugin.getInstance().getDataFolder().getAbsolutePath() + File.separator
+//				+ "protections" + File.separator + block.getBlock().getWorld().getName() + ".yml");
+//		if (!worldFile.exists()) {
+//			worldFile.mkdirs();
+//			try {
+//				worldFile.createNewFile();
+//			} catch (IOException e) {
+//				FMPlugin.getInstance().error("Unable to create file " + worldFile.getAbsolutePath(), false);
+//				e.printStackTrace();
+//				return;
+//			}
+//		}
+//		try {
+//			YamlConfiguration config = YamlConfiguration.loadConfiguration(worldFile);
+//			ConfigurationSection blockSection = config.createSection(
+//					block.getBlock().getX() + "-" + block.getBlock().getY() + "-" + block.getBlock().getZ());
+//			blockSection.set("name", block.getFactoryName());
+//			ConfigurationSection permissionsSection = blockSection.createSection("permissions");
+//			for (Entry<OfflinePlayer, List<FactoryPermission>> entry : block.getPermissions().entrySet()) {
+//				List<String> permNames = new ArrayList<String>();
+//				for (FactoryPermission perm : entry.getValue()) {
+//					permNames.add(perm.toString());
+//				}
+//				permissionsSection.set(entry.getKey().getUniqueId().toString(), permNames);
+//			}
+//		} catch (Exception e) {
+//			FMPlugin.getInstance().error("Error when saving block protection " + worldFile.getAbsolutePath(), false);
+//			e.printStackTrace();
+//		}
+//	}
 
 	public void save(Collection<Factory> factories) {
 		if (saveFile.exists()) {
@@ -143,7 +132,7 @@ public class FileManager {
 			config.set("version", saveFileVersion);
 			for (Factory f : factories) {
 				String current = serializeLocation(f.getMultiBlockStructure().getCenter());
-				config.set(current + ".name", f.getType());
+				config.set(current + ".name", f.getName());
 				ConfigurationSection blockSection = config.getConfigurationSection(current).createSection("blocks");
 				configureLocation(blockSection, f.getMultiBlockStructure().getAllBlocks());
 				if (f instanceof ProductionFactory) {
@@ -154,7 +143,7 @@ public class FileManager {
 					config.set(current + ".breakTime",
 							((PercentageHealthRepairManager) pf.getRepairManager()).getBreakTime());
 					config.set(current + ".runtime", pf.getRunningTime());
-					config.set(current + ".selectedRecipe", pf.getCurrentRecipe().getType());
+					config.set(current + ".selectedRecipe", pf.getCurrentRecipe().getName());
 					config.set(current + ".autoSelect", pf.isAutoSelect());
 					List<String> recipeList = new LinkedList<String>();
 					for (IRecipe rec : pf.getRecipes()) {
@@ -167,8 +156,8 @@ public class FileManager {
 						config.set(current + ".activator", pf.getActivator().toString());
 					}
 					for (IRecipe i : ((ProductionFactory) f).getRecipes()) {
-						config.set(current + ".runcounts." + i.getType(), pf.getRunCount(i));
-						config.set(current + ".recipeLevels." + i.getType(), pf.getRecipeLevel(i));
+						config.set(current + ".runcounts." + i.getName(), pf.getRunCount(i));
+						config.set(current + ".recipeLevels." + i.getName(), pf.getRecipeLevel(i));
 					}
 				} // else if (f instanceof Pipe) {
 //					Pipe p = (Pipe) f;
@@ -218,7 +207,7 @@ public class FileManager {
 		return loc.getWorld().getName() + "#" + loc.getBlockX() + "#" + loc.getBlockY() + "#" + loc.getBlockZ();
 	}
 
-	public void load(Map<FactoryType, IFactoryBuilder> builders) {
+	public void load(Map<String, IFactoryBuilder> builders) {
 		if (saveFile.exists()) {
 			loadFromFile(saveFile, builders);
 		} else {
@@ -233,7 +222,7 @@ public class FileManager {
 		}
 	}
 
-	private void loadFromFile(File f, Map<FactoryType, IFactoryBuilder> builders) {
+	private void loadFromFile(File f, Map<String, IFactoryBuilder> builders) {
 		int counter = 0;
 		YamlConfiguration config = YamlConfiguration.loadConfiguration(saveFile);
 		int loadedVersion = config.getInt("version", 1);
@@ -308,8 +297,7 @@ public class FileManager {
 				}
 				int health = current.getInt("health");
 				long breakTime = current.getLong("breakTime", 0);
-				String selectedRecipeStr = current.getString("selectedRecipe");
-				RecipeType selectedRecipe = RecipeType.valueOf(selectedRecipeStr);
+				String selectedRecipe = current.getString("selectedRecipe");
 				List<String> recipes = current.getStringList("recipes");
 				boolean autoSelect = current.getBoolean("autoSelect", false);
 				if (recipes == null) {
@@ -330,7 +318,7 @@ public class FileManager {
 					for (String countKey : runCounts.getKeys(false)) {
 						int runs = runCounts.getInt(countKey);
 						for (IRecipe r : fac.getRecipes()) {
-							if (r.getType().equals(countKey)) {
+							if (r.getName().equals(countKey)) {
 								fac.setRunCount(r, runs);
 								break;
 							}
@@ -342,7 +330,7 @@ public class FileManager {
 					for (String countKey : recipeLevels.getKeys(false)) {
 						int runs = recipeLevels.getInt(countKey);
 						for (IRecipe r : fac.getRecipes()) {
-							if (r.getType().equals(countKey)) {
+							if (r.getName().equals(countKey)) {
 								fac.setRecipeLevel(r, runs);
 								break;
 							}

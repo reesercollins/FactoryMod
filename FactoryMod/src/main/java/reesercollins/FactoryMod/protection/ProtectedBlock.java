@@ -9,21 +9,19 @@ import org.bukkit.block.Block;
 
 import reesercollins.FactoryMod.FMPlugin;
 import reesercollins.FactoryMod.factories.Factory;
-import reesercollins.FactoryMod.factories.Factory.FactoryType;
 
 public class ProtectedBlock {
 
 	private Block block;
 	private Class<? extends Factory> factoryClass;
-	private FactoryType factoryType;
+	private String factoryName;
 	private HashMap<OfflinePlayer, List<FactoryPermission>> permissions;
 
 	public ProtectedBlock(Block block) {
 		this.block = block;
 		Factory fac = FMPlugin.getManager().getFactoryAt(block);
 		if (fac != null) {
-			this.factoryClass = fac.getClass();
-			this.factoryType = fac.getType();
+			this.factoryName = fac.getName();
 		}
 	}
 
@@ -31,9 +29,9 @@ public class ProtectedBlock {
 		this(location.getBlock());
 	}
 
-	public ProtectedBlock(Block block, FactoryType type) {
+	public ProtectedBlock(Block block, String name) {
 		this.block = block;
-		this.factoryType = type;
+		this.factoryName = name;
 	}
 
 	/**
@@ -51,11 +49,11 @@ public class ProtectedBlock {
 	}
 
 	/**
-	 * @return The result of the getType() function on the factory this block
+	 * @return The result of the getName() function on the factory this block
 	 *         represents.
 	 */
-	public FactoryType getFactoryType() {
-		return factoryType;
+	public String getFactoryName() {
+		return factoryName;
 	}
 
 	public HashMap<OfflinePlayer, List<FactoryPermission>> getPermissions() {

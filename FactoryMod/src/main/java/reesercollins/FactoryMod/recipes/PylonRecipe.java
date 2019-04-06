@@ -22,8 +22,8 @@ public class PylonRecipe extends InputRecipe {
 	private static int globalLimit;
 	private int weight;
 
-	public PylonRecipe(String identifier, int productionTime, ItemMap input, ItemMap output, int weight) {
-		super(identifier, productionTime, input);
+	public PylonRecipe(String identifier, String name, int productionTime, ItemMap input, ItemMap output, int weight) {
+		super(identifier, name, productionTime, input);
 		this.output = output;
 		this.weight = weight;
 	}
@@ -56,11 +56,6 @@ public class PylonRecipe extends InputRecipe {
 
 	public ItemMap getOutput() {
 		return output;
-	}
-
-	@Override
-	public RecipeType getType() {
-		return RecipeType.PYLON;
 	}
 
 	@Override
@@ -114,7 +109,7 @@ public class PylonRecipe extends InputRecipe {
 			res = out.get(0);
 		}
 		ItemMeta im = res.getItemMeta();
-		im.setDisplayName(getType().toString());
+		im.setDisplayName(getName());
 		res.setItemMeta(im);
 		return res;
 	}

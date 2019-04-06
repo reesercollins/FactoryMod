@@ -22,17 +22,17 @@ public abstract class Factory implements Runnable {
 	protected boolean active;
 	protected MultiBlockStructure mbs;
 	protected int updateTime;
-	protected FactoryType type;
+	protected String name;
 	protected int threadId;
 
 	public Factory(IInteractionManager im, IRepairManager rm, IPowerManager pm, MultiBlockStructure mbs, int updateTime,
-			FactoryType type) {
+			String name) {
 		this.im = im;
 		this.rm = rm;
 		this.mbs = mbs;
 		this.pm = pm;
 		this.updateTime = updateTime;
-		this.type = type;
+		this.name = name;
 	}
 	
 	public enum FactoryType {
@@ -86,15 +86,15 @@ public abstract class Factory implements Runnable {
 	}
 
 	/**
-	 * Types are not unique for factory instances, but simply describe a broader
+	 * Names are not unique for factory instances, but simply describe a broader
 	 * functionality group. Factories implemented by the same class can have
 	 * different names, but factories with the same name should have the exact same
 	 * functionality
 	 * 
 	 * @return name of this factory
 	 */
-	public FactoryType getType() {
-		return type;
+	public String getName() {
+		return name;
 	}
 
 	/**
@@ -140,7 +140,7 @@ public abstract class Factory implements Runnable {
 	}
 
 	public String getLogData() {
-		return type + " at " + mbs.getCenter().toString();
+		return name + " at " + mbs.getCenter().toString();
 	}
 
 	public void turnFurnaceOff(Block f) {

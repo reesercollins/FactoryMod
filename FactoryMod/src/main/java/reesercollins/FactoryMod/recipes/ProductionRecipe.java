@@ -24,9 +24,9 @@ public class ProductionRecipe extends InputRecipe {
 	private Random rng;
 	private DecimalFormat decimalFormatting;
 
-	public ProductionRecipe(String identifier, int productionTime, ItemMap input, ItemMap output,
+	public ProductionRecipe(String identifier, String name, int productionTime, ItemMap input, ItemMap output,
 			ProductionRecipeModifier modifier) {
-		super(identifier, productionTime, input);
+		super(identifier, name, productionTime, input);
 		this.output = output;
 		this.modifier = modifier;
 		this.rng = new Random();
@@ -95,11 +95,6 @@ public class ProductionRecipe extends InputRecipe {
 	}
 
 	@Override
-	public RecipeType getType() {
-		return RecipeType.PRODUCTION;
-	}
-
-	@Override
 	public List<ItemStack> getInputRepresentation(Inventory i, ProductionFactory pf) {
 		if (i == null) {
 			return input.getItemStackRepresentation();
@@ -145,7 +140,7 @@ public class ProductionRecipe extends InputRecipe {
 			res = out.get(0);
 		}
 		ItemMeta im = res.getItemMeta();
-		im.setDisplayName(getType().toString());
+		im.setDisplayName(getName());
 		res.setItemMeta(im);
 		return res;
 	}
