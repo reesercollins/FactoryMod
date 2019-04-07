@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.bukkit.Bukkit;
@@ -32,11 +33,13 @@ import reesercollins.FactoryMod.builders.IFactoryBuilder;
 import reesercollins.FactoryMod.builders.ProductionBuilder;
 import reesercollins.FactoryMod.factories.Factory.FactoryType;
 import reesercollins.FactoryMod.itemHandling.ItemMap;
+import reesercollins.FactoryMod.recipes.DeterministicEnchantingRecipe;
 import reesercollins.FactoryMod.recipes.IRecipe;
 import reesercollins.FactoryMod.recipes.IRecipe.RecipeType;
 import reesercollins.FactoryMod.recipes.InputRecipe;
 import reesercollins.FactoryMod.recipes.ProductionRecipe;
 import reesercollins.FactoryMod.recipes.PylonRecipe;
+import reesercollins.FactoryMod.recipes.RandomOutputRecipe;
 import reesercollins.FactoryMod.recipes.RecipeScalingUpgradeRecipe;
 import reesercollins.FactoryMod.recipes.RepairRecipe;
 import reesercollins.FactoryMod.recipes.UpgradeRecipe;
@@ -89,6 +92,13 @@ public class ConfigParser {
 			plugin.warning(config.getString("factory_interaction_material") + " is not a valid material");
 		}
 
+		useYamlIdentifiers = config.getBoolean("use_recipe_yamlidentifiers", false);
+		if (!useYamlIdentifiers) {
+			plugin.warning(
+					"You have usage of yaml identifiers turned off, names will be used instead to identify factories and recipes. This behavior"
+							+ "is not recommended and not compatible with config inheritation");
+		}
+
 		defaultUpdateTime = (int) parseTime(config.getString("default_update_time", "5"));
 		defaultHealth = config.getInt("default_health", 10000);
 		ItemMap dfuel = parseItemMap(config.getConfigurationSection("default_fuel"));
@@ -107,7 +117,7 @@ public class ConfigParser {
 			new BukkitRunnable() {
 				@Override
 				public void run() {
-					FMPlugin.getManager().saveFactories();
+					FMPlugin.getManager().saveFactories(false);
 				}
 			}.runTaskTimerAsynchronously(plugin, savingInterval, savingInterval);
 		}
@@ -290,7 +300,8 @@ public class ConfigParser {
 				for (String enchantKey : current.getConfigurationSection("enchants").getKeys(false)) {
 					ConfigurationSection enchantConfig = current.getConfigurationSection("enchants")
 							.getConfigurationSection(enchantKey);
-					NamespacedKey enchantmentKey = NamespacedKey.minecraft(enchantConfig.getString("enchant").toLowerCase());
+					NamespacedKey enchantmentKey = NamespacedKey
+							.minecraft(enchantConfig.getString("enchant").toLowerCase());
 					if (enchantmentKey == null) {
 						plugin.error("Failed to find enchantment with key " + enchantConfig.getString("enchant"),
 								false);
@@ -673,79 +684,80 @@ public class ConfigParser {
 					(parentRecipe instanceof PylonRecipe) ? ((PylonRecipe) parentRecipe).getWeight() : 20);
 			result = new PylonRecipe(identifier, name, productionTime, input, outputMap, weight);
 			break;
-//		case "ENCHANT":
-//			Enchantment enchant = Enchantment.getByName(config.getString("enchant",
-//					(parentRecipe instanceof DeterministicEnchantingRecipe)
-//							? ((DeterministicEnchantingRecipe) parentRecipe).getEnchant().getName()
-//							: null));
-//			if (enchant == null) {
-//				plugin.warning(
-//						"No enchant specified for deterministic enchanting recipe " + name + ". It was skipped.");
-//				result = null;
-//				break;
-//			}
-//			int level = config.getInt("level",
-//					(parentRecipe instanceof DeterministicEnchantingRecipe)
-//							? ((DeterministicEnchantingRecipe) parentRecipe).getLevel()
-//							: 1);
-//			ConfigurationSection toolSection = config.getConfigurationSection("enchant_item");
-//			ItemMap tool;
-//			if (toolSection == null) {
-//				if (!(parentRecipe instanceof DeterministicEnchantingRecipe)) {
-//					tool = new ItemMap();
-//				} else {
-//					tool = ((DeterministicEnchantingRecipe) parentRecipe).getTool().clone();
-//				}
-//			} else {
-//				tool = parseItemMap(toolSection);
-//			}
-//			if (tool.getTotalItemAmount() == 0) {
-//				plugin.warning("Deterministic enchanting recipe " + name
-//						+ " had no tool to enchant specified, it was skipped");
-//				result = null;
-//				break;
-//			}
-//			result = new DeterministicEnchantingRecipe(identifier, name, productionTime, input, tool, enchant, level);
-//			break;
-//		case "RANDOM":
-//			ConfigurationSection outputSect = config.getConfigurationSection("outputs");
-//			Map<ItemMap, Double> outputs = new HashMap<ItemMap, Double>();
-//			ItemMap displayThis = null;
-//			if (outputSect == null) {
-//				if (parentRecipe instanceof RandomOutputRecipe) {
-//					// clone it
-//					for (Entry<ItemMap, Double> entry : ((RandomOutputRecipe) parentRecipe).getOutputs().entrySet()) {
-//						outputs.put(entry.getKey().clone(), entry.getValue());
-//					}
-//					displayThis = ((RandomOutputRecipe) parentRecipe).getDisplayMap();
-//				} else {
-//					plugin.severe("No outputs specified for random recipe " + name + " it was skipped");
-//					result = null;
-//					break;
-//				}
-//			} else {
-//				double totalChance = 0.0;
-//				String displayMap = outputSect.getString("display");
-//				for (String key : outputSect.getKeys(false)) {
-//					ConfigurationSection keySec = outputSect.getConfigurationSection(key);
-//					if (keySec != null) {
-//						double chance = keySec.getDouble("chance");
-//						totalChance += chance;
-//						ItemMap im = parseItemMap(keySec);
-//						outputs.put(im, chance);
-//						if (key.equals(displayMap)) {
-//							displayThis = im;
-//							plugin.debug("Displaying " + displayMap + " as recipe label");
-//						}
-//					}
-//				}
-//				if (Math.abs(totalChance - 1.0) > 0.0001) {
-//					plugin.warning(
-//							"Sum of output chances for recipe " + name + " is not 1.0. Total sum is: " + totalChance);
-//				}
-//			}
-//			result = new RandomOutputRecipe(identifier, name, productionTime, input, outputs, displayThis);
-//			break;
+		case ENCHANT:
+			Enchantment enchant = Enchantment.getByKey(NamespacedKey.minecraft(config.getString("enchant",
+					(parentRecipe instanceof DeterministicEnchantingRecipe)
+							? ((DeterministicEnchantingRecipe) parentRecipe).getEnchant().getKey().toString()
+							: null)
+					.toLowerCase()));
+			if (enchant == null) {
+				plugin.warning(
+						"No enchant specified for deterministic enchanting recipe " + name + ". It was skipped.");
+				result = null;
+				break;
+			}
+			int level = config.getInt("level",
+					(parentRecipe instanceof DeterministicEnchantingRecipe)
+							? ((DeterministicEnchantingRecipe) parentRecipe).getLevel()
+							: 1);
+			ConfigurationSection toolSection = config.getConfigurationSection("enchant_item");
+			ItemMap tool;
+			if (toolSection == null) {
+				if (!(parentRecipe instanceof DeterministicEnchantingRecipe)) {
+					tool = new ItemMap();
+				} else {
+					tool = ((DeterministicEnchantingRecipe) parentRecipe).getTool().clone();
+				}
+			} else {
+				tool = parseItemMap(toolSection);
+			}
+			if (tool.getTotalItemAmount() == 0) {
+				plugin.warning("Deterministic enchanting recipe " + name
+						+ " had no tool to enchant specified, it was skipped");
+				result = null;
+				break;
+			}
+			result = new DeterministicEnchantingRecipe(identifier, name, productionTime, input, tool, enchant, level);
+			break;
+		case RANDOM:
+			ConfigurationSection outputSect = config.getConfigurationSection("outputs");
+			Map<ItemMap, Double> outputs = new HashMap<ItemMap, Double>();
+			ItemMap displayThis = null;
+			if (outputSect == null) {
+				if (parentRecipe instanceof RandomOutputRecipe) {
+					// clone it
+					for (Entry<ItemMap, Double> entry : ((RandomOutputRecipe) parentRecipe).getOutputs().entrySet()) {
+						outputs.put(entry.getKey().clone(), entry.getValue());
+					}
+					displayThis = ((RandomOutputRecipe) parentRecipe).getDisplayMap();
+				} else {
+					plugin.warning("No outputs specified for random recipe " + name + " it was skipped");
+					result = null;
+					break;
+				}
+			} else {
+				double totalChance = 0.0;
+				String displayMap = outputSect.getString("display");
+				for (String key : outputSect.getKeys(false)) {
+					ConfigurationSection keySec = outputSect.getConfigurationSection(key);
+					if (keySec != null) {
+						double chance = keySec.getDouble("chance");
+						totalChance += chance;
+						ItemMap im = parseItemMap(keySec);
+						outputs.put(im, chance);
+						if (key.equals(displayMap)) {
+							displayThis = im;
+							plugin.info("Displaying " + displayMap + " as recipe label");
+						}
+					}
+				}
+				if (Math.abs(totalChance - 1.0) > 0.0001) {
+					plugin.warning(
+							"Sum of output chances for recipe " + name + " is not 1.0. Total sum is: " + totalChance);
+				}
+			}
+			result = new RandomOutputRecipe(identifier, name, productionTime, input, outputs, displayThis);
+			break;
 //		case "COSTRETURN":
 //			double factor = config.getDouble("factor",
 //					(parentRecipe instanceof FactoryMaterialReturnRecipe)

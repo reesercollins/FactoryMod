@@ -217,7 +217,7 @@ public class MenuBuilder {
 			ci.setSlot(craStack, 4);
 			ci.setSlot(chestDec, 5);
 			ItemMap im = manager.getSetupCost(ProductionStructure.class, builder.getName());
-			int slot = 0;
+			int slot = 9;
 			for (ItemStack is : im.getItemStackRepresentation()) {
 				DecorationStack dec = new DecorationStack(is);
 				ci.setSlot(dec, slot++);
@@ -260,7 +260,7 @@ public class MenuBuilder {
 			};
 			ci.setSlot(cheCli, 5);
 
-			int slot = 0;
+			int slot = 9;
 			List<ItemStack> itms = rec.getInput().getItemStackRepresentation();
 			if (itms.size() > 27) {
 				itms = rec.getInput().getLoredItemCountRepresentation();
@@ -271,7 +271,7 @@ public class MenuBuilder {
 				ci.setSlot(dec, slot++);
 			}
 		}
-		ci.setSlot(input, 22);
+		ci.setSlot(input, 0);
 		ItemStack backStack = new ItemStack(Material.ARROW);
 		ItemMeta backMeta = backStack.getItemMeta();
 		backMeta.setDisplayName("Back to factory overview");
@@ -283,7 +283,7 @@ public class MenuBuilder {
 				openFactoryBrowser(arg0, factoryViewed.get(arg0.getUniqueId()));
 			}
 		};
-		ci.setSlot(backClickable, 18);
+		ci.setSlot(backClickable, 53);
 		ci.showInventory(p);
 	}
 
@@ -372,7 +372,7 @@ public class MenuBuilder {
 		inputStack.setItemMeta(inputMeta);
 		DecorationStack inputClickable = new DecorationStack(inputStack);
 		ci.setSlot(inputClickable, 4);
-		int index = 0;
+		int index = 9;
 		List<ItemStack> ins = rec.getInputRepresentation(null, null);
 		if (ins.size() > 18) {
 			ins = new ItemMap(ins).getLoredItemCountRepresentation();
@@ -399,7 +399,7 @@ public class MenuBuilder {
 				openRecipeBrowser(p, factoryViewed.get(p.getUniqueId()));
 			}
 		};
-		ci.setSlot(backClickable, 27);
+		ci.setSlot(backClickable, 53);
 
 		ci.setSlot(outputClickable, 31);
 		index = 27;

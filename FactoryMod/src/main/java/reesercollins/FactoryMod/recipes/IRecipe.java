@@ -5,21 +5,10 @@ import org.bukkit.inventory.Inventory;
 import reesercollins.FactoryMod.factories.ProductionFactory;
 
 public interface IRecipe {
-	
+
 	public enum RecipeType {
-		PRODUCTION,
-		COMPACT,
-		DECOMPACT,
-		REPAIR,
-		UPGRADE,
-		AOEREPAIR,
-		PYLON,
-		ENCHANT,
-		RANDOM,
-		COSTRETURN,
-		LOREENCHANT,
-		RECIPEMODIFIERUPGRADE,
-		DUMMY;
+		PRODUCTION, COMPACT, DECOMPACT, REPAIR, UPGRADE, AOEREPAIR, PYLON, ENCHANT, RANDOMENCHANT, RANDOM, COSTRETURN, LOREENCHANT,
+		RECIPEMODIFIERUPGRADE, DUMMY;
 	}
 
 	/**
@@ -55,5 +44,13 @@ public interface IRecipe {
 	 * @param f Factory which is run
 	 */
 	public void applyEffect(Inventory i, ProductionFactory pf);
+
+	/**
+	 * Each implementation of this class has to specify a unique identifier, which
+	 * is used to identify instances of this recipe in the config
+	 * 
+	 * @return Unique identifier for the implementation
+	 */
+	public RecipeType getTypeIdentifier();
 
 }

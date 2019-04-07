@@ -48,7 +48,7 @@ public class UpgradeRecipe extends InputRecipe {
 		ItemMeta im = res.getItemMeta();
 		im.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		im.setDisplayName(getName());
+		im.setDisplayName(ChatColor.RESET + name);
 		res.setItemMeta(im);
 		return res;
 	}
@@ -119,6 +119,11 @@ public class UpgradeRecipe extends InputRecipe {
 
 	public IFactoryBuilder getBuilder() {
 		return builder;
+	}
+
+	@Override
+	public RecipeType getTypeIdentifier() {
+		return RecipeType.UPGRADE;
 	}
 
 }

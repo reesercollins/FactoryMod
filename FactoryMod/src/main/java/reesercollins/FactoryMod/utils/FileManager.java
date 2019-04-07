@@ -118,8 +118,8 @@ public class FileManager {
 //		}
 //	}
 
-	public void save(Collection<Factory> factories) {
-		if (saveFile.exists()) {
+	public void save(Collection<Factory> factories, boolean onShutdown) {
+		if (saveFile.exists() && !onShutdown) {
 			// old save file exists, so it is our new backup now
 			if (backup.exists()) {
 				backup.delete();
@@ -137,7 +137,7 @@ public class FileManager {
 				configureLocation(blockSection, f.getMultiBlockStructure().getAllBlocks());
 				if (f instanceof ProductionFactory) {
 					ProductionFactory pf = (ProductionFactory) f;
-					config.set(current + ".type", "production");
+					config.set(current + ".type", FactoryType.PRODUCTION.name());
 					config.set(current + ".health",
 							((PercentageHealthRepairManager) pf.getRepairManager()).getRawHealth());
 					config.set(current + ".breakTime",
@@ -232,7 +232,7 @@ public class FileManager {
 				continue;
 			}
 			String typeString = current.getString("type");
-			FactoryType type = FactoryType.valueOf(typeString);
+			FactoryType type = FactoryType.valueOf(typeString.toUpperCase());
 			String name = current.getString("name");
 			int runtime = current.getInt("runtime");
 			List<Location> blocks = new LinkedList<Location>();
