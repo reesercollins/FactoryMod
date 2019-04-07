@@ -241,7 +241,7 @@ public class ItemMap {
 		int amount = 0;
 		for (Entry<ItemStack, Integer> entry : matSubMap.getEntrySet()) {
 			ItemStack current = entry.getKey();
-			if (is.getItemMeta().equals(current.getItemMeta())) {
+			if (is.isSimilar(current)) {
 				amount += entry.getValue();
 			}
 		}

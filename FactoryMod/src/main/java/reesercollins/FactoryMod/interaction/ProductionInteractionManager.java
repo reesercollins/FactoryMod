@@ -70,20 +70,16 @@ public class ProductionInteractionManager implements IInteractionManager {
 				}
 				int index = 0;
 				for (ItemStack is : input) {
-					Clickable c = new Clickable(is) {
-						@Override
-						public void clicked(Player p) {
-						}
-					};
+					DecorationStack c = new DecorationStack(is);
 					ci.setSlot(c, index);
 					index++;
 				}
-				List<ItemStack> output = ((InputRecipe) pf.getCurrentRecipe()).getInputRepresentation(pf.getInventory(),
+				List<ItemStack> output = ((InputRecipe) pf.getCurrentRecipe()).getOutputRepresentation(pf.getInventory(),
 						pf);
 				if (output.size() > 18) {
 					output = new ItemMap(output).getLoredItemCountRepresentation();
 				}
-				index = 44;
+				index = 27;
 				for (ItemStack is : output) {
 					Clickable c = new DecorationStack(is);
 					ci.setSlot(c, index);
@@ -154,42 +150,45 @@ public class ProductionInteractionManager implements IInteractionManager {
 
 				recipes.put(c, recipe);
 				ci.addSlot(c);
-
-				ItemStack autoSelectStack = new ItemStack(
-						pf.isAutoSelect() ? Material.EMERALD_BLOCK : Material.REDSTONE_BLOCK);
-				ItemMeta autoSelectMeta = autoSelectStack.getItemMeta();
-				autoSelectMeta.setDisplayName("Toggle auto select");
-				autoSelectMeta.setLore(new ArrayList<String>(Arrays.asList(
-						ChatColor.GOLD + "Auto select will make the factory automatically select any "
-								+ "recipe it can run whenever you activate it.",
-						ChatColor.AQUA + "Click to turn it " + (pf.isAutoSelect() ? "off" : "on"))));
-				Clickable autoSelectClick = new Clickable(autoSelectStack) {
-
-					@Override
-					public void clicked(Player p) {
-						p.sendMessage(ChatColor.GREEN + "Turned auto select " + (pf.isAutoSelect() ? "off" : "on")
-								+ " for " + pf.getName());
-						pf.setAutoSelect(!pf.isAutoSelect());
-					}
-				};
-				ci.setSlot(autoSelectClick, (rows * 9) - 2);
-				ItemStack menuStack = new ItemStack(Material.PAINTING);
-				ItemMeta menuMeta = menuStack.getItemMeta();
-				menuMeta.setDisplayName("Open Menu");
-				menuMeta.setLore(
-						new ArrayList<String>(Arrays.asList(ChatColor.LIGHT_PURPLE + "Click to open a detailed menu")));
-				menuStack.setItemMeta(menuMeta);
-				Clickable menuC = new Clickable(menuStack) {
-					@Override
-					public void clicked(Player p) {
-						FMPlugin.getMenuBuilder().openFactoryBrowser(p, pf.getName());
-					}
-				};
-				ci.setSlot(menuC, (rows * 9) - 1);
-
-				ci.showInventory(p);
-				return;
 			}
+
+			ItemStack autoSelectStack = new ItemStack(
+					pf.isAutoSelect() ? Material.EMERALD_BLOCK : Material.REDSTONE_BLOCK);
+			ItemMeta autoSelectMeta = autoSelectStack.getItemMeta();
+			autoSelectMeta.setDisplayName(ChatColor.RESET + "Toggle auto select");
+			autoSelectMeta.setLore(new ArrayList<String>(
+					Arrays.asList(ChatColor.GOLD + "Auto select will make the factory automatically select any",
+							ChatColor.GOLD + "recipe it can run whenever you activate it.",
+							ChatColor.AQUA + "Click to turn it " + (pf.isAutoSelect() ? "off" : "on"))));
+			autoSelectStack.setItemMeta(autoSelectMeta);
+			Clickable autoSelectClick = new Clickable(autoSelectStack) {
+
+				@Override
+				public void clicked(Player p) {
+					p.sendMessage(ChatColor.GREEN + "Turned auto select " + (pf.isAutoSelect() ? "off" : "on") + " for "
+							+ pf.getName());
+					getItemStack().setType(pf.isAutoSelect() ? Material.REDSTONE_BLOCK : Material.EMERALD_BLOCK);
+					pf.setAutoSelect(!pf.isAutoSelect());
+				}
+			};
+			ci.setSlot(autoSelectClick, (rows * 9) - 2);
+			ItemStack menuStack = new ItemStack(Material.PAINTING);
+			ItemMeta menuMeta = menuStack.getItemMeta();
+			menuMeta.setDisplayName(ChatColor.RESET + "Open Menu");
+			menuMeta.setLore(
+					new ArrayList<String>(Arrays.asList(ChatColor.LIGHT_PURPLE + "Click to open a detailed menu")));
+			menuStack.setItemMeta(menuMeta);
+			Clickable menuC = new Clickable(menuStack) {
+				@Override
+				public void clicked(Player p) {
+					FMPlugin.getMenuBuilder().openFactoryBrowser(p, pf.getName());
+				}
+			};
+			ci.setSlot(menuC, (rows * 9) - 1);
+
+			ci.showInventory(p);
+			return;
+
 		} else if (b.equals(pf.getFurnace())) {
 			if (pf.isActive()) {
 				pf.deactivate();

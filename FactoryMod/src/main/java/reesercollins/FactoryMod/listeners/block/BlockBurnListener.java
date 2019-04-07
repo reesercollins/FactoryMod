@@ -2,13 +2,14 @@ package reesercollins.FactoryMod.listeners.block;
 
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBurnEvent;
 
 import reesercollins.FactoryMod.FMPlugin;
 import reesercollins.FactoryMod.FactoryManager;
 import reesercollins.FactoryMod.factories.Factory;
 
-public class BlockBurnListener {
+public class BlockBurnListener implements Listener {
 
 	FactoryManager manager;
 

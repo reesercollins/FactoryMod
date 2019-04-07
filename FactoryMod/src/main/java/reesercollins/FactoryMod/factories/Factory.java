@@ -2,11 +2,8 @@ package reesercollins.FactoryMod.factories;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.block.Furnace;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.material.DirectionalContainer;
 
 import reesercollins.FactoryMod.FMPlugin;
 import reesercollins.FactoryMod.interaction.IInteractionManager;
@@ -127,17 +124,9 @@ public abstract class Factory implements Runnable {
 		if (f.getType() != Material.FURNACE) {
 			return;
 		}
-		
 		Furnace furnace = (Furnace) f.getState();
-			
-		ItemStack[] oldContents = furnace.getInventory().getStorageContents();
-		BlockFace facing = ((DirectionalContainer) furnace.getData()).getFacing();
-		furnace.getInventory().clear();
-		furnace = (Furnace) f.getState().getBlockData();
-		((DirectionalContainer) furnace).setFacingDirection(facing);
-		furnace.update();
 		furnace.setBurnTime(Short.MAX_VALUE);
-		furnace.getInventory().setContents(oldContents);
+		furnace.update();
 	}
 
 	public String getLogData() {

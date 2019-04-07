@@ -105,8 +105,14 @@ public class RecipeScalingUpgradeRecipe extends InputRecipe {
 				+ " output multiplier");
 		ItemMeta im = is.getItemMeta();
 		im.setLore(lore);
+		im.setDisplayName(ChatColor.RESET + name);
 		is.setItemMeta(im);
 		return is;
+	}
+
+	@Override
+	public RecipeType getTypeIdentifier() {
+		return RecipeType.RECIPEMODIFIERUPGRADE;
 	}
 
 }

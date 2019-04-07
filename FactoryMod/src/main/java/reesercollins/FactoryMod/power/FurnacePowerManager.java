@@ -39,13 +39,10 @@ public class FurnacePowerManager implements IPowerManager {
 	@Override
 	public boolean powerAvailable() {
 		if (furnace.getType() != Material.FURNACE) {
-			return false;
+			throw new UnknownError("Was expecting FURNACE, instead got " + furnace.getType());
 		}
-		FurnaceInventory fi = ((Furnace) furnace.getState()).getInventory();
-		ItemMap im = new ItemMap();
-		im.addItemStack(fi.getFuel());
-		im.addItemStack(fi.getSmelting());
-		return im.getAmount(fuel) != 0;
+		ItemMap im = new ItemMap(((Furnace) furnace.getState()).getInventory());
+		return im.getAmount(fuel) > 0;
 	}
 
 	@Override

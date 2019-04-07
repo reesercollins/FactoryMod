@@ -27,6 +27,7 @@ public abstract class InputRecipe implements IRecipe {
 		this.productionTime = productionTime;
 		this.input = input;
 		this.identifier = identifier;
+		this.name = name;
 	}
 
 	/**

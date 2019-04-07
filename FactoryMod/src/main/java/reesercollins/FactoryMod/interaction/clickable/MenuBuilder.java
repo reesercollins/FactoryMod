@@ -97,7 +97,7 @@ public class MenuBuilder {
 
 			ItemStack creationStack = new ItemStack(Material.CHEST);
 			ItemMeta creationMeta = creationStack.getItemMeta();
-			creationMeta.setDisplayName("Setup");
+			creationMeta.setDisplayName(ChatColor.RESET + "Setup");
 			creationMeta.setLore(
 					new ArrayList<String>(Arrays.asList(ChatColor.LIGHT_PURPLE + "Click to display more information",
 							ChatColor.LIGHT_PURPLE + "on how to setup this factory")));
@@ -113,7 +113,7 @@ public class MenuBuilder {
 
 			ItemStack recipeStack = new ItemStack(Material.CRAFTING_TABLE);
 			ItemMeta recipeMeta = recipeStack.getItemMeta();
-			recipeMeta.setDisplayName("Recipies");
+			recipeMeta.setDisplayName(ChatColor.RESET + "Recipies");
 			recipeMeta.setLore(
 					new ArrayList<String>(Arrays.asList(ChatColor.LIGHT_PURPLE + "Click to display all recipes",
 							ChatColor.LIGHT_PURPLE + "this factory can run")));
@@ -129,7 +129,7 @@ public class MenuBuilder {
 
 			ItemStack upgradeStack = new ItemStack(Material.FURNACE);
 			ItemMeta upgradeMeta = upgradeStack.getItemMeta();
-			upgradeMeta.setDisplayName("Upgrades");
+			upgradeMeta.setDisplayName(ChatColor.RESET + "Upgrades");
 			upgradeMeta.setLore(new ArrayList<String>(
 					Arrays.asList(ChatColor.LIGHT_PURPLE + "Click to display more information about",
 							ChatColor.LIGHT_PURPLE + "the possible upgrades to this factory")));
@@ -167,7 +167,7 @@ public class MenuBuilder {
 			Clickable c = new Clickable(is) {
 				@Override
 				public void clicked(Player p) {
-					openDetailedRecipeBrowser(p, this.getItemStack().getItemMeta().getDisplayName());
+					openDetailedRecipeBrowser(p, ChatColor.stripColor(this.getItemStack().getItemMeta().getDisplayName()));
 				}
 			};
 			recipeInv.setSlot(c, j++);
@@ -175,7 +175,7 @@ public class MenuBuilder {
 
 		ItemStack backStack = new ItemStack(Material.ARROW);
 		ItemMeta backMeta = backStack.getItemMeta();
-		backMeta.setDisplayName("Back to factory overview");
+		backMeta.setDisplayName(ChatColor.RESET + "Back to factory overview");
 		backMeta.setLore(new ArrayList<String>(Arrays.asList(ChatColor.LIGHT_PURPLE + "Click to go back")));
 		backStack.setItemMeta(backMeta);
 		Clickable backClickable = new Clickable(backStack) {
@@ -184,7 +184,7 @@ public class MenuBuilder {
 				openFactoryBrowser(p, factoryViewed.get(p.getUniqueId()));
 			}
 		};
-		recipeInv.setSlot(backClickable, size - 5);
+		recipeInv.setSlot(backClickable, size - 1);
 		recipeInv.showInventory(p);
 	}
 
@@ -217,7 +217,7 @@ public class MenuBuilder {
 			ci.setSlot(craStack, 4);
 			ci.setSlot(chestDec, 5);
 			ItemMap im = manager.getSetupCost(ProductionStructure.class, builder.getName());
-			int slot = 0;
+			int slot = 9;
 			for (ItemStack is : im.getItemStackRepresentation()) {
 				DecorationStack dec = new DecorationStack(is);
 				ci.setSlot(dec, slot++);
@@ -235,8 +235,8 @@ public class MenuBuilder {
 			cr.setItemMeta(crMeta);
 			Clickable craCli = new Clickable(cr) {
 				@Override
-				public void clicked(Player arg0) {
-					openFactoryBrowser(arg0, parentFactories.get(factoryViewed.get(arg0.getUniqueId())));
+				public void clicked(Player p) {
+					openFactoryBrowser(p, parentFactories.get(factoryViewed.get(p.getUniqueId())));
 				}
 			};
 			ci.setSlot(craCli, 4);
@@ -246,21 +246,21 @@ public class MenuBuilder {
 			fur.setItemMeta(furMeta);
 			Clickable furCli = new Clickable(fur) {
 				@Override
-				public void clicked(Player arg0) {
-					openFactoryBrowser(arg0, parentFactories.get(factoryViewed.get(arg0.getUniqueId())));
+				public void clicked(Player p) {
+					openFactoryBrowser(p, parentFactories.get(factoryViewed.get(p.getUniqueId())));
 				}
 			};
 			ci.setSlot(furCli, 3);
 
 			Clickable cheCli = new Clickable(che) {
 				@Override
-				public void clicked(Player arg0) {
-					openFactoryBrowser(arg0, parentFactories.get(factoryViewed.get(arg0.getUniqueId())));
+				public void clicked(Player p) {
+					openFactoryBrowser(p, parentFactories.get(factoryViewed.get(p.getUniqueId())));
 				}
 			};
 			ci.setSlot(cheCli, 5);
 
-			int slot = 0;
+			int slot = 9;
 			List<ItemStack> itms = rec.getInput().getItemStackRepresentation();
 			if (itms.size() > 27) {
 				itms = rec.getInput().getLoredItemCountRepresentation();
@@ -271,19 +271,19 @@ public class MenuBuilder {
 				ci.setSlot(dec, slot++);
 			}
 		}
-		ci.setSlot(input, 22);
+		ci.setSlot(input, 0);
 		ItemStack backStack = new ItemStack(Material.ARROW);
 		ItemMeta backMeta = backStack.getItemMeta();
-		backMeta.setDisplayName("Back to factory overview");
+		backMeta.setDisplayName(ChatColor.RESET + "Back to factory overview");
 		backMeta.setLore(new ArrayList<String>(Arrays.asList(ChatColor.LIGHT_PURPLE + "Click to go back")));
 		backStack.setItemMeta(backMeta);
 		Clickable backClickable = new Clickable(backStack) {
 			@Override
-			public void clicked(Player arg0) {
-				openFactoryBrowser(arg0, factoryViewed.get(arg0.getUniqueId()));
+			public void clicked(Player p) {
+				openFactoryBrowser(p, factoryViewed.get(p.getUniqueId()));
 			}
 		};
-		ci.setSlot(backClickable, 18);
+		ci.setSlot(backClickable, 53);
 		ci.showInventory(p);
 	}
 
@@ -300,7 +300,7 @@ public class MenuBuilder {
 		if (upgrades.size() == 0) {
 			ItemStack bar = new ItemStack(Material.BARRIER);
 			ItemMeta barMeta = bar.getItemMeta();
-			barMeta.setDisplayName("No upgrades available");
+			barMeta.setDisplayName(ChatColor.RESET + "No upgrades available");
 			barMeta.setLore(new ArrayList<String>(Arrays.asList(ChatColor.LIGHT_PURPLE + "Click to go back")));
 			bar.setItemMeta(barMeta);
 			Clickable noUpgrades = new Clickable(bar) {
@@ -320,7 +320,7 @@ public class MenuBuilder {
 				Clickable c = new Clickable(((InputRecipe) recipe).getRecipeRepresentation()) {
 					@Override
 					public void clicked(Player p) {
-						openDetailedRecipeBrowser(p, this.getItemStack().getItemMeta().getDisplayName());
+						openDetailedRecipeBrowser(p, ChatColor.stripColor(this.getItemStack().getItemMeta().getDisplayName()));
 					}
 				};
 				ci.addSlot(c);
@@ -328,7 +328,7 @@ public class MenuBuilder {
 		}
 		ItemStack backStack = new ItemStack(Material.ARROW);
 		ItemMeta backMeta = backStack.getItemMeta();
-		backMeta.setDisplayName("Back to factory overview");
+		backMeta.setDisplayName(ChatColor.RESET + "Back to factory overview");
 		backMeta.setLore(new ArrayList<String>(Arrays.asList(ChatColor.LIGHT_PURPLE + "Click to go back")));
 		backStack.setItemMeta(backMeta);
 		Clickable backClickable = new Clickable(backStack) {
@@ -366,13 +366,13 @@ public class MenuBuilder {
 		ClickableInventory ci = new ClickableInventory(54, recipeName);
 		ItemStack inputStack = new ItemStack(Material.PAPER);
 		ItemMeta inputMeta = inputStack.getItemMeta();
-		inputMeta.setDisplayName("Input materials");
+		inputMeta.setDisplayName(ChatColor.RESET + "Input materials");
 		inputMeta.setLore(new ArrayList<String>(
 				Arrays.asList(ChatColor.LIGHT_PURPLE + "The materials required to run this recipe")));
 		inputStack.setItemMeta(inputMeta);
 		DecorationStack inputClickable = new DecorationStack(inputStack);
 		ci.setSlot(inputClickable, 4);
-		int index = 0;
+		int index = 9;
 		List<ItemStack> ins = rec.getInputRepresentation(null, null);
 		if (ins.size() > 18) {
 			ins = new ItemMap(ins).getLoredItemCountRepresentation();
@@ -384,7 +384,7 @@ public class MenuBuilder {
 
 		ItemStack outputStack = new ItemStack(Material.PAPER);
 		ItemMeta outputMeta = outputStack.getItemMeta();
-		outputMeta.setDisplayName("Output/effect");
+		outputMeta.setDisplayName(ChatColor.RESET + "Output/effect");
 		outputStack.setItemMeta(outputMeta);
 		DecorationStack outputClickable = new DecorationStack(outputStack);
 
@@ -399,10 +399,10 @@ public class MenuBuilder {
 				openRecipeBrowser(p, factoryViewed.get(p.getUniqueId()));
 			}
 		};
-		ci.setSlot(backClickable, 27);
+		ci.setSlot(backClickable, 53);
 
 		ci.setSlot(outputClickable, 31);
-		index = 27;
+		index = 36;
 		List<ItemStack> out = rec.getOutputRepresentation(null, null);
 		if (out.size() > 18) {
 			out = new ItemMap(out).getLoredItemCountRepresentation();
@@ -442,7 +442,8 @@ public class MenuBuilder {
 		ItemMeta fuelMeta = fuelStack.getItemMeta();
 		fuelMeta.setLore(new ArrayList<String>(Arrays
 				.asList(ChatColor.LIGHT_PURPLE + "Total duration of " + rec.getProductionTime() / 20 + " seconds")));
-		ci.setSlot(new DecorationStack(fuelStack), 30);
+		fuelStack.setItemMeta(fuelMeta);
+		ci.setSlot(new DecorationStack(fuelStack), 8);
 		ci.showInventory(p);
 	}
 }

@@ -3,6 +3,14 @@ package reesercollins.FactoryMod;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import reesercollins.FactoryMod.interaction.clickable.MenuBuilder;
+import reesercollins.FactoryMod.listeners.block.BlockBreakListener;
+import reesercollins.FactoryMod.listeners.block.BlockBurnListener;
+import reesercollins.FactoryMod.listeners.block.BlockRedstoneListener;
+import reesercollins.FactoryMod.listeners.entity.EntityExplodeListener;
+import reesercollins.FactoryMod.listeners.inventory.InventoryClickListener;
+import reesercollins.FactoryMod.listeners.inventory.InventoryCloseListener;
+import reesercollins.FactoryMod.listeners.player.PlayerInteractListener;
+import reesercollins.FactoryMod.listeners.player.PlayerQuitListener;
 
 public class FMPlugin extends JavaPlugin {
 
@@ -19,6 +27,7 @@ public class FMPlugin extends JavaPlugin {
 		manager = parser.parse();
 		menuBuilder = new MenuBuilder(parser.getDefaultMenuFactory());
 		manager.loadFactories();
+		registerListeners();
 	}
 
 	@Override
@@ -36,6 +45,17 @@ public class FMPlugin extends JavaPlugin {
 
 	public static MenuBuilder getMenuBuilder() {
 		return menuBuilder;
+	}
+	
+	private void registerListeners() {
+		plugin.getServer().getPluginManager().registerEvents(new BlockBreakListener(), plugin);
+		plugin.getServer().getPluginManager().registerEvents(new BlockBurnListener(), plugin);
+		plugin.getServer().getPluginManager().registerEvents(new BlockRedstoneListener(), plugin);
+		plugin.getServer().getPluginManager().registerEvents(new EntityExplodeListener(), plugin);
+		plugin.getServer().getPluginManager().registerEvents(new PlayerInteractListener(), plugin);
+		plugin.getServer().getPluginManager().registerEvents(new PlayerQuitListener(), plugin);
+		plugin.getServer().getPluginManager().registerEvents(new InventoryClickListener(), plugin);
+		plugin.getServer().getPluginManager().registerEvents(new InventoryCloseListener(), plugin);
 	}
 
 	public void info(String msg) {

@@ -1,13 +1,12 @@
 default_update_time: 1s
 default_fuel:
   charcoal:
-    material: COAL
-    durability: 1
-default_fuel_consumption_intervall: 2s
+    material: CHARCOAL
+default_fuel_consumption_interval: 2s
 default_menu_factory: Basic Contraption
 default_return_rate: 0.5
 default_break_grace_period: 10d
-decay_intervall: 1h
+decay_interval: 1h
 default_decay_amount: 21
 default_health: 10000
 use_recipe_yamlidentifiers: true
@@ -23,8 +22,7 @@ factories:
     citadelBreakReduction: 0.4
     setupcost:
       planks:
-        material: WOOD
-        durability: -1
+        material: OAK_PLANKS
         amount: 1024
       stone:
         material: STONE
@@ -37,7 +35,6 @@ factories:
     - Cut_any_type_of_Plank_Basic
     - Bake_Bread_Basic
     - Burn_Charcoal_from_Logs_Basic
-    - Burn_Charcoal_from_Logs2_Basic
     - Produce_basic_andesite_Miner_Component
     - Produce_basic_sticky_Hunter_Component
     - Repair_Rudimentary_Factory
@@ -46,7 +43,6 @@ factories:
     - Upgrade_to_Blacksmith
     - Upgrade_to_Laboratory
     - Upgrade_to_Wood_Processor
-    - Upgrade_to_Wood_Processor_2
     - Upgrade_to_Basic_Forge
     - Upgrade_to_Basic_Fortification
     - Upgrade_to_Printing_Press
@@ -371,7 +367,6 @@ factories:
     citadelBreakReduction: 0.4
     recipes:
     - Burn_Charcoal_from_Logs_Advanced
-    - Burn_Charcoal_from_Logs2_Advanced
     - Craft_Oak_Fence
     - Cut_any_type_of_Plank_Advanced
     - Repair_Rudimentary_Factory
@@ -407,7 +402,6 @@ factories:
     citadelBreakReduction: 0.2
     recipes:
     - Burn_Charcoal_from_Logs_Expert
-    - Burn_Charcoal_from_Logs2_Expert
     - Burn_Charcoal_from_Coal
     - Repair_Basic_Factory
   farmsteadfactory:
@@ -472,7 +466,7 @@ factories:
     - Repair_Factory
   woolprocessor:
     type: PRODUCTION_UPGRADE
-    name: Wool Processing
+    name: WHITE_WOOL Processing
     citadelBreakReduction: 0.2
     recipes:
     - Dye_Wool_Orange
@@ -1147,7 +1141,6 @@ factories:
      - Enchant_Axe_Efficiency_II
      - Enchant_Shovel_Efficiency_I
      - Enchant_Shovel_Efficiency_II
-     - Enchant_Leaf_Burner_I
      - Upgrade_to_Rapid_Forge
      - Repair_Factory
   rapidforge:
@@ -1167,8 +1160,6 @@ factories:
      - Enchant_Shovel_Efficiency_II
      - Enchant_Shovel_Efficiency_III
      - Enchant_Shovel_Efficiency_IV
-     - Enchant_Leaf_Burner_I
-     - Enchant_Leaf_Burner_II
      - Upgrade_to_Sonic_Forge
      - Repair_Advanced_Factory
   sonicforge:
@@ -1191,8 +1182,6 @@ factories:
      - Enchant_Shovel_Efficiency_III
      - Enchant_Shovel_Efficiency_IV
      - Enchant_Shovel_Efficiency_V
-     - Enchant_Leaf_Burner_I
-     - Enchant_Leaf_Burner_II
      - Repair_Expert_Factory
 #Unbreaking
   rockforge:
@@ -1315,67 +1304,16 @@ factories:
      - Topaz_Enrichment
      - Ruby_Enrichment
      - Repair_Expert_Factory
-     
-
-#Pipes     
-  normalpipe:
-    type: PIPE
-    name: Standard Pipe
-    setupcost: 
-      redstone:
-        material: REDSTONE
-        amount: 48
-    transfer_time_multiplier: 1s
-    transfer_amount: 16
-    glass_color: 1
-  betterpipe:
-    type: PIPE
-    name: Improved Pipe
-    setupcost: 
-      redstone:
-        material: REDSTONE
-        amount: 384
-      gold:
-        material: GOLD_INGOT
-        amount: 32
-    transfer_time_multiplier: 10
-    transfer_amount: 24
-    glass_color: 2
-
-#Sorters
-  sortera:
-    type: SORTER
-    name: Standard Sorter
-    setupcost:
-      redstone:
-        material: REDSTONE
-        amount: 48
-    sort_time: 2s
-    sort_amount: 32
-    maximum_materials_per_side: 5
-  sorterb:
-    type: SORTER
-    name: Improved Sorter
-    setupcost:
-      redstone:
-        material: REDSTONE
-        amount: 384
-      gold:
-        material: GOLD_INGOT
-        amount: 32
-    sort_time: 1s
-    sort_amount: 64
-    maximum_materials_per_side: 10
     
 recipes:
 # lvl 1
   Repair_Rudimentary_Factory:
     type: REPAIR
-    name: Repair Factory
+    name: Repair Rudimemtary Factory
     production_time: 30s
     input:
       eye of ender:
-        material: EYE_OF_ENDER 
+        material: ENDER_EYE 
         lore:
          - Essence
         enchants:
@@ -1386,11 +1324,11 @@ recipes:
 # lvl 2
   Repair_Basic_Factory:
     type: REPAIR
-    name: Repair Factory
+    name: Repair Basic Factory
     production_time: 40s
     input:
       eye of ender:
-        material: EYE_OF_ENDER 
+        material: ENDER_EYE 
         lore:
          - Essence
         enchants:
@@ -1405,7 +1343,7 @@ recipes:
     production_time: 50s
     input:
       eye of ender:
-        material: EYE_OF_ENDER 
+        material: ENDER_EYE
         lore:
          - Essence
         enchants:
@@ -1420,7 +1358,7 @@ recipes:
     production_time: 60s
     input:
       eye of ender:
-        material: EYE_OF_ENDER 
+        material: ENDER_EYE 
         lore:
          - Essence
         enchants:
@@ -1435,7 +1373,7 @@ recipes:
     production_time: 90s
     input:
       eye of ender:
-        material: EYE_OF_ENDER 
+        material: ENDER_EYE 
         lore:
          - Essence
         enchants:
@@ -1445,7 +1383,7 @@ recipes:
     health_gained: 3334
   Bake_Bread_Advanced:
     type: PRODUCTION
-    name: Bake Bread
+    name: Bake Bread Advanced
     production_time: 30s
     input:
       wheat:
@@ -1457,7 +1395,7 @@ recipes:
         amount: 128
   Bake_Bread_Expert:
     type: PRODUCTION
-    name: Bake Bread
+    name: Bake Bread Expert
     production_time: 30s
     input:
       wheat:
@@ -1524,7 +1462,7 @@ recipes:
     production_time: 32s
     input:
       potato:
-        material: POTATO_ITEM
+        material: POTATO
         amount: 256
     output:
       baked potato:
@@ -1569,7 +1507,7 @@ recipes:
     production_time: 30s
     input:
       ink:
-        material: INK_SACK
+        material: INK_SAC
         amount: 6
       feather:
         material: FEATHER
@@ -1579,7 +1517,7 @@ recipes:
         amount: 6
     output:
       books:
-        material: BOOK_AND_QUILL
+        material: WRITABLE_BOOK
         amount: 18
   Burn_Charcoal_from_Coal:
     type: PRODUCTION
@@ -1591,97 +1529,48 @@ recipes:
         amount: 64
     output:
       charcoal:
-        material: COAL
+        material: CHARCOAL
         amount: 128
-        durability: 1
   Burn_Charcoal_from_Logs_Basic:
     type: PRODUCTION
     name: Burn Charcoal from Logs
     production_time: 16s
     input:
       log:
-        material: LOG
-        durability: -1
+        material: OAK_LOG
         amount: 64
     output:
       charcoal:
-        material: COAL
+        material: CHARCOAL
         amount: 80
-        durability: 1
-  Burn_Charcoal_from_Logs2_Basic:
-    type: PRODUCTION
-    name: Burn Charcoal from Acacia or Dark Oak
-    production_time: 16s
-    input:
-      log:
-        material: LOG_2
-        durability: -1
-        amount: 64
-    output:
-      charcoal:
-        material: COAL
-        amount: 80
-        durability: 1
   Burn_Charcoal_from_Logs_Advanced:
     type: PRODUCTION
-    name: Burn Charcoal from Logs
+    name: Burn Charcoal from Logs Advanced
     production_time: 28s
     input:
       log:
-        material: LOG
-        durability: -1
+        material: OAK_LOG
         amount: 128
     output:
       charcoal:
-        material: COAL
+        material: CHARCOAL
         amount: 192
-        durability: 1
-  Burn_Charcoal_from_Logs2_Advanced:
-    type: PRODUCTION
-    name: Burn Charcoal from Acacia or Dark Oak
-    production_time: 28s
-    input:
-      log:
-        material: LOG_2
-        durability: -1
-        amount: 128
-    output:
-      charcoal:
-        material: COAL
-        amount: 192
-        durability: 1
   Burn_Charcoal_from_Logs_Expert:
     type: PRODUCTION
-    name: Burn Charcoal from Normal Logs
+    name: Burn Charcoal from Logs Expert
     production_time: 45s
     input:
       log:
-        material: LOG
-        durability: -1
+        material: OAK_LOG
         amount: 512
     output:
       charcoal:
-        material: COAL
+        material: CHARCOAL
         amount: 1024
-        durability: 1
-  Burn_Charcoal_from_Logs2_Expert:
-    type: PRODUCTION
-    name: Burn Charcoal from Acacia or Dark Oak
-    production_time: 45s
-    input:
-      log:
-        material: LOG_2
-        durability: -1
-        amount: 512
-    output:
-      charcoal:
-        material: COAL
-        amount: 1024
-        durability: 1
   Compact_Stack_Advanced:
     type: COMPACT
-    name: Compact Stack
-    fuel_consumption_intervall: 5t
+    name: Compact Stack Advanced
+    fuel_consumption_interval: 5t
     production_time: 5t
     input:
       crate:
@@ -1713,8 +1602,7 @@ recipes:
         amount: 64
     output:
       red sand:
-        material: SAND
-        durability: 1
+        material: RED_SAND
         amount: 32
   Cook_Fish:
     type: PRODUCTION
@@ -1722,11 +1610,11 @@ recipes:
     production_time: 16s
     input:
       raw fish:
-        material: RAW_FISH
+        material: COD
         amount: 32
     output:
       cooked fish:
-        material: COOKED_FISH
+        material: COOKED_COD
         amount: 64
   Cook_Mutton:
     type: PRODUCTION
@@ -1758,17 +1646,15 @@ recipes:
     production_time: 16s
     input:
       raw salmon:
-        material: RAW_FISH
-        durability: 1
+        material: SALMON
         amount: 32
     output:
       cooked salmon:
-        material: COOKED_FISH
-        durability: 1
+        material: COOKED_SALMON
         amount: 64
   Craft_Anvils_Advanced:
     type: PRODUCTION
-    name: Craft Anvils
+    name: Craft Anvils Advanced
     production_time: 10s
     input:
       iron block:
@@ -1856,16 +1742,15 @@ recipes:
     production_time: 5s
     input:
       planks:
-        material: WOOD
-        durability: -1
+        material: OAK_PLANKS
         amount: 64
     output:
       boat:
-        material: BOAT
+        material: OAK_BOAT
         amount: 18
   Craft_Buckets_Advanced:
     type: PRODUCTION
-    name: Craft Buckets
+    name: Craft Buckets Advanced
     production_time: 5s
     input:
       iron block:
@@ -1896,9 +1781,8 @@ recipes:
         material: QUARTZ_BLOCK
         amount: 32
     output:
-      chhiseled quartz blocks:
-        material: QUARTZ_BLOCK
-        durability: 1
+      chiseled quartz blocks:
+        material: CHISELED_QUARTZ_BLOCK
         amount: 32
   Craft_Chiselled_Stonebrick:
     type: PRODUCTION
@@ -1906,15 +1790,14 @@ recipes:
     production_time: 5s
     input:
       stone brick:
-        material: SMOOTH_BRICK
+        material: STONE_BRICKS
         amount: 8
       flint:
         material: FLINT
         amount: 1
     output:
       chiseled stone brick:
-        material: SMOOTH_BRICK
-        durability: 3
+        material: CHISELED_STONE_BRICKS
         amount: 16
   Craft_Cracked_Stonebrick:
     type: PRODUCTION
@@ -1922,15 +1805,14 @@ recipes:
     production_time: 5s
     input:
       stone brick:
-        material: SMOOTH_BRICK
+        material: STONE_BRICKS
         amount: 8
       gravel:
         material: GRAVEL
         amount: 2
     output:
       chiseled stone brick:
-        material: SMOOTH_BRICK
-        durability: 2
+        material: CHISELED_STONE_BRICKS
         amount: 16
   Craft_Daylight_Sensor:
     type: PRODUCTION
@@ -1938,8 +1820,7 @@ recipes:
     production_time: 5s
     input:
       planks:
-        material: WOOD
-        durability: -1
+        material: OAK_PLANKS # ANY
         amount: 64
       glass:
         material: GLASS
@@ -1953,7 +1834,7 @@ recipes:
         amount: 32
   Craft_Dispenser_Advanced:
     type: PRODUCTION
-    name: Craft Dispenser
+    name: Craft Dispenser Advanced
     production_time: 5s
     input:
       cobblestone:
@@ -2033,7 +1914,7 @@ recipes:
         amount: 32
     output:
       flower pot:
-        material: FLOWER_POT_ITEM
+        material: FLOWER_POT
         amount: 64
   Craft_Iron_Bars:
     type: PRODUCTION
@@ -2045,7 +1926,7 @@ recipes:
         amount: 16
     output:
       iron bars:
-        material: IRON_FENCE
+        material: IRON_BARS
         amount: 64
   Craft_Iron_Door:
     type: PRODUCTION
@@ -2053,7 +1934,7 @@ recipes:
     production_time: 5s
     input:
       iron ingot:
-        material: IRON_FENCE
+        material: IRON_BARS
         amount: 16
     output:
       iron door:
@@ -2068,8 +1949,7 @@ recipes:
         material: DIAMOND
         amount: 48
       log:
-        material: LOG
-        durability: -1
+        material: OAK_LOG
         amount: 32
     output:
       jukebox:
@@ -2093,15 +1973,14 @@ recipes:
     production_time: 5s
     input:
       stone brick:
-        material: SMOOTH_BRICK
+        material: STONE_BRICKS
         amount: 16
       vine:
         material: VINE
         amount: 8
     output:
       chiseled stone brick:
-        material: SMOOTH_BRICK
-        durability: 1
+        material: CHISELED_STONE_BRICKS
         amount: 16
   Craft_Netherbrick_Basic:
     type: PRODUCTION
@@ -2125,7 +2004,7 @@ recipes:
         amount: 48
     output:
       nether brick fence:
-        material: NETHER_FENCE
+        material: NETHER_BRICK_FENCE
         amount: 64
   Craft_Netherbrick_Slabs:
     type: PRODUCTION
@@ -2137,8 +2016,7 @@ recipes:
         amount: 64
     output:
       nether brick slabs:
-        material: STEP
-        durability: 6
+        material: NETHER_BRICK_SLAB
         amount: 160
   Craft_Netherbrick_Stairs:
     type: PRODUCTION
@@ -2154,15 +2032,14 @@ recipes:
         amount: 48
   Craft_Noteblocks_Advanced:
     type: PRODUCTION
-    name: Craft Noteblocks
+    name: Craft Noteblocks Advanced
     production_time: 5s
     input:
       redstone dust:
         material: REDSTONE
         amount: 48
       planks:
-        material: WOOD
-        durability: -1
+        material: OAK_PLANKS
         amount: 128
     output:
       note block:
@@ -2177,8 +2054,7 @@ recipes:
         material: REDSTONE
         amount: 64
       planks:
-        material: WOOD
-        durability: -1
+        material: OAK_PLANKS
         amount: 128
     output:
       note block:
@@ -2190,11 +2066,11 @@ recipes:
     production_time: 5s
     input:
       oak log:
-        material: LOG
+        material: OAK_LOG
         amount: 16
     output:
       oak fence:
-        material: FENCE
+        material: OAK_FENCE
         amount: 48
   Craft_Pillar_Quartz_Blocks:
     type: PRODUCTION
@@ -2206,8 +2082,7 @@ recipes:
         amount: 32
     output:
       pillar quartz block:
-        material: QUARTZ_BLOCK
-        durability: 2
+        material: QUARTZ_PILLAR
         amount: 32
   Craft_Piston:
     type: PRODUCTION
@@ -2224,12 +2099,11 @@ recipes:
         material: IRON_INGOT
         amount: 48
       planks:
-        material: WOOD
-        durability: -1
+        material: OAK_PLANKS
         amount: 192
     output:
       piston:
-        material: PISTON_BASE
+        material: PISTON
         amount: 64
   Craft_Polished_Andesite:
     type: PRODUCTION
@@ -2237,41 +2111,35 @@ recipes:
     production_time: 8s
     input:
       andesite:
-        material: STONE
-        durability: 5
+        material: ANDESITE
         amount: 64
     output:
       polished andesite:
-        material: STONE
-        durability: 6
+        material: POLISHED_ANDESITE
         amount: 88
   Craft_Polished_Diorite:
     type: PRODUCTION
     name: Craft Polished Diorite
     production_time: 8s
     input:
-      andesite:
-        material: STONE
-        durability: 3
+      diorite:
+        material: DIORITE
         amount: 64
     output:
-      polished andesite:
-        material: STONE
-        durability: 4
+      polished diorite:
+        material: POLISHED_DIORITE
         amount: 88
   Craft_Polished_Granite:
     type: PRODUCTION
     name: Craft Polished Granite
     production_time: 8s
     input:
-      andesite:
-        material: STONE
-        durability: 1
+      granite:
+        material: GRANITE
         amount: 64
     output:
-      polished andesite:
-        material: STONE
-        durability: 2
+      polished granite:
+        material: POLISHED_GRANITE
         amount: 88
   Craft_Prismarine_Basic:
     type: PRODUCTION
@@ -2307,8 +2175,7 @@ recipes:
         amount: 64
     output:
       quartz slab:
-        material: STEP
-        durability: 7
+        material: QUARTZ_SLAB
         amount: 160
   Craft_Quartz_Stairs:
     type: PRODUCTION
@@ -2335,7 +2202,7 @@ recipes:
         amount: 5
     output:
       rail:
-        material: RAILS
+        material: RAIL
         amount: 96
   Craft_Redstone_Comparator:
     type: PRODUCTION
@@ -2343,7 +2210,7 @@ recipes:
     production_time: 5s
     input:
       redstone torch:
-        material: REDSTONE_TORCH_ON
+        material: REDSTONE_TORCH
         amount: 64
       quartz:
         material: QUARTZ
@@ -2353,7 +2220,7 @@ recipes:
         amount: 64
     output:
       comparator:
-        material: REDSTONE_COMPARATOR
+        material: COMPARATOR
         amount: 32
   Craft_Redstone_Lamps:
     type: PRODUCTION
@@ -2368,25 +2235,25 @@ recipes:
         amount: 128
     output:
       redstone lamp:
-        material: REDSTONE_LAMP_OFF
+        material: REDSTONE_LAMP
         amount: 48
   Craft_Redstone_Repeater_Advanced:
     type: PRODUCTION
-    name: Craft Redstone Repeater
+    name: Craft Redstone Repeater Advanced
     production_time: 5s
     input:
       redstone dust:
         material: REDSTONE
         amount: 32
       redstone torch:
-        material: REDSTONE_TORCH_ON
+        material: REDSTONE_TORCH
         amount: 64
       stone:
         material: STONE
         amount: 96
     output:
       redstone repeater:
-        material: DIODE
+        material: REPEATER
         amount: 64
   Craft_Redstone_Repeater_Basic:
     type: PRODUCTION
@@ -2397,18 +2264,18 @@ recipes:
         material: REDSTONE
         amount: 32
       redstone torch:
-        material: REDSTONE_TORCH_ON
+        material: REDSTONE_TORCH
         amount: 64
       stone:
         material: STONE
         amount: 96
     output:
       redstone repeater:
-        material: DIODE
+        material: REPEATER
         amount: 48
   Craft_Redstone_Torch_Advanced:
     type: PRODUCTION
-    name: Craft Redstone Torch
+    name: Craft Redstone Torch Advanced
     production_time: 5s
     input:
       redstone dust:
@@ -2419,7 +2286,7 @@ recipes:
         amount: 32
     output:
       redstone torch:
-        material: REDSTONE_TORCH_ON
+        material: REDSTONE_TORCH
         amount: 64
   Craft_Redstone_Torch_Basic:
     type: PRODUCTION
@@ -2434,7 +2301,7 @@ recipes:
         amount: 32
     output:
       redstone torch:
-        material: REDSTONE_TORCH_ON
+        material: REDSTONE_TORCH
         amount: 64
   Craft_Saddles_Basic:
     type: PRODUCTION
@@ -2493,15 +2360,14 @@ recipes:
         material: IRON_INGOT
         amount: 48
       planks:
-        material: WOOD
-        durability: -1
+        material: OAK_PLANKS
         amount: 192
       slime:
         material: SLIME_BALL
         amount: 48
     output:
       piston:
-        material: PISTON_STICKY_BASE
+        material: STICKY_PISTON
         amount: 64
   Craft_Stonebrick_Slabs:
     type: PRODUCTION
@@ -2509,12 +2375,11 @@ recipes:
     production_time: 5s
     input:
       stone brick:
-        material: SMOOTH_BRICK
+        material: STONE_BRICKS
         amount: 64
     output:
-      stone brick stairs:
-        material: STEP
-        durability: 5
+      stone brick slab:
+        material: STONE_BRICK_SLAB
         amount: 128
   Craft_Stonebrick_Stairs:
     type: PRODUCTION
@@ -2522,15 +2387,15 @@ recipes:
     production_time: 5s
     input:
       stone brick:
-        material: SMOOTH_BRICK
+        material: STONE_BRICKS
         amount: 64
     output:
       stone brick stair:
-        material: SMOOTH_STAIRS
+        material: STONE_BRICK_STAIRS
         amount: 48
   Craft_Stonebricks_Advanced:
     type: PRODUCTION
-    name: Craft Stonebricks
+    name: Craft Stonebricks Advanced
     production_time: 5s
     input:
       stone:
@@ -2538,7 +2403,7 @@ recipes:
         amount: 64
     output:
       stone brick:
-        material: SMOOTH_BRICK
+        material: STONE_BRICKS
         amount: 128
   Craft_Stonebricks_Basic:
     type: PRODUCTION
@@ -2550,7 +2415,7 @@ recipes:
         amount: 64
     output:
       stone brick:
-        material: SMOOTH_BRICK
+        material: STONE_BRICKS
         amount: 96
   Craft_trap_door:
     type: PRODUCTION
@@ -2558,12 +2423,11 @@ recipes:
     production_time: 5s
     input:
       planks:
-        material: WOOD
-        durability: -1
+        material: OAK_PLANKS
         amount: 64
     output:
       trapdoor:
-        material: TRAP_DOOR
+        material: OAK_TRAPDOOR
         amount: 128
   Create_Activator_Rail:
     type: PRODUCTION
@@ -2577,7 +2441,7 @@ recipes:
         material: STICK
         amount: 8
       redstone torch:
-        material: REDSTONE_TORCH_ON
+        material: REDSTONE_TORCH
         amount: 4
     output:
       activator rail:
@@ -2588,8 +2452,8 @@ recipes:
     name: Grow random flower
     production_time: 5s
     input:
-      seeds:
-        material: SEEDS
+      WHEAT_SEEDS:
+        material: WHEAT_SEEDS
         amount: 32
       waterbucket:
         material: WATER_BUCKET
@@ -2598,8 +2462,7 @@ recipes:
       1:
         chance: 0.08
         poppy:
-          material: RED_ROSE
-          durability: 0
+          material: POPPY
           amount: 4
         emptybucket:
           material: BUCKET
@@ -2607,8 +2470,7 @@ recipes:
       2:
         chance: 0.08
         blueorchid:
-          material: RED_ROSE
-          durability: 1
+          material: BLUE_ORCHID
           amount: 4
         emptybucket:
           material: BUCKET
@@ -2616,8 +2478,7 @@ recipes:
       3:
         chance: 0.08
         allium:
-          material: RED_ROSE
-          durability: 2
+          material: ALLIUM
           amount: 4
         emptybucket:
           material: BUCKET
@@ -2625,8 +2486,7 @@ recipes:
       4:
         chance: 0.08
         azurebluet:
-          material: RED_ROSE
-          durability: 3
+          material: AZURE_BLUET
           amount: 4
         emptybucket:
           material: BUCKET
@@ -2634,8 +2494,7 @@ recipes:
       5:
         chance: 0.08
         redtulip:
-          material: RED_ROSE
-          durability: 4
+          material: RED_TULIP
           amount: 4
         emptybucket:
           material: BUCKET
@@ -2643,8 +2502,7 @@ recipes:
       6:
         chance: 0.08
         orangetulip:
-          material: RED_ROSE
-          durability: 5
+          material: ORANGE_TULIP
           amount: 4
         emptybucket:
           material: BUCKET
@@ -2652,8 +2510,7 @@ recipes:
       7:
         chance: 0.08
         whitetulip:
-          material: RED_ROSE
-          durability: 6
+          material: WHITE_TULIP
           amount: 4
         emptybucket:
           material: BUCKET
@@ -2661,8 +2518,7 @@ recipes:
       8:
         chance: 0.08
         pinktulip:
-          material: RED_ROSE
-          durability: 7
+          material: PINK_TULIP
           amount: 4
         emptybucket:
           material: BUCKET
@@ -2670,8 +2526,7 @@ recipes:
       9:
         chance: 0.08
         oxeyedaisy:
-          material: RED_ROSE
-          durability: 8
+          material: OXEYE_DAISY
           amount: 4
         emptybucket:
           material: BUCKET
@@ -2679,7 +2534,7 @@ recipes:
       10:
         chance: 0.08
         yellowflower:
-          material: YELLOW_FLOWER
+          material: DANDELION
           amount: 4
         emptybucket:
           material: BUCKET
@@ -2687,8 +2542,7 @@ recipes:
       11:
         chance: 0.025
         sunflower:
-          material: DOUBLE_PLANT
-          durability: 0
+          material: SUNFLOWER
           amount: 1
         emptybucket:
           material: BUCKET
@@ -2696,8 +2550,7 @@ recipes:
       12:
         chance: 0.025
         lilac:
-          material: DOUBLE_PLANT
-          durability: 1
+          material: LILAC
           amount: 1
         emptybucket:
           material: BUCKET
@@ -2705,8 +2558,7 @@ recipes:
       13:
         chance: 0.025
         rosebush:
-          material: DOUBLE_PLANT
-          durability: 4
+          material: ROSE_BUSH
           amount: 1
         emptybucket:
           material: BUCKET
@@ -2714,8 +2566,7 @@ recipes:
       14:
         chance: 0.025
         peony:
-          material: DOUBLE_PLANT
-          durability: 5
+          material: PEONY
           amount: 1
         emptybucket:
           material: BUCKET
@@ -2738,16 +2589,15 @@ recipes:
         lore:
          - Food Concentrate
       soup:
-        material: MUSHROOM_SOUP
+        material: MUSHROOM_STEW
         lore:
          - Soup Concentrate 
       sand:
-        material: SAND
+        material: RED_SAND
         lore:
          - Desert Concentrate
-        durability: 1
       brick:
-        material: NETHER_BRICK_ITEM
+        material: NETHER_BRICK
         lore:
          - Hell Concentrate
       end:
@@ -2756,7 +2606,6 @@ recipes:
          - End Concentrate
       rainbow:
         material: LAPIS_LAZULI
-        durability: 4
         lore:
          - Rainbow Concentrate
       cave:
@@ -2764,12 +2613,11 @@ recipes:
         lore:
          - Cave Concentrate
       nature:
-        material: SAPLING
+        material: OAK_SAPLING
         lore:
          - Nature Concentrate
-        durability: 3
       ocean:
-        material: INK_SACK
+        material: INK_SAC
         lore:
          - Ocean Concentrate
     output:
@@ -2786,9 +2634,8 @@ recipes:
         amount: 64
     output:
       coarse dirt:
-        material: DIRT
+        material: COARSE_DIRT
         amount: 64
-        durability: 1
   Create_Detector_Rail:
     type: PRODUCTION
     name: Create Detector Rail
@@ -2817,7 +2664,7 @@ recipes:
         amount: 48
     output:
       lead:
-        material: LEASH
+        material: LEAD
         amount: 16
   Create_Mycelium:
     type: PRODUCTION
@@ -2829,7 +2676,7 @@ recipes:
         amount: 64
     output:
       mycelium:
-        material: MYCEL
+        material: MYCELIUM
         amount: 64
   Create_Nametags:
     type: PRODUCTION
@@ -2851,7 +2698,7 @@ recipes:
         amount: 4
   Create_Podzol_Advanced:
     type: PRODUCTION
-    name: Create Podzol
+    name: Create Podzol Advanced
     production_time: 32s
     input:
       dirt:
@@ -2859,8 +2706,7 @@ recipes:
         amount: 64
     output:
       podzol:
-        material: DIRT
-        durability: 2
+        material: PODZOL
         amount: 128
   Create_Podzol_Basic:
     type: PRODUCTION
@@ -2872,23 +2718,22 @@ recipes:
         amount: 64
     output:
       podzol:
-        material: DIRT
-        durability: 2
+        material: PODZOL
         amount: 64
   Create_Poppy_Advanced:
     type: PRODUCTION
     name: Create Poppy Advanced
     production_time: 16s
     input:
-      seeds:
-        material: SEEDS
+      WHEAT_SEEDS:
+        material: WHEAT_SEEDS
         amount: 64
       waterbucket:
         material: WATER_BUCKET
         amount: 1
     output:
       identifiername:
-        material: RED_ROSE
+        material: POPPY
         amount: 4
       emptybucket:
         material: BUCKET
@@ -2898,15 +2743,15 @@ recipes:
     name: Grow Poppy
     production_time: 16s
     input:
-      seeds:
-        material: SEEDS
+      WHEAT_SEEDS:
+        material: WHEAT_SEEDS
         amount: 64
       waterbucket:
         material: WATER_BUCKET
         amount: 1
     output:
       roses:
-        material: RED_ROSE
+        material: POPPY
         amount: 2
       emptybucket:
         material: BUCKET
@@ -2939,35 +2784,31 @@ recipes:
         amount: 5
     output:
       rail:
-        material: RAILS
+        material: RAIL
         amount: 128
   Cut_any_type_of_Plank_Advanced:
     type: PRODUCTION
-    name: Cut Planks
+    name: Cut Planks Advanced
     production_time: 15s
     input:
       log:
-        material: LOG
-        durability: -2
+        material: OAK_LOG
         amount: 128
     output:
       planks:
-        material: WOOD
+        material: OAK_PLANKS
         amount: 600
-        durability: -2
   Cut_any_type_of_Plank_Basic:
     type: PRODUCTION
     name: Cut Planks
     production_time: 5s
     input:
       log:
-        material: LOG
-        durability: -2
+        material: OAK_LOG
         amount: 32
     output:
       planks:
-        material: WOOD
-        durability: -2
+        material: OAK_PLANKS
         amount: 140
   Cut_any_type_of_Plank_Expert:
     type: PRODUCTION
@@ -2975,19 +2816,17 @@ recipes:
     production_time: 30s
     input:
       log:
-        material: LOG
-        durability: -2
+        material: OAK_LOG
         amount: 256
     output:
       planks:
-        material: WOOD
+        material: OAK_PLANKS
         amount: 1280
-        durability: -2
   De-compact_Stack_Advanced:
     type: DECOMPACT
-    name: Decompact Stack
+    name: Decompact Stack Advanced
     production_time: 5t
-    fuel_consumption_intervall: 5t
+    fuel_consumption_interval: 5t
     compact_lore: Compacted Item
   De-compact_Stack_Basic:
     type: DECOMPACT
@@ -3032,11 +2871,11 @@ recipes:
         amount: 64
   Extract_Quartz_Advanced:
     type: PRODUCTION
-    name: Extract Quartz
+    name: Extract Quartz Advanced
     production_time: 8s
     input:
       quartz ore:
-        material: QUARTZ_ORE
+        material: NETHER_QUARTZ_ORE
         amount: 32
     output:
       quartz:
@@ -3048,7 +2887,7 @@ recipes:
     production_time: 10s
     input:
       quartz ore:
-        material: QUARTZ_ORE
+        material: NETHER_QUARTZ_ORE
         amount: 32
     output:
       quartz:
@@ -3056,7 +2895,7 @@ recipes:
         amount: 96
   Extract_Redstone_Advanced:
     type: PRODUCTION
-    name: Extract Redstone
+    name: Extract Redstone Advanced
     production_time: 15s
     input:
       redstone ore:
@@ -3116,7 +2955,7 @@ recipes:
         amount: 4
   Forge_Diamond_Breastplate_Basic:
     type: PRODUCTION
-    name: Forge Diamond Breastplate
+    name: Forge Diamond Breastplate Basic
     production_time: 32s
     input:
       diamond:
@@ -3176,7 +3015,7 @@ recipes:
         amount: 4
   Forge_Diamond_Leggings_Basic:
     type: PRODUCTION
-    name: Forge Diamond Leggings
+    name: Forge Diamond Leggings Basic
     production_time: 32s
     input:
       diamond:
@@ -3212,7 +3051,7 @@ recipes:
         amount: 4
   Forge_Diamond_Pickaxe_Basic:
     type: PRODUCTION
-    name: Forge Diamond Pickaxe
+    name: Forge Diamond Pickaxe Basic
     production_time: 32s
     input:
       diamond:
@@ -3232,7 +3071,7 @@ recipes:
         amount: 3
     output:
       diamond shovel:
-        material: DIAMOND_SPADE
+        material: DIAMOND_SHOVEL
         amount: 4
   Forge_Diamond_Sword:
     type: PRODUCTION
@@ -3256,7 +3095,7 @@ recipes:
         amount: 6
     output:
       gold axe:
-        material: GOLD_AXE
+        material: GOLDEN_AXE
         amount: 4
   Forge_Gold_Boots:
     type: PRODUCTION
@@ -3268,7 +3107,7 @@ recipes:
         amount: 8
     output:
       gold boots:
-        material: GOLD_BOOTS
+        material: GOLDEN_BOOTS
         amount: 4
   Forge_Gold_Breastplate:
     type: PRODUCTION
@@ -3280,11 +3119,11 @@ recipes:
         amount: 16
     output:
       gold chestplate:
-        material: GOLD_CHESTPLATE
+        material: GOLDEN_CHESTPLATE
         amount: 4
   Forge_Gold_Breastplate_Basic:
     type: PRODUCTION
-    name: Forge Gold Breastplate
+    name: Forge Gold Breastplate Basic
     production_time: 8s
     input:
       gold:
@@ -3292,7 +3131,7 @@ recipes:
         amount: 24
     output:
       gold chestplate:
-        material: GOLD_CHESTPLATE
+        material: GOLDEN_CHESTPLATE
         amount: 4
   Forge_Gold_Helmet:
     type: PRODUCTION
@@ -3304,7 +3143,7 @@ recipes:
         amount: 10
     output:
       gold helmet:
-        material: GOLD_HELMET
+        material: GOLDEN_HELMET
         amount: 4
   Forge_Gold_Hoe:
     type: PRODUCTION
@@ -3316,7 +3155,7 @@ recipes:
         amount: 4
     output:
       gold hoe:
-        material: GOLD_HOE
+        material: GOLDEN_HOE
         amount: 4
   Forge_Gold_Horse_Armour:
     type: PRODUCTION
@@ -3328,7 +3167,7 @@ recipes:
         amount: 20
     output:
       gold horse armor:
-        material: GOLD_HORSE_ARMOR
+        material: GOLDEN_HORSE_ARMOR
         amount: 1
   Forge_Gold_Leggings:
     type: PRODUCTION
@@ -3340,11 +3179,11 @@ recipes:
         amount: 14
     output:
       gold leggings:
-        material: GOLD_LEGGINGS
+        material: GOLDEN_LEGGINGS
         amount: 4
   Forge_Gold_Leggings_Basic:
     type: PRODUCTION
-    name: Forge Gold Leggings
+    name: Forge Gold Leggings Basic
     production_time: 8s
     input:
       gold:
@@ -3352,7 +3191,7 @@ recipes:
         amount: 21
     output:
       gold leggings:
-        material: GOLD_LEGGINGS
+        material: GOLDEN_LEGGINGS
         amount: 4
   Forge_Gold_Pickaxe:
     type: PRODUCTION
@@ -3364,7 +3203,7 @@ recipes:
         amount: 6
     output:
       gold pickaxe:
-        material: GOLD_PICKAXE
+        material: GOLDEN_PICKAXE
         amount: 4
   Forge_Gold_Shovel:
     type: PRODUCTION
@@ -3376,11 +3215,11 @@ recipes:
         amount: 2
     output:
       gold shovel:
-        material: GOLD_SPADE
+        material: GOLDEN_SHOVEL
         amount: 4
   Forge_Gold_Pickaxe_Basic:
     type: PRODUCTION
-    name: Forge Gold Pickaxe
+    name: Forge Gold Pickaxe Basic
     production_time: 8s
     input:
       gold:
@@ -3388,11 +3227,11 @@ recipes:
         amount: 9
     output:
       gold pickaxe:
-        material: GOLD_PICKAXE
+        material: GOLDEN_PICKAXE
         amount: 4
   Forge_Gold_Shovel_Basic:
     type: PRODUCTION
-    name: Forge Gold Shovel
+    name: Forge Gold Shovel Basic
     production_time: 8s
     input:
       gold:
@@ -3400,7 +3239,7 @@ recipes:
         amount: 3
     output:
       gold shovel:
-        material: GOLD_SPADE
+        material: GOLDEN_SHOVEL
         amount: 4
   Forge_Gold_Sword:
     type: PRODUCTION
@@ -3412,7 +3251,7 @@ recipes:
         amount: 4
     output:
       gold sword:
-        material: GOLD_SWORD
+        material: GOLDEN_SWORD
         amount: 4
   Forge_Iron_Axe:
     type: PRODUCTION
@@ -3520,7 +3359,7 @@ recipes:
         amount: 3
     output:
       iron shovel:
-        material: IRON_SPADE
+        material: IRON_SHOVEL
         amount: 4
   Forge_Iron_Sword:
     type: PRODUCTION
@@ -3580,7 +3419,7 @@ recipes:
         amount: 3
     output:
       stone shovel:
-        material: STONE_SPADE
+        material: STONE_SHOVEL
         amount: 4
   Forge_Stone_Sword:
     type: PRODUCTION
@@ -3600,7 +3439,7 @@ recipes:
     production_time: 16s
     input:
       chicken:
-        material: RAW_CHICKEN
+        material: CHICKEN
         amount: 32
     output:
       cooked chicken:
@@ -3612,19 +3451,19 @@ recipes:
     production_time: 16s
     input:
       pork:
-        material: PORK
+        material: PORKCHOP
         amount: 32
     output:
       grilled pork:
-        material: GRILLED_PORK
+        material: COOKED_PORKCHOP
         amount: 64
   Grill_Steak_Advanced:
     type: PRODUCTION
-    name: Grill Steak
+    name: Grill Steak Advanced
     production_time: 16s
     input:
       beef:
-        material: RAW_BEEF
+        material: BEEF
         amount: 32
     output:
       cooked beef:
@@ -3636,7 +3475,7 @@ recipes:
     production_time: 20s
     input:
       beef:
-        material: RAW_BEEF
+        material: BEEF
         amount: 32
     output:
       cooked beef:
@@ -3648,35 +3487,31 @@ recipes:
     production_time: 5s
     input:
       fern:
-        material: LONG_GRASS
+        material: FERN
         amount: 32
-        durability: 2
     output:
       large fern:
-        material: DOUBLE_PLANT
+        material: LARGE_FERN
         amount: 32
-        durability: 3
   Grow_Grass:
     type: PRODUCTION
     name: Grow Grass
     production_time: 5s
     input:
       grass:
-        material: LONG_GRASS
+        material: GRASS
         amount: 64
-        durability: 1
     output:
       double tall grass:
-        material: DOUBLE_PLANT
+        material: TALL_GRASS
         amount: 64
-        durability: 2
   Grow_Vine:
     type: PRODUCTION
     name: Grow Vine
     production_time: 5s
     input:
       grass:
-        material: LONG_GRASS
+        material: GRASS
         amount: 64
     output:
       vine:
@@ -3684,7 +3519,7 @@ recipes:
         amount: 64
   Harden_Clay_Advanced:
     type: PRODUCTION
-    name: Harden Clay
+    name: Harden Clay Advanced
     production_time: 5s
     input:
       clay:
@@ -3692,7 +3527,7 @@ recipes:
         amount: 48
     output:
       hard clay:
-        material: HARD_CLAY
+        material: TERRACOTTA
         amount: 64
   Harden_Clay_Basic:
     type: PRODUCTION
@@ -3704,7 +3539,7 @@ recipes:
         amount: 64
     output:
       hard clay:
-        material: HARD_CLAY
+        material: TERRACOTTA
         amount: 128
   Kill_Dead_Bush:
     type: PRODUCTION
@@ -3742,12 +3577,11 @@ recipes:
         material: RED_MUSHROOM
         amount: 16
       planks:
-        material: WOOD
-        durability: -1
+        material: OAK_PLANKS
         amount: 32
     output:
       mushroom stew:
-        material: MUSHROOM_SOUP
+        material: MUSHROOM_STEW
         amount: 18
   Make_Rabbit_Stew:
     type: PRODUCTION
@@ -3761,8 +3595,7 @@ recipes:
         material: BAKED_POTATO
         amount: 16
       planks:
-        material: WOOD
-        durability: -1
+        material: OAK_PLANKS
         amount: 32
     output:
       rabbit stew:
@@ -3777,8 +3610,7 @@ recipes:
         material: BEETROOT
         amount: 16
       planks:
-        material: WOOD
-        durability: -1
+        material: OAK_PLANKS
         amount: 32
     output:
       beetroot soup:
@@ -3790,73 +3622,65 @@ recipes:
     production_time: 10s
     input:
       sapling:
-        material: SAPLING
+        material: OAK_SAPLING
         amount: 64
-        durability: -1
-      waterbucket:
+    ket:
         material: WATER_BUCKET
         amount: 1
     outputs:
       1:
         chance: 0.143
         oaksapling:
-          material: SAPLING
+          material: OAK_SAPLING
           amount: 48
-          durability: 0
         emptybucket:
           material: BUCKET
           amount: 1
       2:
         chance: 0.143
         sprucesapling:
-          material: SAPLING
+          material: SPRUCE_SAPLING
           amount: 48
-          durability: 1
         emptybucket:
           material: BUCKET
           amount: 1
       3:
         chance: 0.143
         birchsapling:
-          material: SAPLING
+          material: BIRCH_SAPLING
           amount: 48
-          durability: 2
         emptybucket:
           material: BUCKET
           amount: 1
       4:
         chance: 0.143
         junglesapling:
-          material: SAPLING
+          material: JUNGLE_SAPLING
           amount: 48
-          durability: 3
         emptybucket:
           material: BUCKET
           amount: 1
       5:
         chance: 0.143
         acaciasapling:
-          material: SAPLING
+          material: ACACIA_SAPLING
           amount: 48
-          durability: 4
         emptybucket:
           material: BUCKET
           amount: 1
       6:
         chance: 0.143
         darkoaksapling:
-          material: SAPLING
+          material: DARK_OAK_SAPLING
           amount: 48
-          durability: 5
         emptybucket:
           material: BUCKET
           amount: 1
       7:
         chance: 0.142
         tallfern:
-          material: DOUBLE_PLANT
-          amount: 32
-          durability: 3         
+          material: LARGE_FERN
+          amount: 32        
         emptybucket:
           material: BUCKET
           amount: 1
@@ -3866,11 +3690,10 @@ recipes:
     production_time: 10s
     input:
       sapling:
-        material: SAPLING
+        material: OAK_SAPLING
         amount: 32
-        durability: -1
-      seeds:
-        material: SEEDS
+      WHEAT_SEEDS:
+        material: WHEAT_SEEDS
         amount: 32
       waterbucket:
         material: WATER_BUCKET
@@ -3879,54 +3702,48 @@ recipes:
       1:
         chance: 0.125
         oakleaves:
-          material: LEAVES
+          material: OAK_LEAVES
           amount: 64
-          durability: 0
         emptybucket:
           material: BUCKET
           amount: 1
       2:
         chance: 0.125
         spruceleaves:
-          material: LEAVES
+          material: SPRUCE_LEAVES
           amount: 64
-          durability: 1
         emptybucket:
           material: BUCKET
           amount: 1
       3:
         chance: 0.125
         birchleaves:
-          material: LEAVES
+          material: BIRCH_LEAVES
           amount: 64
-          durability: 2
         emptybucket:
           material: BUCKET
           amount: 1
       4:
         chance: 0.125
         jungleleaves:
-          material: LEAVES
+          material: JUNGLE_LEAVES
           amount: 64
-          durability: 3
         emptybucket:
           material: BUCKET
           amount: 1
       5:
         chance: 0.125
         acacialeaves:
-          material: LEAVES_2
+          material: ACACIA_LEAVES
           amount: 64
-          durability: 0
         emptybucket:
           material: BUCKET
           amount: 1
       6:
         chance: 0.125
         darkoakleaves:
-          material: LEAVES_2
+          material: DARK_OAK_LEAVES
           amount: 64
-          durability: 1
         emptybucket:
           material: BUCKET
           amount: 1
@@ -3935,16 +3752,14 @@ recipes:
         deadbush:
           material: DEAD_BUSH
           amount: 16
-          durability: 0
         emptybucket:
           material: BUCKET
           amount: 1
       8:
         chance: 0.125
         tallgrass:
-          material: DOUBLE_PLANT
+          material: FERN
           amount: 32
-          durability: 2
         emptybucket:
           material: BUCKET
           amount: 1
@@ -3954,42 +3769,37 @@ recipes:
     production_time: 5s
     input:
       fern:
-        material: LONG_GRASS
+        material: FERN
         amount: 32
-        durability: 2
     output:
       large fern:
-        material: DOUBLE_PLANT
+        material: LARGE_FERN
         amount: 32
-        durability: 3
   Mutate_Tall_Grass_Advanced:
     type: PRODUCTION
     name: Mutate Tall Grass Advanced
     production_time: 5s
     input:
-      fern:
-        material: LONG_GRASS
+      grass:
+        material: GRASS
         amount: 32
-        durability: 1
+
     output:
-      large fern:
-        material: DOUBLE_PLANT
+      large grass:
+        material: TALL_GRASS
         amount: 32
-        durability: 2
   Mutate_Tall_Grass_Basic:
     type: PRODUCTION
     name: Grow Tall Grass
     production_time: 5s
     input:
-      fern:
-        material: LONG_GRASS
+      grass:
+        material: GRASS
         amount: 32
-        durability: 1
     output:
-      large fern:
-        material: DOUBLE_PLANT
+      large grass:
+        material: TALL_GRASS
         amount: 32
-        durability: 2
   Smelt_Clay_Bricks:
     type: PRODUCTION
     name: Smelt Clay Bricks
@@ -4028,7 +3838,7 @@ recipes:
         amount: 256
   Smelt_Coal_Ore_Expert:
     type: PRODUCTION
-    name: Smelt Coal Ore
+    name: Smelt Coal Ore Expert
     production_time: 50s
     input:
       coal ore:
@@ -4047,12 +3857,11 @@ recipes:
         material: PRISMARINE_SHARD
         amount: 64
       ink sack:
-        material: INK_SACK
+        material: INK_SAC
         amount: 8
     output:
       dark prismarine:
-        material: PRISMARINE
-        durability: 2
+        material: DARK_PRISMARINE
         amount: 10
   Smelt_Glass_Advanced:
     type: PRODUCTION
@@ -4100,7 +3909,7 @@ recipes:
         amount: 32
     output:
       glass pane:
-        material: THIN_GLASS
+        material: GLASS_PANE
         amount: 192
   Smelt_Glass_Panes_Basic:
     type: PRODUCTION
@@ -4112,7 +3921,7 @@ recipes:
         amount: 16
     output:
       glass pane:
-        material: THIN_GLASS
+        material: GLASS_PANE
         amount: 64
   Blow_Glassbottles:
     type: PRODUCTION
@@ -4196,17 +4005,15 @@ recipes:
         amount: 64
     output:
       prismarine brick:
-        material: PRISMARINE
-        durability: 1
+        material: PRISMARINE_BRICKS
         amount: 8
   Smelt_Red_Sandstone_Advanced:
     type: PRODUCTION
-    name: Smelt Red Sandstone
+    name: Smelt Red Sandstone Advanced
     production_time: 20s
     input:
       red sand:
-        material: SAND
-        durability: 1
+        material: RED_SAND
         amount: 128
     output:
       red sandstone:
@@ -4218,8 +4025,7 @@ recipes:
     production_time: 12s
     input:
       red sand:
-        material: SAND
-        durability: 1
+        material: RED_SAND
         amount: 64
     output:
       red sandstone:
@@ -4235,7 +4041,7 @@ recipes:
         amount: 64
     output:
       red sandstone:
-        material: STONE_SLAB2
+        material: RED_SANDSTONE_SLAB
         amount: 192
   Smelt_Red_Sandstone_Stairs:
     type: PRODUCTION
@@ -4283,8 +4089,7 @@ recipes:
         amount: 64
     output:
       sandstone slab:
-        material: STEP
-        durability: 1
+        material: SANDSTONE_SLAB
         amount: 192
   Smelt_Sandstone_Stairs:
     type: PRODUCTION
@@ -4308,8 +4113,7 @@ recipes:
         amount: 64
     output:
       smooth red sandstone:
-        material: RED_SANDSTONE
-        durability: 2
+        material: SMOOTH_RED_SANDSTONE
         amount: 64
   Smelt_Smooth_Sandstone:
     type: PRODUCTION
@@ -4321,8 +4125,7 @@ recipes:
         amount: 64
     output:
       smooth sandstone:
-        material: SANDSTONE
-        durability: 2
+        material: SMOOTH_SANDSTONE
         amount: 64
   Smelt_Chiselled_Red_Sandstone:
     type: PRODUCTION
@@ -4334,8 +4137,7 @@ recipes:
         amount: 48
     output:
       chiseled red sandstone:
-        material: RED_SANDSTONE
-        durability: 1
+        material: CHISELED_RED_SANDSTONE
         amount: 64
   Smelt_Chiselled_Sandstone:
     type: PRODUCTION
@@ -4347,8 +4149,7 @@ recipes:
         amount: 48
     output:
       chiseled sandstone:
-        material: SANDSTONE
-        durability: 1
+        material: CHISELED_SANDSTONE
         amount: 64
   Smelt_Stone_Advanced:
     type: PRODUCTION
@@ -4414,7 +4215,7 @@ recipes:
     production_time: 1800s
     type: UPGRADE
     name: Upgrade to Animal Husbandry Factory
-    fuel_consumption_intervall: 15s
+    fuel_consumption_interval: 15s
     input:
       hay bale:
         material: HAY_BLOCK
@@ -4427,7 +4228,7 @@ recipes:
     production_time: 1h
     type: UPGRADE
     name: Upgrade to Aquatic Brick Smelter
-    fuel_consumption_intervall: 30s
+    fuel_consumption_interval: 30s
     input:
       prismarine shard:
         material: PRISMARINE_SHARD
@@ -4436,7 +4237,7 @@ recipes:
         material: PRISMARINE_CRYSTALS
         amount: 512
       ink:
-        material: INK_SACK
+        material: INK_SAC
         amount: 384
       waterbucket:
         material: WATER_BUCKET
@@ -4449,7 +4250,7 @@ recipes:
     production_time: 1h
     type: UPGRADE
     name: Upgrade to Quartz Factory
-    fuel_consumption_intervall: 30s
+    fuel_consumption_interval: 30s
     input:
       Quartz Block:
         material: QUARTZ_BLOCK
@@ -4465,7 +4266,7 @@ recipes:
     production_time: 2h
     type: UPGRADE
     name: Upgrade to Bakery
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       bread:
         material: BREAD
@@ -4490,7 +4291,7 @@ recipes:
     production_time: 1d
     type: UPGRADE
     name: Upgrade to Bastion Factory
-    fuel_consumption_intervall: 15m
+    fuel_consumption_interval: 15m
     input:
       pretzel:
         material: CAKE
@@ -4498,18 +4299,17 @@ recipes:
         lore:
          - Food Concentrate
       soup:
-        material: MUSHROOM_SOUP
+        material: MUSHROOM_STEW
         amount: 20
         lore:
          - Soup Concentrate 
       sand:
-        material: SAND
+        material: RED_SAND
         amount: 20
         lore:
          - Desert Concentrate
-        durability: 1
       brick:
-        material: NETHER_BRICK_ITEM
+        material: NETHER_BRICK
         amount: 20
         lore:
          - Hell Concentrate
@@ -4529,13 +4329,12 @@ recipes:
         lore:
          - Cave Concentrate
       nature:
-        material: SAPLING
+        material: OAK_SAPLING
         amount: 20
         lore:
          - Nature Concentrate
-        durability: 3
       ocean:
-        material: INK_SACK
+        material: INK_SAC
         amount: 20
         lore:
          - Ocean Concentrate
@@ -4544,16 +4343,16 @@ recipes:
     production_time: 2h
     type: UPGRADE
     name: Upgrade to Bio Lab
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       dirt:
         material: DIRT
         amount: 1024
       poppy:
-        material: RED_ROSE
+        material: POPPY
         amount: 128
       yellow_flower:
-        material: YELLOW_FLOWER
+        material: DANDELION
         amount: 128
       water:
         material: WATER_BUCKET
@@ -4562,14 +4361,14 @@ recipes:
         material: BONE_MEAL
         amount: 128
       sapling:
-        material: SAPLING
+        material: OAK_SAPLING
         amount: 384
     factory: Bio Lab
   Upgrade_to_Blacksmith:
     production_time: 10m
     type: UPGRADE
     name: Upgrade to Blacksmith
-    fuel_consumption_intervall: 20s
+    fuel_consumption_interval: 20s
     input:
       stone:
         material: COBBLESTONE
@@ -4578,19 +4377,17 @@ recipes:
         material: IRON_INGOT
         amount: 24
       wood:
-        material: WOOD
-        durability: -1
+        material: OAK_PLANKS
         amount: 512
     factory: Blacksmith
   Upgrade_to_Brick_Smelter:
     production_time: 900s
     type: UPGRADE
     name: Upgrade to Brick Smelter
-    fuel_consumption_intervall: 8s
+    fuel_consumption_interval: 8s
     input:
       char:
-        material: COAL
-        durability: 1
+        material: CHARCOAL
         amount: 512
       stone:
         material: STONE
@@ -4603,18 +4400,17 @@ recipes:
     production_time: 900s
     type: UPGRADE
     name: Upgrade to Carpentry
-    fuel_consumption_intervall: 8s
+    fuel_consumption_interval: 8s
     input:
       planks:
-        material: WOOD
-        durability: -1
+        material: OAK_PLANKS
         amount: 512
     factory: Carpentry
   Upgrade_to_Coal_Burner:
     production_time: 1800s
     type: UPGRADE
     name: Upgrade to Coal Burner
-    fuel_consumption_intervall: 15s
+    fuel_consumption_interval: 15s
     input:
       coal:
         material: COAL
@@ -4624,13 +4420,13 @@ recipes:
     production_time: 1800s
     type: UPGRADE
     name: Upgrade to Compactor Basic
-    fuel_consumption_intervall: 15s
+    fuel_consumption_interval: 15s
     input:
       piston:
-        material: PISTON_BASE
+        material: PISTON
         amount: 64
       pistonSticky:
-        material: PISTON_STICKY_BASE
+        material: STICKY_PISTON
         amount: 64
       chest:
         material: CHEST
@@ -4651,10 +4447,10 @@ recipes:
     production_time: 1h
     type: UPGRADE
     name: Upgrade to Dedicated Compactor
-    fuel_consumption_intervall: 30s
+    fuel_consumption_interval: 30s
     input:
       piston:
-        material: PISTON_STICKY_BASE 
+        material: STICKY_PISTON 
         amount: 512
       chest:
         material: CHEST
@@ -4675,10 +4471,10 @@ recipes:
     production_time: 1h
     type: UPGRADE
     name: Upgrade to Dedicated De-Compactor
-    fuel_consumption_intervall: 30s
+    fuel_consumption_interval: 30s
     input:
       piston:
-        material: PISTON_STICKY_BASE 
+        material: STICKY_PISTON 
         amount: 512
       chest:
         material: CHEST
@@ -4699,14 +4495,13 @@ recipes:
     production_time: 2h
     type: UPGRADE
     name: Upgrade to Diamond Armour Forge
-    fuel_consumption_intervall: 60s
+    fuel_consumption_interval: 60s
     input:
       diamond block:
         material: DIAMOND_BLOCK
         amount: 48
       char:
-        material: COAL
-        durability: 1
+        material: CHARCOAL
         amount: 1024
       lava:
         material: LAVA_BUCKET
@@ -4719,14 +4514,13 @@ recipes:
     production_time: 1h
     type: UPGRADE
     name: Upgrade to Diamond Equipment Forge
-    fuel_consumption_intervall: 30s
+    fuel_consumption_interval: 30s
     input:
       diamond block:
         material: DIAMOND_BLOCK
         amount: 16
       char:
-        material: COAL
-        durability: 1
+        material: CHARCOAL
         amount: 512
       lava:
         material: LAVA_BUCKET
@@ -4739,14 +4533,13 @@ recipes:
     production_time: 1h
     type: UPGRADE
     name: Upgrade to Diamond Tools Forge
-    fuel_consumption_intervall: 30s
+    fuel_consumption_interval: 30s
     input:
       diamond block:
         material: DIAMOND_BLOCK
         amount: 32
       char:
-        material: COAL
-        durability: 1
+        material: CHARCOAL
         amount: 1024
       lava:
         material: LAVA_BUCKET
@@ -4759,7 +4552,7 @@ recipes:
     production_time: 10m
     type: UPGRADE
     name: Upgrade to Farmstead Factory
-    fuel_consumption_intervall: 20s
+    fuel_consumption_interval: 20s
     input:
       wheat:
         material: BREAD
@@ -4771,18 +4564,17 @@ recipes:
         material: COOKED_CHICKEN
         amount: 96
       beef:
-        material: GRILLED_PORK
+        material: COOKED_BEEF
         amount: 96
     factory: Farmstead Factory
   Upgrade_to_Fine_Woodworking:
     production_time: 900s
     type: UPGRADE
     name: Upgrade to Fine Woodworking
-    fuel_consumption_intervall: 8s
+    fuel_consumption_interval: 8s
     input:
       planks:
-        material: WOOD
-        durability: -1
+        material: OAK_PLANKS
         amount: 512
       iron axe:
         material: IRON_AXE
@@ -4792,10 +4584,10 @@ recipes:
     production_time: 1800s
     type: UPGRADE
     name: Upgrade to Flower Gardening
-    fuel_consumption_intervall: 8s
+    fuel_consumption_interval: 8s
     input:
       flower:
-        material: RED_ROSE
+        material: POPPY
         amount: 128
       dirt:
         material: DIRT
@@ -4805,7 +4597,7 @@ recipes:
     production_time: 4h
     type: UPGRADE
     name: Upgrade to Gem Extractor
-    fuel_consumption_intervall: 2m
+    fuel_consumption_interval: 2m
     input:
       diamond:
         material: DIAMOND_BLOCK
@@ -4824,16 +4616,16 @@ recipes:
     production_time: 1h
     type: UPGRADE
     name: Upgrade to Glass Dying Factory
-    fuel_consumption_intervall: 30s
+    fuel_consumption_interval: 30s
     input:
       glass:
         material: GLASS
         amount: 576
       panes:
-        material: THIN_GLASS
+        material: GLASS_PANE
         amount: 576
       dye0:
-        material: INK_SACK
+        material: INK_SAC
         amount: 32
       dye1:
         material: ROSE_RED
@@ -4885,18 +4677,16 @@ recipes:
     production_time: 30m
     type: UPGRADE
     name: Upgrade to Gold Equipment Forge
-    fuel_consumption_intervall: 15s
+    fuel_consumption_interval: 15s
     input:
       gold block:
         material: GOLD_BLOCK
         amount: 192
       char:
-        material: COAL
-        durability: 1
+        material: CHARCOAL
         amount: 512
       wood:
-        material: WOOD
-        durability: -1
+        material: OAK_PLANKS
         amount: 512
       lava:
         material: LAVA_BUCKET
@@ -4909,18 +4699,16 @@ recipes:
     production_time: 1h
     type: UPGRADE
     name: Upgrade to Gold Armour Forge
-    fuel_consumption_intervall: 30s
+    fuel_consumption_interval: 30s
     input:
       gold block:
         material: GOLD_BLOCK
         amount: 384
       char:
-        material: COAL
-        durability: 1
+        material: CHARCOAL
         amount: 1024
       wood:
-        material: WOOD
-        durability: -1
+        material: OAK_PLANKS
         amount: 512
       lava:
         material: LAVA_BUCKET
@@ -4933,18 +4721,16 @@ recipes:
     production_time: 1h
     type: UPGRADE
     name: Upgrade to Gold Tools Forge
-    fuel_consumption_intervall: 30s
+    fuel_consumption_interval: 30s
     input:
       gold block:
         material: GOLD_BLOCK
         amount: 384
       char:
-        material: COAL
-        durability: 1
+        material: CHARCOAL
         amount: 1024
       wood:
-        material: WOOD
-        durability: -1
+        material: OAK_PLANKS
         amount: 512
       lava:
         material: LAVA_BUCKET
@@ -4957,11 +4743,10 @@ recipes:
     production_time: 1h
     type: UPGRADE
     name: Upgrade to Grass Gardening
-    fuel_consumption_intervall: 30s
+    fuel_consumption_interval: 30s
     input:
       grass:
-        material: LONG_GRASS
-        durability: 1
+        material: GRASS
         amount: 256
       dirt:
         material: DIRT
@@ -4974,13 +4759,13 @@ recipes:
     production_time: 2h
     type: UPGRADE
     name: Upgrade to Grill
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       beef:
         material: COOKED_BEEF
         amount: 768
       pork:
-        material: GRILLED_PORK
+        material: COOKED_PORKCHOP
         amount: 768
       mutton:
         material: COOKED_MUTTON
@@ -4989,12 +4774,11 @@ recipes:
         material: COOKED_CHICKEN
         amount: 512
       fish:
-        material: COOKED_FISH
+        material: COOKED_COD
         amount: 256
       salmon:
-        material: COOKED_FISH
+        material: COOKED_SALMON
         amount: 64
-        durability: 1
       rabbit:
         material: COOKED_RABBIT
         amount: 128
@@ -5006,18 +4790,16 @@ recipes:
     production_time: 900s
     type: UPGRADE
     name: Upgrade to Iron Equipment Forge
-    fuel_consumption_intervall: 8s
+    fuel_consumption_interval: 8s
     input:
       iron block:
         material: IRON_BLOCK
         amount: 32
       wood:
-        material: WOOD
-        durability: -1
+        material: OAK_PLANKS
         amount: 512
       char:
-        material: COAL
-        durability: 1
+        material: CHARCOAL
         amount: 512
       lava:
         material: LAVA_BUCKET
@@ -5030,14 +4812,13 @@ recipes:
     production_time: 3600s
     type: UPGRADE
     name: Upgrade to Steel Forge
-    fuel_consumption_intervall: 30s
+    fuel_consumption_interval: 30s
     input:
       iron block:
         material: IRON_BLOCK
         amount: 128
       char:
-        material: COAL
-        durability: 1
+        material: CHARCOAL
         amount: 1024
       anvil:
         material: ANVIL
@@ -5050,14 +4831,13 @@ recipes:
     production_time: 1800s
     type: UPGRADE
     name: Upgrade to Iron Forge
-    fuel_consumption_intervall: 15s
+    fuel_consumption_interval: 15s
     input:
       iron block:
         material: IRON_BLOCK
         amount: 32
       char:
-        material: COAL
-        durability: 1
+        material: CHARCOAL
         amount: 512
       lava:
         material: LAVA_BUCKET
@@ -5067,14 +4847,13 @@ recipes:
     production_time: 1800s
     type: UPGRADE
     name: Upgrade to Kiln
-    fuel_consumption_intervall: 15s
+    fuel_consumption_interval: 15s
     input:
       clay:
         material: CLAY
         amount: 1536
       char:
-        material: COAL
-        durability: 1
+        material: CHARCOAL
         amount: 512
       lava:
         material: LAVA_BUCKET
@@ -5084,13 +4863,13 @@ recipes:
     production_time: 10m
     type: UPGRADE
     name: Upgrade to Laboratory
-    fuel_consumption_intervall: 20s
+    fuel_consumption_interval: 20s
     input:
       redstone:
         material: REDSTONE
         amount: 192
       cauldron:
-        material: CAULDRON_ITEM
+        material: CAULDRON
         amount: 16
       slime balls: 
         material: SLIME_BALL
@@ -5100,7 +4879,7 @@ recipes:
     production_time: 1h
     type: UPGRADE
     name: Upgrade to Netherbrick Smelter
-    fuel_consumption_intervall: 30s
+    fuel_consumption_interval: 30s
     input:
       nether brick:
         material: NETHER_BRICK
@@ -5117,7 +4896,7 @@ recipes:
     production_time: 900s
     type: UPGRADE
     name: Upgrade to Ore Smelter
-    fuel_consumption_intervall: 8s
+    fuel_consumption_interval: 8s
     input:
       iron ingot:
         material: IRON_BLOCK
@@ -5133,7 +4912,7 @@ recipes:
     production_time: 4h
     type: UPGRADE
     name: Upgrade to Ore Forge
-    fuel_consumption_intervall: 2m
+    fuel_consumption_interval: 2m
     input:
       iron ingot:
         material: IRON_BLOCK
@@ -5149,7 +4928,7 @@ recipes:
     production_time: 1800s
     type: UPGRADE
     name: Upgrade to Organic Block Factory
-    fuel_consumption_intervall: 15s
+    fuel_consumption_interval: 15s
     input:
       grass:
         material: GRASS
@@ -5165,10 +4944,10 @@ recipes:
     production_time: 900s
     type: UPGRADE
     name: Upgrade to Printing Press
-    fuel_consumption_intervall: 15s
+    fuel_consumption_interval: 15s
     input:
       ink sack:
-        material: INK_SACK
+        material: INK_SAC
         amount: 32
       paper:
         material: PAPER
@@ -5178,7 +4957,7 @@ recipes:
     production_time: 1800s
     type: UPGRADE
     name: Upgrade to Rail Factory
-    fuel_consumption_intervall: 15s
+    fuel_consumption_interval: 15s
     input:
       iron:
         material: IRON_BLOCK
@@ -5190,8 +4969,7 @@ recipes:
         material: GOLD_BLOCK
         amount: 32
       char:
-        material: COAL
-        durability: 1
+        material: CHARCOAL
         amount: 512
       anvil:
         material: ANVIL
@@ -5200,8 +4978,7 @@ recipes:
         material: LAVA_BUCKET
         amount: 16
       wood:
-        material: WOOD
-        durability: -1
+        material: OAK_PLANKS
         amount: 1024
         
     factory: Rail Factory
@@ -5209,7 +4986,7 @@ recipes:
     production_time: 1800s
     type: UPGRADE
     name: Upgrade to Redstone Electronics
-    fuel_consumption_intervall: 15s
+    fuel_consumption_interval: 15s
     input:
       redstone dust:
         material: REDSTONE_BLOCK
@@ -5228,7 +5005,7 @@ recipes:
     production_time: 900s
     type: UPGRADE
     name: Upgrade to Redstone Techniques
-    fuel_consumption_intervall: 8s
+    fuel_consumption_interval: 8s
     input:
       redstone dust:
         material: REDSTONE
@@ -5237,15 +5014,14 @@ recipes:
         material: STONE
         amount: 256
       wood:
-        material: WOOD
+        material: OAK_PLANKS
         amount: 512
-        durability: -1
     factory: Redstone Techniques
   Upgrade_to_Redstone_Mechanics_Factory:
     production_time: 1800s
     type: UPGRADE
     name: Upgrade to Redstone Mechanics
-    fuel_consumption_intervall: 15s
+    fuel_consumption_interval: 15s
     input:
       redstone dust:
         material: REDSTONE_BLOCK
@@ -5263,15 +5039,14 @@ recipes:
         material: GLOWSTONE
         amount: 512
       wood:
-        material: WOOD
+        material: OAK_PLANKS
         amount: 512
-        durability: -1
     factory: Redstone Mechanics
   Upgrade_to_Sand_Smelter:
     production_time: 20m
     type: UPGRADE
     name: Upgrade to Sand Smelter
-    fuel_consumption_intervall: 30s
+    fuel_consumption_interval: 30s
     input:
       sand:
         material: SAND
@@ -5281,7 +5056,7 @@ recipes:
     production_time: 2h
     type: UPGRADE
     name: Upgrade to Glass Blowing Workshop
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       sand:
         material: SAND
@@ -5290,14 +5065,14 @@ recipes:
         material: GLASS
         amount: 1024
       panes:
-        material: THIN_GLASS
+        material: GLASS_PANE
         amount: 512
     factory: Glass Blowing Workshop
   Upgrade_to_Sandstone_Smelter:
     production_time: 2h
     type: UPGRADE
     name: Upgrade to Sandstone Smelter
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       sandstone:
         material: SANDSTONE
@@ -5310,7 +5085,7 @@ recipes:
     production_time: 2h
     type: UPGRADE
     name: Upgrade to Soup Kitchen
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       red mushroom:
         material: RED_MUSHROOM
@@ -5338,7 +5113,7 @@ recipes:
     production_time: 10m
     type: UPGRADE
     name: Upgrade to Stone Smelter
-    fuel_consumption_intervall: 20s
+    fuel_consumption_interval: 20s
     input:
       stone:
         material: STONE
@@ -5348,7 +5123,7 @@ recipes:
     production_time: 1800s
     type: UPGRADE
     name: Upgrade to Stonebrick Smelter
-    fuel_consumption_intervall: 15s
+    fuel_consumption_interval: 15s
     input:
       stone:
         material: BRICK
@@ -5363,45 +5138,33 @@ recipes:
     production_time: 1800s
     type: UPGRADE
     name: Upgrade to Tree Mutator
-    fuel_consumption_intervall: 15s
+    fuel_consumption_interval: 15s
     input:
       sapling:
-        material: SAPLING
-        durability: -1
+        material: OAK_SAPLING
         amount: 128
     factory: Tree Mutator
   Upgrade_to_Wood_Processor:
     production_time: 10m
     type: UPGRADE
     name: Upgrade to Wood Processor
-    fuel_consumption_intervall: 20s
-    input:
-      planks:
-        material: LOG
-        durability: -1
-        amount: 512
-    factory: Wood Processor
-  Upgrade_to_Wood_Processor_2:
-    production_time: 10m
-    type: UPGRADE
-    name: Upgrade to Wood Processor with Dark Oak or Acacia
     fuel_consumption_interval: 20s
     input:
       planks:
-        material: LOG_2
-        durability: -1
+        material: OAK_LOG
         amount: 512
+    factory: Wood Processor
   Upgrade_to_Wool_Processing:
     production_time: 1800s
     type: UPGRADE
-    name: Upgrade to Wool Processing
-    fuel_consumption_intervall: 15s
+    name: Upgrade to WHITE_WOOL Processing
+    fuel_consumption_interval: 15s
     input:
-      wool:
-        material: WOOL
+      WHITE_WOOL:
+        material: WHITE_WOOL
         amount: 256
       dye0:
-        material: INK_SACK
+        material: INK_SAC
         amount: 32
       dye1:
         material: ROSE_RED
@@ -5448,12 +5211,12 @@ recipes:
       dye15:
         material: BONE_MEAL
         amount: 32
-    factory: Wool Processing
+    factory: WHITE_WOOL Processing
   Upgrade_to_Fancy_Stone_Smelter:
     name: Upgrade to Fancy Stone Smelter
     production_time: 20m
     type: UPGRADE
-    fuel_consumption_intervall: 30s
+    fuel_consumption_interval: 30s
     factory: Fancy Stone Smelter
     input:
       stone:
@@ -5461,23 +5224,20 @@ recipes:
         amount: 108
         lore:
          - Compacted Item
-      otherstone:
-        material: STONE
-        durability: 1
+      andesite:
+        material: ANDESITE
         amount: 1024
-      idontevenknowwhatthisoneiscalled:
-        material: STONE
-        durability: 3
+      diorite:
+        material: DIORITE
         amount: 1024
-      morestoneIguess:
-        material: STONE
-        durability: 5
+      granite:
+        material: GRANITE
         amount: 1024
   Upgrade_to_Crystallization_Factory:
     production_time: 10m
     type: UPGRADE
     name: Upgrade to Crystallization Factory
-    fuel_consumption_intervall: 20s
+    fuel_consumption_interval: 20s
     factory: Crystallization Factory
     input:
       snow:
@@ -5493,7 +5253,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Basic Pylon
     production_time: 8h
-    fuel_consumption_intervall: 5m
+    fuel_consumption_interval: 5m
     factory: Basic Pylon
     input:
       poisonouspotatoes:
@@ -5514,7 +5274,7 @@ recipes:
         lore:
          - Compacted Item
       netherquartzore:
-        material: QUARTZ_ORE
+        material: NETHER_QUARTZ_ORE
         amount: 10
         lore:
          - Compacted Item
@@ -5522,7 +5282,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Advanced Pylon
     production_time: 8h
-    fuel_consumption_intervall: 5m
+    fuel_consumption_interval: 5m
     factory: Advanced Pylon
     input:
       poisonouspotatoes:
@@ -5543,7 +5303,7 @@ recipes:
         lore:
          - Compacted Item
       netherquartzore:
-        material: QUARTZ_ORE
+        material: NETHER_QUARTZ_ORE
         amount: 20
         lore:
          - Compacted Item
@@ -5556,16 +5316,15 @@ recipes:
         lore:
          - Compacted Item
       compactedlogs:
-        material: LOG
+        material: OAK_LOG
         amount: 32
-        durability: -1
         lore:
          - Compacted Item
   Upgrade_to_Expert_Pylon:
     type: UPGRADE
     name: Upgrade to Expert Pylon
     production_time: 8h
-    fuel_consumption_intervall: 5m
+    fuel_consumption_interval: 5m
     factory: Expert Pylon
     input:
       poisonouspotatoes:
@@ -5601,39 +5360,33 @@ recipes:
         lore:
          - Compacted Item
       compactedlogs1:
-        material: LOG
+        material: OAK_LOG
         amount: 10
-        durability: 0
         lore:
          - Compacted Item
       compactedlogs2:
-        material: LOG
+        material: SPRUCE_LOG
         amount: 10
-        durability: 1
         lore:
          - Compacted Item
       compactedlogs3:
-        material: LOG
+        material: BIRCH_LOG
         amount: 10
-        durability: 2
         lore:
          - Compacted Item
       compactedlogs4:
-        material: LOG
+        material: JUNGLE_LOG
         amount: 10
-        durability: 3
         lore:
          - Compacted Item
       compactedlogs5:
-        material: LOG_2
+        material: ACACIA_LOG
         amount: 10
-        durability: 0
         lore:
          - Compacted Item
       compactedlogs6:
-        material: LOG_2
+        material: DARK_OAK_LOG
         amount: 10
-        durability: 1
         lore:
          - Compacted Item
         
@@ -5642,7 +5395,7 @@ recipes:
     name: Extract Aether
     type: PYLON
     production_time: 4h
-    fuel_consumption_intervall: 24m
+    fuel_consumption_interval: 24m
     input:
     output:
       aether:
@@ -5657,7 +5410,7 @@ recipes:
   Pylon_Advanced:
     name: Extract Aether
     type: PYLON
-    fuel_consumption_intervall: 24m
+    fuel_consumption_interval: 24m
     production_time: 2h
     input:
     output:
@@ -5673,7 +5426,7 @@ recipes:
   Pylon_Expert:
     name: Extract Aether
     type: PYLON
-    fuel_consumption_intervall: 24m
+    fuel_consumption_interval: 24m
     production_time: 2h
     input:
     output:
@@ -5723,9 +5476,8 @@ recipes:
     production_time: 15s
     input: 
       wood:
-        material: WOOD
+        material: OAK_PLANKS
         amount: 128
-        durability: -1
       mushroom1:
         material: RED_MUSHROOM
         amount: 256
@@ -5743,7 +5495,7 @@ recipes:
         material: BUCKET
         amount: 8
       soup:
-        material: MUSHROOM_SOUP
+        material: MUSHROOM_STEW
         lore:
          - Soup Concentrate 
   Bake_Food_Concentrate:
@@ -5780,18 +5532,16 @@ recipes:
         material: SAND
         amount: 512
       redsand:
-        material: SAND
+        material: RED_SAND
         amount: 256
-        durability: 1
       cactus:
         material: CACTUS
         amount: 192
     output:
       sand:
-        material: SAND
+        material: RED_SAND
         lore:
          - Desert Concentrate
-        durability: 1
   Craft_Hell_Concentrate:
     name: Craft Hell Concentrate
     type: PRODUCTION
@@ -5808,7 +5558,7 @@ recipes:
         amount: 64
     output:
       brick:
-        material: NETHER_BRICK_ITEM
+        material: NETHER_BRICK
         lore:
          - Hell Concentrate
   Craft_End_Concentrate:
@@ -5817,7 +5567,7 @@ recipes:
     production_time: 15s
     input:
       endstone:
-        material: ENDER_STONE
+        material: END_STONE
         amount: 384
       pearls:
         material: ENDER_PEARL
@@ -5838,7 +5588,7 @@ recipes:
          - Rainbow Concentrate
     input:
       dye0:
-        material: INK_SACK
+        material: INK_SAC
         amount: 32
       dye1:
         material: ROSE_RED
@@ -5913,35 +5663,28 @@ recipes:
     production_time: 15s
     input: 
       sapling1:
-        material: SAPLING
+        material: OAK_SAPLING
         amount: 32
-        durability: 0
       sapling2:
-        material: SAPLING
+        material: SPRUCE_SAPLING
         amount: 32
-        durability: 1
       sapling3:
-        material: SAPLING
+        material: BIRCH_SAPLING
         amount: 32
-        durability: 2
       sapling4:
-        material: SAPLING
+        material: JUNGLE_SAPLING
         amount: 32
-        durability: 3
       sapling5:
-        material: SAPLING
+        material: ACACIA_SAPLING
         amount: 32
-        durability: 4
       sapling6:
-        material: SAPLING
+        material: DARK_OAK_SAPLING
         amount: 32
-        durability: 5
     output:
       concentrate:
-        material: SAPLING
+        material: OAK_SAPLING
         lore:
          - Nature Concentrate
-        durability: 3
   Craft_Concentrate_Of_Ocean:
     name: Craft Ocean Concentrate
     type: PRODUCTION
@@ -5954,11 +5697,11 @@ recipes:
         material: PRISMARINE_SHARD
         amount: 512
       ink:
-        material: INK_SACK
+        material: INK_SAC
         amount: 256
     output:
       ocean:
-        material: INK_SACK
+        material: INK_SAC
         lore:
          - Ocean Concentrate
         
@@ -5974,12 +5717,10 @@ recipes:
       dye:
         material: BONE_MEAL
         amount: 4
-        durability: 15
     output:
       stainedglass:
-        material: STAINED_GLASS
+        material: WHITE_STAINED_GLASS
         amount: 64
-        durability: 0
   Dye_Glass_Orange:
     name: Dye Glass Orange
     type: PRODUCTION
@@ -5993,9 +5734,8 @@ recipes:
         amount: 4
     output:
       stainedglass:
-        material: STAINED_GLASS
+        material: ORANGE_STAINED_GLASS
         amount: 64
-        durability: 1
   Dye_Glass_Magenta:
     name: Dye Glass Magenta
     type: PRODUCTION
@@ -6009,9 +5749,8 @@ recipes:
         amount: 4
     output:
       stainedglass:
-        material: STAINED_GLASS
+        material: MAGENTA_STAINED_GLASS
         amount: 64
-        durability: 2
   Dye_Glass_Light_Blue:
     name: Dye Glass Light Blue
     type: PRODUCTION
@@ -6025,10 +5764,9 @@ recipes:
         amount: 4
     output:
       stainedglass:
-        material: STAINED_GLASS
+        material: LIGHT_BLUE_STAINED_GLASS
         amount: 64
-        durability: 3
-  Dye_Glass_Yellow:
+  Dye_Glass_Yellow: 
     name: Dye Glass Yellow
     type: PRODUCTION
     production_time: 10s
@@ -6041,9 +5779,8 @@ recipes:
         amount: 4
     output:
       stainedglass:
-        material: STAINED_GLASS
+        material: YELLOW_STAINED_GLASS
         amount: 64
-        durability: 4
   Dye_Glass_Lime:
     name: Dye Glass Lime
     type: PRODUCTION
@@ -6057,9 +5794,8 @@ recipes:
         amount: 4
     output:
       stainedglass:
-        material: STAINED_GLASS
+        material: LIME_STAINED_GLASS
         amount: 64
-        durability: 5
   Dye_Glass_Pink:
     name: Dye Glass Pink
     type: PRODUCTION
@@ -6073,9 +5809,8 @@ recipes:
         amount: 4
     output:
       stainedglass:
-        material: STAINED_GLASS
+        material: PINK_STAINED_GLASS
         amount: 64
-        durability: 6
   Dye_Glass_Gray:
     name: Dye Glass Gray
     type: PRODUCTION
@@ -6089,9 +5824,8 @@ recipes:
         amount: 4
     output:
       stainedglass:
-        material: STAINED_GLASS
+        material: GRAY_STAINED_GLASS
         amount: 64
-        durability: 7
   Dye_Glass_Light_Gray:
     name: Dye Glass Light Gray
     type: PRODUCTION
@@ -6105,9 +5839,8 @@ recipes:
         amount: 4
     output:
       stainedglass:
-        material: STAINED_GLASS
+        material: LIGHT_GRAY_STAINED_GLASS
         amount: 64
-        durability: 8
   Dye_Glass_Cyan:
     name: Dye Glass Cyan
     type: PRODUCTION
@@ -6121,9 +5854,8 @@ recipes:
         amount: 4
     output:
       stainedglass:
-        material: STAINED_GLASS
+        material: CYAN_STAINED_GLASS
         amount: 64
-        durability: 9
   Dye_Glass_Purple:
     name: Dye Glass Purple
     type: PRODUCTION
@@ -6137,9 +5869,8 @@ recipes:
         amount: 4
     output:
       stainedglass:
-        material: STAINED_GLASS
+        material: PURPLE_STAINED_GLASS
         amount: 64
-        durability: 10
   Dye_Glass_Blue:
     name: Dye Glass Blue
     type: PRODUCTION
@@ -6153,9 +5884,8 @@ recipes:
         amount: 4
     output:
       stainedglass:
-        material: STAINED_GLASS
+        material: BLUE_STAINED_GLASS
         amount: 64
-        durability: 11
   Dye_Glass_Brown:
     name: Dye Glass Brown
     type: PRODUCTION
@@ -6169,9 +5899,8 @@ recipes:
         amount: 4
     output:
       stainedglass:
-        material: STAINED_GLASS
+        material: BROWN_STAINED_GLASS
         amount: 64
-        durability: 12
   Dye_Glass_Green:
     name: Dye Glass Green
     type: PRODUCTION
@@ -6185,9 +5914,8 @@ recipes:
         amount: 4
     output:
       stainedglass:
-        material: STAINED_GLASS
+        material: GREEN_STAINED_GLASS
         amount: 64
-        durability: 13
   Dye_Glass_Red:
     name: Dye Glass Red
     type: PRODUCTION
@@ -6201,9 +5929,8 @@ recipes:
         amount: 4
     output:
       stainedglass:
-        material: STAINED_GLASS
+        material: RED_STAINED_GLASS
         amount: 64
-        durability: 14
   Dye_Glass_Black:
     name: Dye Glass Black
     type: PRODUCTION
@@ -6213,540 +5940,477 @@ recipes:
         material: GLASS
         amount: 64
       dye:
-        material: INK_SACK
+        material: INK_SAC
         amount: 4
     output:
       stainedglass:
-        material: STAINED_GLASS
+        material: BLACK_STAINED_GLASS
         amount: 64
-        durability: 15
   Dye_Wool_Orange:
-    name: Dye Wool Orange
+    name: Dye WHITE_WOOL Orange
     type: PRODUCTION
     production_time: 10s
     input:
-      glass:
-        material: WOOL
+      WHITE_WOOL:
+        material: WHITE_WOOL
         amount: 64
       dye:
-        material: INK_SACK
+        material: ORANGE_DYE
         amount: 4
-        durability: 14
     output:
       dyedwool:
-        material: WOOL
+        material: ORANGE_WOOL
         amount: 64
-        durability: 1
   Dye_Wool_Magenta:
-    name: Dye Wool Magenta
+    name: Dye WHITE_WOOL Magenta
     type: PRODUCTION
     production_time: 10s
     input:
-      glass:
-        material: WOOL
+      WHITE_WOOL:
+        material: WHITE_WOOL
         amount: 64
       dye:
-        material: INK_SACK
+        material: MAGENTA_DYE
         amount: 4
-        durability: 13
     output:
       dyedwool:
-        material: WOOL
+        material: MAGENTA_WOOL
         amount: 64
-        durability: 2
   Dye_Wool_Light_Blue:
-    name: Dye Wool Light Blue
+    name: Dye WHITE_WOOL Light Blue
     type: PRODUCTION
     production_time: 10s
     input:
-      glass:
-        material: WOOL
+      WHITE_WOOL:
+        material: WHITE_WOOL
         amount: 64
       dye:
-        material: INK_SACK
+        material: LIGHT_BLUE_DYE
         amount: 4
-        durability: 12
     output:
       dyedwool:
-        material: WOOL
+        material: LIGHT_BLUE_WOOL
         amount: 64
-        durability: 3
   Dye_Wool_Yellow:
-    name: Dye Wool Yellow
+    name: Dye WHITE_WOOL Yellow
     type: PRODUCTION
     production_time: 10s
     input:
-      glass:
-        material: WOOL
+      WHITE_WOOL:
+        material: WHITE_WOOL
         amount: 64
       dye:
-        material: INK_SACK
+        material: DANDELION_YELLOW
         amount: 4
-        durability: 11
     output:
       dyedwool:
-        material: WOOL
+        material: YELLOW_WOOL
         amount: 64
-        durability: 4
   Dye_Wool_Lime:
-    name: Dye Wool Lime
+    name: Dye WHITE_WOOL Lime
     type: PRODUCTION
     production_time: 10s
     input:
-      glass:
-        material: WOOL
+      WHITE_WOOL:
+        material: WHITE_WOOL
         amount: 64
       dye:
-        material: INK_SACK
+        material: LIME_DYE
         amount: 4
-        durability: 10
     output:
       dyedwool:
-        material: WOOL
+        material: LIME_WOOL
         amount: 64
-        durability: 5
   Dye_Wool_Pink:
-    name: Dye Wool Pink
+    name: Dye WHITE_WOOL Pink
     type: PRODUCTION
     production_time: 10s
     input:
-      glass:
-        material: WOOL
+      WHITE_WOOL:
+        material: WHITE_WOOL
         amount: 64
       dye:
-        material: INK_SACK
+        material: PINK_DYE
         amount: 4
-        durability: 9
     output:
       dyedwool:
-        material: WOOL
+        material: PINK_WOOL
         amount: 64
-        durability: 6
   Dye_Wool_Gray:
-    name: Dye Wool Gray
+    name: Dye WHITE_WOOL Gray
     type: PRODUCTION
     production_time: 10s
     input:
-      glass:
-        material: WOOL
+      WHITE_WOOL:
+        material: WHITE_WOOL
         amount: 64
       dye:
-        material: INK_SACK
+        material: GRAY_DYE
         amount: 4
-        durability: 8
     output:
       dyedwool:
-        material: WOOL
+        material: GRAY_WOOL
         amount: 64
-        durability: 7
   Dye_Wool_Light_Gray:
-    name: Dye Wool Light Gray
+    name: Dye WHITE_WOOL Light Gray
     type: PRODUCTION
     production_time: 10s
     input:
-      glass:
-        material: WOOL
+      WHITE_WOOL:
+        material: WHITE_WOOL
         amount: 64
       dye:
-        material: INK_SACK
+        material: LIGHT_GRAY_DYE
         amount: 4
-        durability: 7
     output:
       dyedwool:
-        material: WOOL
+        material: LIGHT_GRAY_WOOL
         amount: 64
-        durability: 8
   Dye_Wool_Cyan:
-    name: Dye Wool Cyan
+    name: Dye WHITE_WOOL Cyan
     type: PRODUCTION
     production_time: 10s
     input:
-      glass:
-        material: WOOL
+      WHITE_WOOL:
+        material: WHITE_WOOL
         amount: 64
       dye:
-        material: INK_SACK
+        material: CYAN_DYE
         amount: 4
-        durability: 6
     output:
       dyedwool:
-        material: WOOL
+        material: CYAN_WOOL
         amount: 64
-        durability: 9
   Dye_Wool_Purple:
-    name: Dye Wool Purple
+    name: Dye WHITE_WOOL Purple
     type: PRODUCTION
     production_time: 10s
     input:
-      glass:
-        material: WOOL
+      WHITE_WOOL:
+        material: WHITE_WOOL
         amount: 64
       dye:
-        material: INK_SACK
+        material: PURPLE_DYE
         amount: 4
-        durability: 5
     output:
       dyedwool:
-        material: WOOL
+        material: PURPLE_WOOL
         amount: 64
-        durability: 10
   Dye_Wool_Blue:
-    name: Dye Wool Blue
+    name: Dye WHITE_WOOL Blue
     type: PRODUCTION
     production_time: 10s
     input:
-      glass:
-        material: WOOL
+      WHITE_WOOL:
+        material: WHITE_WOOL
         amount: 64
       dye:
-        material: INK_SACK
+        material: LAPIS_LAZULI
         amount: 4
-        durability: 4
     output:
       dyedwool:
-        material: WOOL
+        material: BLUE_WOOL
         amount: 64
-        durability: 11
   Dye_Wool_Brown:
-    name: Dye Wool Brown
+    name: Dye WHITE_WOOL Brown
     type: PRODUCTION
     production_time: 10s
     input:
-      glass:
-        material: WOOL
+      WHITE_WOOL:
+        material: WHITE_WOOL
         amount: 64
       dye:
-        material: INK_SACK
+        material: COCOA_BEANS
         amount: 4
-        durability: 3
     output:
       dyedwool:
-        material: WOOL
+        material: BROWN_WOOL
         amount: 64
-        durability: 12
   Dye_Wool_Green:
-    name: Dye Wool Green
+    name: Dye WHITE_WOOL Green
     type: PRODUCTION
     production_time: 10s
     input:
-      glass:
-        material: WOOL
+      WHITE_WOOL:
+        material: WHITE_WOOL
         amount: 64
       dye:
-        material: INK_SACK
+        material: CACTUS_GREEN
         amount: 4
-        durability: 2
     output:
       dyedwool:
-        material: WOOL
+        material: GREEN_WOOL
         amount: 64
-        durability: 13
   Dye_Wool_Red:
-    name: Dye Wool Red
+    name: Dye WHITE_WOOL Red
     type: PRODUCTION
     production_time: 10s
     input:
-      glass:
-        material: WOOL
+      WHITE_WOOL:
+        material: WHITE_WOOL
         amount: 64
       dye:
-        material: INK_SACK
+        material: ROSE_RED
         amount: 4
-        durability: 1
     output:
       dyedwool:
-        material: WOOL
+        material: RED_WOOL
         amount: 64
-        durability: 14
   Dye_Wool_Black:
-    name: Dye Wool Black
+    name: Dye WHITE_WOOL Black
     type: PRODUCTION
     production_time: 10s
     input:
-      glass:
-        material: WOOL
+      WHITE_WOOL:
+        material: WHITE_WOOL
         amount: 64
       dye:
-        material: INK_SACK
+        material: INK_SAC
         amount: 4
-        durability: 0
     output:
       dyedwool:
-        material: WOOL
+        material: BLACK_WOOL
         amount: 64
-        durability: 15
   Dye_GlassPanes_White:
     name: Dye Glass Panes White
     type: PRODUCTION
     production_time: 10s
     input:
       glass:
-        material: THIN_GLASS
+        material: GLASS_PANE
         amount: 64
       dye:
-        material: INK_SACK
+        material: BONE_MEAL
         amount: 4
-        durability: 15
     output:
       stainedglass:
-        material: STAINED_GLASS_PANE
+        material: WHITE_STAINED_GLASS_PANE
         amount: 64
-        durability: 0
   Dye_GlassPanes_Orange:
     name: Dye Glass Panes Orange
     type: PRODUCTION
     production_time: 10s
     input:
       glass:
-        material: THIN_GLASS
+        material: GLASS_PANE
         amount: 64
       dye:
-        material: INK_SACK
+        material: ORANGE_DYE
         amount: 4
-        durability: 14
     output:
       stainedglass:
-        material: STAINED_GLASS_PANE
+        material: ORANGE_STAINED_GLASS_PANE
         amount: 64
-        durability: 1
   Dye_GlassPanes_Magenta:
     name: Dye Glass Panes Magenta
     type: PRODUCTION
     production_time: 10s
     input:
       glass:
-        material: THIN_GLASS
+        material: GLASS_PANE
         amount: 64
       dye:
-        material: INK_SACK
+        material: MAGENTA_DYE
         amount: 4
-        durability: 13
     output:
       stainedglass:
-        material: STAINED_GLASS_PANE
+        material: MAGENTA_STAINED_GLASS_PANE
         amount: 64
-        durability: 2
   Dye_GlassPanes_Light_Blue:
     name: Dye Glass Panes Light Blue
     type: PRODUCTION
     production_time: 10s
     input:
       glass:
-        material: THIN_GLASS
+        material: GLASS_PANE
         amount: 64
       dye:
-        material: INK_SACK
+        material: LIGHT_BLUE_DYE
         amount: 4
-        durability: 12
     output:
       stainedglass:
-        material: STAINED_GLASS_PANE
+        material: LIGHT_BLUE_STAINED_GLASS_PANE
         amount: 64
-        durability: 3
   Dye_GlassPanes_Yellow:
     name: Dye Glass Panes Yellow
     type: PRODUCTION
     production_time: 10s
     input:
       glass:
-        material: THIN_GLASS
+        material: GLASS_PANE
         amount: 64
       dye:
-        material: INK_SACK
+        material: DANDELION_YELLOW
         amount: 4
-        durability: 11
     output:
       stainedglass:
-        material: STAINED_GLASS_PANE
-        amount: 64
-        durability: 4
+        material: YELLOW_STAINED_GLASS_PANE
+        amount: 64 
   Dye_GlassPanes_Lime:
     name: Dye Glass Panes Lime
     type: PRODUCTION
     production_time: 10s
     input:
       glass:
-        material: THIN_GLASS
+        material: GLASS_PANE
         amount: 64
       dye:
-        material: INK_SACK
+        material: LIME_DYE
         amount: 4
-        durability: 10
     output:
       stainedglass:
-        material: STAINED_GLASS_PANE
+        material: LIME_STAINED_GLASS_PANE
         amount: 64
-        durability: 5
   Dye_GlassPanes_Pink:
     name: Dye Glass Panes Pink
     type: PRODUCTION
     production_time: 10s
     input:
       glass:
-        material: THIN_GLASS
+        material: GLASS_PANE
         amount: 64
       dye:
-        material: INK_SACK
+        material: PINK_DYE
         amount: 4
-        durability: 9
-    output:
-      stainedglass:
-        material: STAINED_GLASS_PANE
+    output: 
+      stainedglass: 
+        material: PINK_STAINED_GLASS_PANE
         amount: 64
-        durability: 6
   Dye_GlassPanes_Gray:
     name: Dye Glass Panes Gray
     type: PRODUCTION
     production_time: 10s
     input:
       glass:
-        material: THIN_GLASS
+        material: GLASS_PANE
         amount: 64
       dye:
-        material: INK_SACK
+        material: GRAY_DYE
         amount: 4
-        durability: 8
     output:
       stainedglass:
-        material: STAINED_GLASS_PANE
+        material: GRAY_STAINED_GLASS_PANE
         amount: 64
-        durability: 7
   Dye_GlassPanes_Light_Gray:
     name: Dye Glass Panes Light Gray
     type: PRODUCTION
     production_time: 10s
     input:
       glass:
-        material: THIN_GLASS
+        material: GLASS_PANE
         amount: 64
       dye:
-        material: INK_SACK
+        material: LIGHT_GRAY_DYE
         amount: 4
-        durability: 7
     output:
       stainedglass:
-        material: STAINED_GLASS_PANE
+        material: LIGHT_GRAY_STAINED_GLASS_PANE
         amount: 64
-        durability: 8
   Dye_GlassPanes_Cyan:
     name: Dye Glass Panes Cyan
     type: PRODUCTION
     production_time: 10s
     input:
       glass:
-        material: THIN_GLASS
+        material: GLASS_PANE
         amount: 64
       dye:
-        material: INK_SACK
+        material: CYAN_DYE
         amount: 4
-        durability: 6
     output:
       stainedglass:
-        material: STAINED_GLASS_PANE
+        material: CYAN_STAINED_GLASS_PANE
         amount: 64
-        durability: 9
   Dye_GlassPanes_Purple:
     name: Dye Glass Panes Purple
     type: PRODUCTION
     production_time: 10s
     input:
       glass:
-        material: THIN_GLASS
+        material: GLASS_PANE
         amount: 64
       dye:
-        material: INK_SACK
+        material: PURPLE_DYE
         amount: 4
-        durability: 5
     output:
       stainedglass:
-        material: STAINED_GLASS_PANE
+        material: PURPLE_STAINED_GLASS_PANE
         amount: 64
-        durability: 10
   Dye_GlassPanes_Blue:
     name: Dye Glass Panes Blue
     type: PRODUCTION
     production_time: 10s
     input:
       glass:
-        material: THIN_GLASS
+        material: GLASS_PANE
         amount: 64
       dye:
-        material: INK_SACK
+        material: LAPIS_LAZULI
         amount: 4
-        durability: 4
     output:
       stainedglass:
-        material: STAINED_GLASS_PANE
+        material: BLUE_STAINED_GLASS_PANE
         amount: 64
-        durability: 11
   Dye_GlassPanes_Brown:
     name: Dye Glass Panes Brown
     type: PRODUCTION
     production_time: 10s
     input:
       glass:
-        material: THIN_GLASS
+        material: GLASS_PANE
         amount: 64
       dye:
-        material: INK_SACK
+        material: COCOA_BEANS
         amount: 4
-        durability: 3
     output:
       stainedglass:
-        material: STAINED_GLASS_PANE
+        material: BROWN_STAINED_GLASS_PANE
         amount: 64
-        durability: 12
   Dye_GlassPanes_Green:
     name: Dye Glass Panes Green
     type: PRODUCTION
     production_time: 10s
     input:
       glass:
-        material: THIN_GLASS
+        material: GLASS_PANE
         amount: 64
       dye:
-        material: INK_SACK
+        material: CACTUS_GREEN
         amount: 4
-        durability: 2
     output:
       stainedglass:
-        material: STAINED_GLASS_PANE
+        material: GREEN_STAINED_GLASS_PANE
         amount: 64
-        durability: 13
   Dye_GlassPanes_Red:
     name: Dye Glass Panes Red
     type: PRODUCTION
     production_time: 10s
     input:
       glass:
-        material: THIN_GLASS
+        material: GLASS_PANE
         amount: 64
       dye:
-        material: INK_SACK
+        material: ROSE_RED
         amount: 4
-        durability: 1
     output:
       stainedglass:
-        material: STAINED_GLASS_PANE
+        material: RED_STAINED_GLASS_PANE
         amount: 64
-        durability: 14
   Dye_GlassPanes_Black:
     name: Dye Glass Panes Black
     type: PRODUCTION
     production_time: 10s
     input:
       glass:
-        material: THIN_GLASS
+        material: GLASS_PANE
         amount: 64
       dye:
-        material: INK_SACK
+        material: INK_SAC
         amount: 4
-        durability: 0
     output:
       stainedglass:
-        material: STAINED_GLASS_PANE
+        material: BLACK_STAINED_GLASS_PANE
         amount: 64
-        durability: 15
   Pack_Snow_To_Ice:
     name: Pack Snow into Ice
     type: PRODUCTION
@@ -6798,7 +6462,7 @@ recipes:
     name: Create Pylon Locator
     type: PRODUCTION
     production_time: 1d
-    fuel_consumption_intervall: 15m
+    fuel_consumption_interval: 15m
     input:
       compass:
         material: COMPASS
@@ -6830,12 +6494,11 @@ recipes:
     type: UPGRADE
     name: Upgrade to Apprentice Transmuter
     factory: Apprentice Transmuter
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       logs:
-        material: LOG
+        material: OAK_LOG
         amount: 1024
-        durability: -1
       aether:
         material: GOLD_NUGGET
         amount: 180
@@ -6849,7 +6512,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Adept Transmuter
     factory: Adept Transmuter
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       ironblocks:
         material: IRON_BLOCK
@@ -6870,7 +6533,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Grandmaster Transmuter
     factory: Grandmaster Transmuter
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       ironblocks:
         material: DIAMOND_BLOCK
@@ -6894,17 +6557,16 @@ recipes:
     name: Aspen Enrichment
     type: PRODUCTION
     production_time: 1h
-    fuel_consumption_intervall: 6m
+    fuel_consumption_interval: 6m
     input:
       wheat:
         material: WHEAT
         amount: 64
       logs:
-        material: LOG
+        material: OAK_LOG
         amount: 16
-        durability: -1
       netherwart:
-        material: NETHER_STALK
+        material: NETHER_WART
         amount: 32
       aether:
         material: GOLD_NUGGET
@@ -6922,15 +6584,14 @@ recipes:
     name: Cypress Enrichment
     type: PRODUCTION
     production_time: 1h
-    fuel_consumption_intervall: 6m
+    fuel_consumption_interval: 6m
     input:
       carrots:
-        material: CARROT_ITEM
+        material: CARROT
         amount: 64
       logs:
-        material: LOG
+        material: OAK_LOG
         amount: 16
-        durability: -1
       cactus:
         material: CACTUS
         amount: 64
@@ -6950,15 +6611,14 @@ recipes:
     name: Pine Enrichment
     type: PRODUCTION
     production_time: 1h
-    fuel_consumption_intervall: 6m
+    fuel_consumption_interval: 6m
     input:
       potatoes:
-        material: POTATO_ITEM
+        material: POTATO
         amount: 64
       logs:
-        material: LOG
+        material: OAK_LOG
         amount: 16
-        durability: -1
       sugarcane:
         material: SUGAR_CANE
         amount: 64
@@ -6979,20 +6639,19 @@ recipes:
     name: Lead Enrichment
     type: PRODUCTION
     production_time: 30m
-    fuel_consumption_intervall: 5m
+    fuel_consumption_interval: 5m
     input:
       wheat:
         material: WHEAT
         amount: 320
       acacialogs:
-        material: LOG_2
+        material: ACACIA_LOG
         amount: 80
-        durability: 0
       netherwart:
-        material: NETHER_STALK
+        material: NETHER_WART
         amount: 160
       melons:
-        material: MELON_BLOCK
+        material: MELON
         amount: 128
 #      chicken:
 #        material: RAW_CHICKEN
@@ -7013,22 +6672,20 @@ recipes:
     name: Copper Enrichment
     type: PRODUCTION
     production_time: 30m
-    fuel_consumption_intervall: 5m
+    fuel_consumption_interval: 5m
     input:
       carrots:
-        material: CARROT_ITEM
+        material: CARROT
         amount: 320
       sprucelogs:
-        material: LOG
+        material: SPRUCE_LOG
         amount: 80
-        durability: 1
       cactus:
         material: CACTUS
         amount: 320
       cocoa:
-        material: INK_SACK
+        material: COCOA_BEANS
         amount: 256
-        durability: 3
 #      beef:
 #        material: RAW_BEEF
 #        amount: 32
@@ -7048,15 +6705,14 @@ recipes:
     name: Tin Enrichment
     type: PRODUCTION
     production_time: 30m
-    fuel_consumption_intervall: 5m
+    fuel_consumption_interval: 5m
     input:
       potatoes:
-        material: POTATO_ITEM
+        material: POTATO
         amount: 320
       birchlogs:
-        material: LOG
+        material: BIRCH_LOG
         amount: 80
-        durability: 2
       sugarcane:
         material: SUGAR_CANE
         amount: 320
@@ -7083,7 +6739,7 @@ recipes:
     name: Amethyst Enrichment
     type: PRODUCTION
     production_time: 1h
-    fuel_consumption_intervall: 6m
+    fuel_consumption_interval: 6m
     input:
       wheat:
         material: WHEAT
@@ -7091,24 +6747,22 @@ recipes:
         lore:
          - Compacted Item
       acacialogs:
-        material: LOG_2
+        material: ACACIA_LOG
         amount: 6
-        durability: 0
         lore:
          - Compacted Item
       junglesaplings:
-        material: SAPLING
+        material: JUNGLE_SAPLING
         amount: 1
-        durability: 3
         lore:
          - Compacted Item
       netherwart:
-        material: NETHER_STALK
+        material: NETHER_WART
         amount: 15
         lore:
          - Compacted Item
       melons:
-        material: MELON_BLOCK
+        material: MELON
         amount: 10
         lore:
          - Compacted Item
@@ -7121,9 +6775,8 @@ recipes:
         lore:
          - Compacted Item
       fish:
-        material: RAW_FISH
+        material: SALMON
         amount: 15
-        durability: 1
       aether:
         material: GOLD_NUGGET
         amount: 120
@@ -7140,41 +6793,37 @@ recipes:
     name: Topaz Enrichment
     type: PRODUCTION
     production_time: 1h
-    fuel_consumption_intervall: 6m
+    fuel_consumption_interval: 6m
     input:
       carrots:
-        material: CARROT_ITEM
+        material: CARROT
         amount: 25
         lore:
          - Compacted Item
       sprucelogs:
-        material: LOG
+        material: SPRUCE_LOG
         amount: 6
-        durability: 1
         lore:
          - Compacted Item
       darkoaksaplings:
-        material: SAPLING
+        material: DARK_OAK_SAPLING
         amount: 16
-        durability: 5
       cactus:
         material: CACTUS
         amount: 25
         lore:
          - Compacted Item
       cocoa:
-        material: INK_SACK
+        material: COCOA_BEANS
         amount: 20
-        durability: 3
         lore:
          - Compacted Item
 #      beef:
 #        material: RAW_BEEF
 #        amount: 160
       pufferfish:
-        material: RAW_FISH
+        material: PUFFERFISH
         amount: 3
-        durability: 3
       vines:
         material: VINE
         amount: 6
@@ -7196,23 +6845,21 @@ recipes:
     name: Ruby Enrichment
     type: PRODUCTION
     production_time: 1h
-    fuel_consumption_intervall: 6m
+    fuel_consumption_interval: 6m
     input:
       potatoes:
-        material: POTATO_ITEM
+        material: POTATO
         amount: 25
         lore:
          - Compacted Item
       birchlogs:
-        material: LOG
+        material: BIRCH_LOG
         amount: 6
-        durability: 2
         lore:
          - Compacted Item
       oaksaplings:
-        material: SAPLING
+        material: OAK_SAPLING
         amount: 1
-        durability: 0
         lore:
          - Compacted Item
       sugarcane:
@@ -7229,9 +6876,8 @@ recipes:
 #        material: PORK
 #        amount: 160
       salmon:
-        material: RAW_FISH
+        material: SALMON
         amount: 5
-        durability: 1
       vines:
         material: VINE
         amount: 6
@@ -7257,7 +6903,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Basic Forge
     factory: Basic Forge
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       emeralds:
         material: EMERALD
@@ -7267,7 +6913,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Ember Forge
     factory: Ember Forge
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       emeralds:
         material: EMERALD
@@ -7277,7 +6923,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Magma Forge
     factory: Magma Forge
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       emeralds:
         material: EMERALD_BLOCK
@@ -7289,7 +6935,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to River Forge
     factory: River Forge
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       emeralds:
         material: EMERALD
@@ -7299,7 +6945,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Ocean Forge
     factory: Ocean Forge
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       emeralds:
         material: EMERALD_BLOCK
@@ -7311,7 +6957,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Magic Forge
     factory: Magic Forge
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       emeralds:
         material: EMERALD
@@ -7321,7 +6967,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Arcane Forge
     factory: Arcane Forge
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       emeralds:
         material: EMERALD_BLOCK
@@ -7333,7 +6979,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Mithril Forge
     factory: Mithril Forge
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       emeralds:
         material: EMERALD
@@ -7343,7 +6989,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Titanium Forge
     factory: Titanium Forge
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       emeralds:
         material: EMERALD_BLOCK
@@ -7353,7 +6999,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Meteor Forge
     factory: Meteor Forge
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       emeralds:
         material: EMERALD_BLOCK
@@ -7365,7 +7011,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Archer Forge
     factory: Archer Forge
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       emeralds:
         material: EMERALD
@@ -7375,7 +7021,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Marksman Forge
     factory: Marksman Forge
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       emeralds:
         material: EMERALD_BLOCK
@@ -7385,7 +7031,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Sniper Forge
     factory: Sniper Forge
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       emeralds:
         material: EMERALD_BLOCK
@@ -7397,7 +7043,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Dagger Forge
     factory: Dagger Forge
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       emeralds:
         material: EMERALD
@@ -7407,7 +7053,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Sword Forge
     factory: Sword Forge
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       emeralds:
         material: EMERALD_BLOCK
@@ -7417,7 +7063,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Blade Forge
     factory: Blade Forge
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       emeralds:
         material: EMERALD_BLOCK
@@ -7429,7 +7075,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Quick Forge
     factory: Quick Forge
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       emeralds:
         material: EMERALD
@@ -7439,7 +7085,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Rapid Forge
     factory: Rapid Forge
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       emeralds:
         material: EMERALD_BLOCK
@@ -7449,7 +7095,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Sonic Forge
     factory: Sonic Forge
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       emeralds:
         material: EMERALD_BLOCK
@@ -7461,7 +7107,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Rock Forge
     factory: Rock Forge
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       emeralds:
         material: EMERALD
@@ -7471,7 +7117,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Metal Forge
     factory: Metal Forge
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       emeralds:
         material: EMERALD_BLOCK
@@ -7481,7 +7127,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Carbon Forge
     factory: Carbon Forge
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       emeralds:
         material: EMERALD_BLOCK
@@ -7498,7 +7144,7 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 5
-    enchant: PROTECTION_FIRE
+    enchant: fire_protection
     level: 1
     enchant_item:
       boots:
@@ -7511,7 +7157,7 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 5
-    enchant: PROTECTION_FIRE
+    enchant: fire_protection
     level: 1
     enchant_item:
       boots:
@@ -7524,7 +7170,7 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 5
-    enchant: PROTECTION_FIRE
+    enchant: fire_protection
     level: 1
     enchant_item:
       boots:
@@ -7537,7 +7183,7 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 5
-    enchant: PROTECTION_FIRE
+    enchant: fire_protection
     level: 1
     enchant_item:
       boots:
@@ -7550,14 +7196,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 10
-    enchant: PROTECTION_FIRE
+    enchant: fire_protection
     level: 2
     enchant_item:
       boots:
         material: DIAMOND_HELMET
         enchants:
           fireprot1:
-            enchant: PROTECTION_FIRE
+            enchant: fire_protection
             level: 1
   Enchant_Chestplate_FireP_II:
     type: ENCHANT
@@ -7567,14 +7213,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 10
-    enchant: PROTECTION_FIRE
+    enchant: fire_protection
     level: 2
     enchant_item:
       boots:
         material: DIAMOND_CHESTPLATE
         enchants:
           fireprot1:
-            enchant: PROTECTION_FIRE
+            enchant: fire_protection
             level: 1
   Enchant_Leggings_FireP_II:
     type: ENCHANT
@@ -7584,14 +7230,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 10
-    enchant: PROTECTION_FIRE
+    enchant: fire_protection
     level: 2
     enchant_item:
       boots:
         material: DIAMOND_LEGGINGS
         enchants:
           fireprot1:
-            enchant: PROTECTION_FIRE
+            enchant: fire_protection
             level: 1
   Enchant_Boots_FireP_II:
     type: ENCHANT
@@ -7601,14 +7247,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 10
-    enchant: PROTECTION_FIRE
+    enchant: fire_protection
     level: 2
     enchant_item:
       boots:
         material: DIAMOND_BOOTS
         enchants:
           fireprot1:
-            enchant: PROTECTION_FIRE
+            enchant: fire_protection
             level: 1
   Enchant_Helmet_FireP_III:
     type: ENCHANT
@@ -7618,14 +7264,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 20
-    enchant: PROTECTION_FIRE
+    enchant: fire_protection
     level: 3
     enchant_item:
       boots:
         material: DIAMOND_HELMET
         enchants:
           fireprot1:
-            enchant: PROTECTION_FIRE
+            enchant: fire_protection
             level: 2
   Enchant_Chestplate_FireP_III:
     type: ENCHANT
@@ -7635,14 +7281,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 20
-    enchant: PROTECTION_FIRE
+    enchant: fire_protection
     level: 3
     enchant_item:
       boots:
         material: DIAMOND_CHESTPLATE
         enchants:
           fireprot1:
-            enchant: PROTECTION_FIRE
+            enchant: fire_protection
             level: 2
   Enchant_Leggings_FireP_III:
     type: ENCHANT
@@ -7652,14 +7298,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 20
-    enchant: PROTECTION_FIRE
+    enchant: fire_protection
     level: 3
     enchant_item:
       boots:
         material: DIAMOND_LEGGINGS
         enchants:
           fireprot1:
-            enchant: PROTECTION_FIRE
+            enchant: fire_protection
             level: 2
   Enchant_Boots_FireP_III:
     type: ENCHANT
@@ -7669,14 +7315,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 20
-    enchant: PROTECTION_FIRE
+    enchant: fire_protection
     level: 3
     enchant_item:
       boots:
         material: DIAMOND_BOOTS
         enchants:
           fireprot1:
-            enchant: PROTECTION_FIRE
+            enchant: fire_protection
             level: 2
   Enchant_Helmet_FireP_IV:
     type: ENCHANT
@@ -7686,14 +7332,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 50
-    enchant: PROTECTION_FIRE
+    enchant: fire_protection
     level: 4
     enchant_item:
       boots:
         material: DIAMOND_HELMET
         enchants:
           fireprot1:
-            enchant: PROTECTION_FIRE
+            enchant: fire_protection
             level: 3
   Enchant_Chestplate_FireP_IV:
     type: ENCHANT
@@ -7703,14 +7349,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 50
-    enchant: PROTECTION_FIRE
+    enchant: fire_protection
     level: 4
     enchant_item:
       boots:
         material: DIAMOND_CHESTPLATE
         enchants:
           fireprot1:
-            enchant: PROTECTION_FIRE
+            enchant: fire_protection
             level: 3
   Enchant_Leggings_FireP_IV:
     type: ENCHANT
@@ -7720,14 +7366,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 50
-    enchant: PROTECTION_FIRE
+    enchant: fire_protection
     level: 4
     enchant_item:
       boots:
         material: DIAMOND_LEGGINGS
         enchants:
           fireprot1:
-            enchant: PROTECTION_FIRE
+            enchant: fire_protection
             level: 3
   Enchant_Boots_FireP_IV:
     type: ENCHANT
@@ -7737,14 +7383,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 50
-    enchant: PROTECTION_FIRE
+    enchant: fire_protection
     level: 4
     enchant_item:
       boots:
         material: DIAMOND_BOOTS
         enchants:
           fireprot1:
-            enchant: PROTECTION_FIRE
+            enchant: fire_protection
             level: 3
   Enchant_Helmet_FireP_V:
     type: ENCHANT
@@ -7754,14 +7400,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 150
-    enchant: PROTECTION_FIRE
+    enchant: fire_protection
     level: 5
     enchant_item:
       boots:
         material: DIAMOND_HELMET
         enchants:
           fireprot1:
-            enchant: PROTECTION_FIRE
+            enchant: fire_protection
             level: 4
   Enchant_Chestplate_FireP_V:
     type: ENCHANT
@@ -7771,14 +7417,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 150
-    enchant: PROTECTION_FIRE
+    enchant: fire_protection
     level: 5
     enchant_item:
       boots:
         material: DIAMOND_CHESTPLATE
         enchants:
           fireprot1:
-            enchant: PROTECTION_FIRE
+            enchant: fire_protection
             level: 4
   Enchant_Leggings_FireP_V:
     type: ENCHANT
@@ -7788,14 +7434,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 150
-    enchant: PROTECTION_FIRE
+    enchant: fire_protection
     level: 5
     enchant_item:
       boots:
         material: DIAMOND_LEGGINGS
         enchants:
           fireprot1:
-            enchant: PROTECTION_FIRE
+            enchant: fire_protection
             level: 4
   Enchant_Boots_FireP_V:
     type: ENCHANT
@@ -7805,14 +7451,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 150
-    enchant: PROTECTION_FIRE
+    enchant: fire_protection
     level: 5
     enchant_item:
       boots:
         material: DIAMOND_BOOTS
         enchants:
           fireprot1:
-            enchant: PROTECTION_FIRE
+            enchant: fire_protection
             level: 4
   Enchant_Helmet_FireP_VI:
     type: ENCHANT
@@ -7822,14 +7468,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 450
-    enchant: PROTECTION_FIRE
+    enchant: fire_protection
     level: 6
     enchant_item:
       boots:
         material: DIAMOND_HELMET
         enchants:
           fireprot1:
-            enchant: PROTECTION_FIRE
+            enchant: fire_protection
             level: 5
   Enchant_Chestplate_FireP_VI:
     type: ENCHANT
@@ -7839,14 +7485,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 450
-    enchant: PROTECTION_FIRE
+    enchant: fire_protection
     level: 6
     enchant_item:
       boots:
         material: DIAMOND_CHESTPLATE
         enchants:
           fireprot1:
-            enchant: PROTECTION_FIRE
+            enchant: fire_protection
             level: 5
   Enchant_Leggings_FireP_VI:
     type: ENCHANT
@@ -7856,14 +7502,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 450
-    enchant: PROTECTION_FIRE
+    enchant: fire_protection
     level: 6
     enchant_item:
       boots:
         material: DIAMOND_LEGGINGS
         enchants:
           fireprot1:
-            enchant: PROTECTION_FIRE
+            enchant: fire_protection
             level: 5
   Enchant_Boots_FireP_VI:
     type: ENCHANT
@@ -7873,14 +7519,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 450
-    enchant: PROTECTION_FIRE
+    enchant: fire_protection
     level: 6
     enchant_item:
       boots:
         material: DIAMOND_BOOTS
         enchants:
           fireprot1:
-            enchant: PROTECTION_FIRE
+            enchant: fire_protection
             level: 5
 #Flame
 
@@ -7907,7 +7553,7 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 250
-    enchant: FIRE_ASPECT
+    enchant: fire_aspect
     level: 1
     enchant_item:
       sword:
@@ -7920,14 +7566,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 625
-    enchant: FIRE_ASPECT
+    enchant: fire_aspect
     level: 2
     enchant_item:
       sword:
         material: DIAMOND_SWORD
         enchants:
           fireaspect1:
-            enchant: FIRE_ASPECT
+            enchant: fire_aspect
             level: 1  
 #Depth Strider
 
@@ -7939,7 +7585,7 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 50
-    enchant: DEPTH_STRIDER
+    enchant: depth_strider
     level: 1
     enchant_item:
       boots:
@@ -7952,14 +7598,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 125
-    enchant: DEPTH_STRIDER
+    enchant: depth_strider
     level: 2
     enchant_item:
       boots:
         material: DIAMOND_BOOTS
         enchants:
           depthstrider1:
-            enchant: DEPTH_STRIDER
+            enchant: depth_strider
             level: 1
   Enchant_DepthStrider_III:
     type: ENCHANT
@@ -7969,14 +7615,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 500
-    enchant: DEPTH_STRIDER
+    enchant: depth_strider
     level: 3
     enchant_item:
       boots:
         material: DIAMOND_BOOTS
         enchants:
           depthstrider2:
-            enchant: DEPTH_STRIDER
+            enchant: depth_strider
             level: 2
 #Respiration
 
@@ -7988,7 +7634,7 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 50
-    enchant: OXYGEN
+    enchant: respiration
     level: 1
     enchant_item:
       helmet:
@@ -8001,14 +7647,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 100
-    enchant: OXYGEN
+    enchant: respiration
     level: 2
     enchant_item:
       helmet:
         material: DIAMOND_HELMET
         enchants:
           respiration1:
-            enchant: OXYGEN
+            enchant: respiration
             level: 1
   Enchant_Respiration_III:
     type: ENCHANT
@@ -8018,14 +7664,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 300
-    enchant: OXYGEN
+    enchant: respiration
     level: 3
     enchant_item:
       helmet:
         material: DIAMOND_HELMET
         enchants:
           respiration2:
-            enchant: OXYGEN
+            enchant: respiration
             level: 2
 #Frost Walker
 
@@ -8037,7 +7683,7 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 400
-    enchant: FROST_WALKER
+    enchant: frost_walker
     level: 1
     enchant_item:
       boots:
@@ -8051,7 +7697,7 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 500
-    enchant: FROST_WALKER
+    enchant: frost_walker
     level: 2
     enchant_item:
       boots:
@@ -8066,7 +7712,7 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 250
-    enchant: WATER_WORKER
+    enchant: aqua_affinity
     level: 1
     enchant_item:
       helmet:
@@ -8081,7 +7727,7 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 15
-    enchant: PROTECTION_FALL
+    enchant: feather_falling
     level: 1
     enchant_item:
       boots:
@@ -8094,14 +7740,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 50
-    enchant: PROTECTION_FALL
+    enchant: feather_falling
     level: 2
     enchant_item:
       boots:
         material: DIAMOND_BOOTS
         enchants:
           featherfalling1:
-            enchant: PROTECTION_FALL
+            enchant: feather_falling
             level: 1
   Enchant_FeatherFalling_III:
     type: ENCHANT
@@ -8111,14 +7757,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 150
-    enchant: PROTECTION_FALL
+    enchant: feather_falling
     level: 3
     enchant_item:
       boots:
         material: DIAMOND_BOOTS
         enchants:
           featherfalling2:
-            enchant: PROTECTION_FALL
+            enchant: feather_falling
             level: 2
   Enchant_FeatherFalling_IV:
     type: ENCHANT
@@ -8128,14 +7774,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 500
-    enchant: PROTECTION_FALL
+    enchant: feather_falling
     level: 4
     enchant_item:
       boots:
         material: DIAMOND_BOOTS
         enchants:
           featherfalling3:
-            enchant: PROTECTION_FALL
+            enchant: feather_falling
             level: 3
 #BOA
 
@@ -8147,7 +7793,7 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 10
-    enchant: DAMAGE_ARTHROPODS
+    enchant: bane_of_arthropods
     level: 1
     enchant_item:
       sword:
@@ -8160,14 +7806,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 20
-    enchant: DAMAGE_ARTHROPODS
+    enchant: bane_of_arthropods
     level: 2
     enchant_item:
       sword:
         material: DIAMOND_SWORD
         enchants:
           baneofarthropods1:
-            enchant: DAMAGE_ARTHROPODS
+            enchant: bane_of_arthropods
             level: 1
   Enchant_BOA_III:
     type: ENCHANT
@@ -8177,14 +7823,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 60
-    enchant: DAMAGE_ARTHROPODS
+    enchant: bane_of_arthropods
     level: 3
     enchant_item:
       sword:
         material: DIAMOND_SWORD
         enchants:
           baneofarthropods2:
-            enchant: DAMAGE_ARTHROPODS
+            enchant: bane_of_arthropods
             level: 2
   Enchant_BOA_IV:
     type: ENCHANT
@@ -8194,14 +7840,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 120
-    enchant: DAMAGE_ARTHROPODS
+    enchant: bane_of_arthropods
     level: 4
     enchant_item:
       sword:
         material: DIAMOND_SWORD
         enchants:
           baneofarthropods3:
-            enchant: DAMAGE_ARTHROPODS
+            enchant: bane_of_arthropods
             level: 3
   Enchant_BOA_V:
     type: ENCHANT
@@ -8211,14 +7857,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 300
-    enchant: DAMAGE_ARTHROPODS
+    enchant: bane_of_arthropods
     level: 5
     enchant_item:
       sword:
         material: DIAMOND_SWORD
         enchants:
           baneofarthropods4:
-            enchant: DAMAGE_ARTHROPODS
+            enchant: bane_of_arthropods
             level: 4
 #Infinity
 
@@ -8275,7 +7921,7 @@ recipes:
     level: 1
     enchant_item:
       pickaxe:
-        material: DIAMOND_SPADE
+        material: DIAMOND_SHOVEL
 #Protection
 
   Enchant_Helmet_Protection_I:
@@ -8544,7 +8190,7 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 5
-    enchant: PROTECTION_EXPLOSIONS
+    enchant: blast_protection
     level: 1
     enchant_item:
       boots:
@@ -8557,7 +8203,7 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 5
-    enchant: PROTECTION_EXPLOSIONS
+    enchant: blast_protection
     level: 1
     enchant_item:
       boots:
@@ -8570,7 +8216,7 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 5
-    enchant: PROTECTION_EXPLOSIONS
+    enchant: blast_protection
     level: 1
     enchant_item:
       boots:
@@ -8583,7 +8229,7 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 5
-    enchant: PROTECTION_EXPLOSIONS
+    enchant: blast_protection
     level: 1
     enchant_item:
       boots:
@@ -8596,14 +8242,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 15
-    enchant: PROTECTION_EXPLOSIONS
+    enchant: blast_protection
     level: 2
     enchant_item:
       boots:
         material: DIAMOND_HELMET
         enchants:
           blastprot1:
-            enchant: PROTECTION_EXPLOSIONS
+            enchant: blast_protection
             level: 1
   Enchant_Chestplate_BlastProtection_II:
     type: ENCHANT
@@ -8613,14 +8259,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 15
-    enchant: PROTECTION_EXPLOSIONS
+    enchant: blast_protection
     level: 2
     enchant_item:
       boots:
         material: DIAMOND_CHESTPLATE
         enchants:
           blastprot1:
-            enchant: PROTECTION_EXPLOSIONS
+            enchant: blast_protection
             level: 1
   Enchant_Leggings_BlastProtection_II:
     type: ENCHANT
@@ -8630,14 +8276,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 15
-    enchant: PROTECTION_EXPLOSIONS
+    enchant: blast_protection
     level: 2
     enchant_item:
       boots:
         material: DIAMOND_LEGGINGS
         enchants:
           blastprot1:
-            enchant: PROTECTION_EXPLOSIONS
+            enchant: blast_protection
             level: 1
   Enchant_Boots_BlastProtection_II:
     type: ENCHANT
@@ -8647,14 +8293,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 15
-    enchant: PROTECTION_EXPLOSIONS
+    enchant: blast_protection
     level: 2
     enchant_item:
       boots:
         material: DIAMOND_BOOTS
         enchants:
           blastprot1:
-            enchant: PROTECTION_EXPLOSIONS
+            enchant: blast_protection
             level: 1
   Enchant_Helmet_BlastProtection_III:
     type: ENCHANT
@@ -8664,14 +8310,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 30
-    enchant: PROTECTION_EXPLOSIONS
+    enchant: blast_protection
     level: 3
     enchant_item:
       boots:
         material: DIAMOND_HELMET
         enchants:
           blastprot1:
-            enchant: PROTECTION_EXPLOSIONS
+            enchant: blast_protection
             level: 2
   Enchant_Chestplate_BlastProtection_III:
     type: ENCHANT
@@ -8681,14 +8327,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 30
-    enchant: PROTECTION_EXPLOSIONS
+    enchant: blast_protection
     level: 3
     enchant_item:
       boots:
         material: DIAMOND_CHESTPLATE
         enchants:
           blastprot1:
-            enchant: PROTECTION_EXPLOSIONS
+            enchant: blast_protection
             level: 2
   Enchant_Leggings_BlastProtection_III:
     type: ENCHANT
@@ -8698,14 +8344,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 30
-    enchant: PROTECTION_EXPLOSIONS
+    enchant: blast_protection
     level: 3
     enchant_item:
       boots:
         material: DIAMOND_LEGGINGS
         enchants:
           blastprot1:
-            enchant: PROTECTION_EXPLOSIONS
+            enchant: blast_protection
             level: 2
   Enchant_Boots_BlastProtection_III:
     type: ENCHANT
@@ -8715,14 +8361,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 30
-    enchant: PROTECTION_EXPLOSIONS
+    enchant: blast_protection
     level: 3
     enchant_item:
       boots:
         material: DIAMOND_BOOTS
         enchants:
           blastprot1:
-            enchant: PROTECTION_EXPLOSIONS
+            enchant: blast_protection
             level: 2
   Enchant_Helmet_BlastProtection_IV:
     type: ENCHANT
@@ -8732,14 +8378,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 75
-    enchant: PROTECTION_EXPLOSIONS
+    enchant: blast_protection
     level: 4
     enchant_item:
       helmet:
         material: DIAMOND_HELMET
         enchants:
           blastprot1:
-            enchant: PROTECTION_EXPLOSIONS
+            enchant: blast_protection
             level: 3
   Enchant_Chestplate_BlastProtection_IV:
     type: ENCHANT
@@ -8749,14 +8395,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 75
-    enchant: PROTECTION_EXPLOSIONS
+    enchant: blast_protection
     level: 4
     enchant_item:
       chestplate:
         material: DIAMOND_CHESTPLATE
         enchants:
           blastprot1:
-            enchant: PROTECTION_EXPLOSIONS
+            enchant: blast_protection
             level: 3
   Enchant_Leggings_BlastProtection_IV:
     type: ENCHANT
@@ -8766,14 +8412,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 75
-    enchant: PROTECTION_EXPLOSIONS
+    enchant: blast_protection
     level: 4
     enchant_item:
       leggings:
         material: DIAMOND_LEGGINGS
         enchants:
           blastprot1:
-            enchant: PROTECTION_EXPLOSIONS
+            enchant: blast_protection
             level: 3
   Enchant_Boots_BlastProtection_IV:
     type: ENCHANT
@@ -8783,14 +8429,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 75
-    enchant: PROTECTION_EXPLOSIONS
+    enchant: blast_protection
     level: 4
     enchant_item:
       boots:
         material: DIAMOND_BOOTS
         enchants:
           blastprot1:
-            enchant: PROTECTION_EXPLOSIONS
+            enchant: blast_protection
             level: 3
 #Thorns
 
@@ -8802,7 +8448,7 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 75
-    enchant: THORNS
+    enchant: thorns
     level: 1
     enchant_item:
       chestplate:
@@ -8815,14 +8461,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 75
-    enchant: THORNS
+    enchant: thorns
     level: 2
     enchant_item:
       chestplate:
         material: DIAMOND_CHESTPLATE
         enchants:
           thorns1:
-            enchant: THORNS
+            enchant: thorns
             level: 1
   Enchant_Thorns_III:
     type: ENCHANT
@@ -8832,14 +8478,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 225
-    enchant: THORNS
+    enchant: thorns
     level: 3
     enchant_item:
       chestplate:
         material: DIAMOND_CHESTPLATE
         enchants:
           thorns2:
-            enchant: THORNS
+            enchant: thorns
             level: 2
 #Power
 
@@ -8934,7 +8580,7 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 5
-    enchant: PROTECTION_PROJECTILE
+    enchant: projectile_protection
     level: 1
     enchant_item:
       boots:
@@ -8947,7 +8593,7 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 5
-    enchant: PROTECTION_PROJECTILE
+    enchant: projectile_protection
     level: 1
     enchant_item:
       boots:
@@ -8960,7 +8606,7 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 5
-    enchant: PROTECTION_PROJECTILE
+    enchant: projectile_protection
     level: 1
     enchant_item:
       boots:
@@ -8973,7 +8619,7 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 5
-    enchant: PROTECTION_PROJECTILE
+    enchant: projectile_protection
     level: 1
     enchant_item:
       boots:
@@ -8986,14 +8632,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 15
-    enchant: PROTECTION_PROJECTILE
+    enchant: projectile_protection
     level: 2
     enchant_item:
       boots:
         material: DIAMOND_HELMET
         enchants:
           projprot1:
-            enchant: PROTECTION_PROJECTILE
+            enchant: projectile_protection
             level: 1
   Enchant_Chestplate_ProjectileProtection_II:
     type: ENCHANT
@@ -9003,14 +8649,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 15
-    enchant: PROTECTION_PROJECTILE
+    enchant: projectile_protection
     level: 2
     enchant_item:
       boots:
         material: DIAMOND_CHESTPLATE
         enchants:
           projprot1:
-            enchant: PROTECTION_PROJECTILE
+            enchant: projectile_protection
             level: 1
   Enchant_Leggings_ProjectileProtection_II:
     type: ENCHANT
@@ -9020,14 +8666,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 15
-    enchant: PROTECTION_PROJECTILE
+    enchant: projectile_protection
     level: 2
     enchant_item:
       boots:
         material: DIAMOND_LEGGINGS
         enchants:
           projprot1:
-            enchant: PROTECTION_PROJECTILE
+            enchant: projectile_protection
             level: 1
   Enchant_Boots_ProjectileProtection_II:
     type: ENCHANT
@@ -9037,14 +8683,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 15
-    enchant: PROTECTION_PROJECTILE
+    enchant: projectile_protection
     level: 2
     enchant_item:
       boots:
         material: DIAMOND_BOOTS
         enchants:
           projprot1:
-            enchant: PROTECTION_PROJECTILE
+            enchant: projectile_protection
             level: 1
   Enchant_Helmet_ProjectileProtection_III:
     type: ENCHANT
@@ -9054,14 +8700,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 50
-    enchant: PROTECTION_PROJECTILE
+    enchant: projectile_protection
     level: 3
     enchant_item:
       boots:
         material: DIAMOND_HELMET
         enchants:
           projprot1:
-            enchant: PROTECTION_PROJECTILE
+            enchant: projectile_protection
             level: 2
   Enchant_Chestplate_ProjectileProtection_III:
     type: ENCHANT
@@ -9071,14 +8717,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 50
-    enchant: PROTECTION_PROJECTILE
+    enchant: projectile_protection
     level: 3
     enchant_item:
       boots:
         material: DIAMOND_CHESTPLATE
         enchants:
           projprot1:
-            enchant: PROTECTION_PROJECTILE
+            enchant: projectile_protection
             level: 2
   Enchant_Leggings_ProjectileProtection_III:
     type: ENCHANT
@@ -9088,14 +8734,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 50
-    enchant: PROTECTION_PROJECTILE
+    enchant: projectile_protection
     level: 3
     enchant_item:
       boots:
         material: DIAMOND_LEGGINGS
         enchants:
           projprot1:
-            enchant: PROTECTION_PROJECTILE
+            enchant: projectile_protection
             level: 2
   Enchant_Boots_ProjectileProtection_III:
     type: ENCHANT
@@ -9105,14 +8751,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 50
-    enchant: PROTECTION_PROJECTILE
+    enchant: projectile_protection
     level: 3
     enchant_item:
       boots:
         material: DIAMOND_BOOTS
         enchants:
           projprot1:
-            enchant: PROTECTION_PROJECTILE
+            enchant: projectile_protection
             level: 2
   Enchant_Helmet_ProjectileProtection_IV:
     type: ENCHANT
@@ -9122,14 +8768,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 125
-    enchant: PROTECTION_PROJECTILE
+    enchant: projectile_protection
     level: 4
     enchant_item:
       helmet:
         material: DIAMOND_HELMET
         enchants:
           projprot1:
-            enchant: PROTECTION_PROJECTILE
+            enchant: projectile_protection
             level: 3
   Enchant_Chestplate_ProjectileProtection_IV:
     type: ENCHANT
@@ -9139,14 +8785,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 125
-    enchant: PROTECTION_PROJECTILE
+    enchant: projectile_protection
     level: 4
     enchant_item:
       chestplate:
         material: DIAMOND_CHESTPLATE
         enchants:
           projprot1:
-            enchant: PROTECTION_PROJECTILE
+            enchant: projectile_protection
             level: 3
   Enchant_Leggings_ProjectileProtection_IV:
     type: ENCHANT
@@ -9156,14 +8802,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 125
-    enchant: PROTECTION_PROJECTILE
+    enchant: projectile_protection
     level: 4
     enchant_item:
       leggings:
         material: DIAMOND_LEGGINGS
         enchants:
           projprot1:
-            enchant: PROTECTION_PROJECTILE
+            enchant: projectile_protection
             level: 3
   Enchant_Boots_ProjectileProtection_IV:
     type: ENCHANT
@@ -9173,14 +8819,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 125
-    enchant: PROTECTION_PROJECTILE
+    enchant: projectile_protection
     level: 4
     enchant_item:
       boots:
         material: DIAMOND_BOOTS
         enchants:
           projprot1:
-            enchant: PROTECTION_PROJECTILE
+            enchant: projectile_protection
             level: 3
 #Punch
 
@@ -9192,7 +8838,7 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 150
-    enchant: ARROW_KNOCKBACK
+    enchant: punch
     level: 1
     enchant_item:
       bow:
@@ -9205,14 +8851,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 400
-    enchant: ARROW_KNOCKBACK
+    enchant: punch
     level: 2
     enchant_item:
       bow:
         material: BOW
         enchants:
           power1:
-            enchant: ARROW_KNOCKBACK
+            enchant: punch
             level: 1
 #Sharpness
 
@@ -9307,7 +8953,7 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 10
-    enchant: DAMAGE_UNDEAD
+    enchant: smite
     level: 1
     enchant_item:
       sword:
@@ -9320,14 +8966,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 20
-    enchant: DAMAGE_UNDEAD
+    enchant: smite
     level: 2
     enchant_item:
       sword:
         material: DIAMOND_SWORD
         enchants:
           smite1:
-            enchant: DAMAGE_UNDEAD
+            enchant: smite
             level: 1
   Enchant_Smite_III:
     type: ENCHANT
@@ -9337,14 +8983,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 60
-    enchant: DAMAGE_UNDEAD
+    enchant: smite
     level: 3
     enchant_item:
       sword:
         material: DIAMOND_SWORD
         enchants:
           smite2:
-            enchant: DAMAGE_UNDEAD
+            enchant: smite
             level: 2
   Enchant_Smite_IV:
     type: ENCHANT
@@ -9354,14 +9000,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 120
-    enchant: DAMAGE_UNDEAD
+    enchant: smite
     level: 4
     enchant_item:
       sword:
         material: DIAMOND_SWORD
         enchants:
           smite3:
-            enchant: DAMAGE_UNDEAD
+            enchant: smite
             level: 3
   Enchant_Smite_V:
     type: ENCHANT
@@ -9371,14 +9017,14 @@ recipes:
       emeralds:
         material: EMERALD
         amount: 300
-    enchant: DAMAGE_UNDEAD
+    enchant: smite
     level: 5
     enchant_item:
       sword:
         material: DIAMOND_SWORD
         enchants:
           smite4:
-            enchant: DAMAGE_UNDEAD
+            enchant: smite
             level: 4
 #Knockback
 
@@ -9589,7 +9235,7 @@ recipes:
     level: 1
     enchant_item:
       tool:
-        material: DIAMOND_SPADE
+        material: DIAMOND_SHOVEL
   Enchant_Shovel_Efficiency_II:
     type: ENCHANT
     name: Enchant Shovel with Efficiency II
@@ -9602,7 +9248,7 @@ recipes:
     level: 2
     enchant_item:
       tool:
-        material: DIAMOND_SPADE
+        material: DIAMOND_SHOVEL
         enchants:
           eff1:
             enchant: efficiency
@@ -9619,7 +9265,7 @@ recipes:
     level: 3
     enchant_item:
       tool:
-        material: DIAMOND_SPADE
+        material: DIAMOND_SHOVEL
         enchants:
           eff2:
             enchant: efficiency
@@ -9636,7 +9282,7 @@ recipes:
     level: 4
     enchant_item:
       tool:
-        material: DIAMOND_SPADE
+        material: DIAMOND_SHOVEL
         enchants:
           eff3:
             enchant: efficiency
@@ -9653,7 +9299,7 @@ recipes:
     level: 5
     enchant_item:
       tool:
-        material: DIAMOND_SPADE
+        material: DIAMOND_SHOVEL
         enchants:
           eff4:
             enchant: efficiency
@@ -9766,7 +9412,7 @@ recipes:
     level: 1
     enchant_item:
       tool:
-        material: DIAMOND_SPADE
+        material: DIAMOND_SHOVEL
   Enchant_Shovel_Unbreaking_II:
     type: ENCHANT
     name: Enchant Shovel with Unbreaking II
@@ -9779,7 +9425,7 @@ recipes:
     level: 2
     enchant_item:
       tool:
-        material: DIAMOND_SPADE
+        material: DIAMOND_SHOVEL
         enchants:
           ub1:
             enchant: unbreaking
@@ -9796,7 +9442,7 @@ recipes:
     level: 3
     enchant_item:
       tool:
-        material: DIAMOND_SPADE
+        material: DIAMOND_SHOVEL
         enchants:
           ub2:
             enchant: unbreaking
@@ -10176,7 +9822,7 @@ recipes:
     level: 1
     enchant_item:
       armor:
-        material: DIAMOND_SPADE
+        material: DIAMOND_SHOVEL
   Enchant_Unbreaking_Pickaxe_Basic:
     type: ENCHANT
     name: Enchant Pickaxe with Unbreaking
@@ -10215,7 +9861,7 @@ recipes:
     level: 1
     enchant_item:
       armor:
-        material: DIAMOND_SPADE
+        material: DIAMOND_SHOVEL
   Enchant_Unbreaking_Sword_Basic:
     type: ENCHANT
     name: Enchant Sword with Unbreaking
@@ -10242,510 +9888,13 @@ recipes:
     enchant_item:
       armor:
         material: DIAMOND_SWORD
-  Enchant_Leaf_Burner_I:
-    type: LOREENCHANT
-    name: Enchant Shear with Leaf Burner
-    production_time: 15s
-    loredItem:
-      tool:
-        material: SHEARS
-    appliedLore:
-     - Leaf Burner
-    input:
-      emeralds:
-        material: EMERALD
-        amount: 40
-  Enchant_Leaf_Burner_II:
-    type: LOREENCHANT
-    name: Enchant Shear with Leaf Burner II
-    production_time: 15s
-    loredItem:
-      tool:
-        material: SHEARS
-    appliedLore:
-     - Leaf Burner II
-    overwrittenLore:
-     - Leaf Burner
-    input:
-      emeralds:
-        material: EMERALD
-        amount: 80
 
 #Fossils
   Break_Fossil_Basic:
     type: RANDOM
-    name: Break Fossil
+    name: Break Fossil Basic
     production_time: 10s
-    fuel_consumption_intervall: 10s
-    input:
-      sapling:
-        material: FLINT
-        amount: 1
-        lore:
-          - Fossil
-    outputs:
-      god1:
-        chance: 0.000001
-        dragonegg:
-          material: DRAGON_EGG
-          amount: 1
-          lore:
-           - Egg of Creation
-      god2:
-        chance: 0.0004081
-        ancientnote:
-          material: PAPER
-          amount: 1
-          lore:
-           - Gezo was here !!!
-      god3:
-        chance: 0.00040909
-        clockback:
-          material: WATCH
-          amount: 1
-          lore:
-           - Clockback
-          enchants:
-            kb:
-              enchant: knockback
-              level: 3
-      god4:
-        chance: 0.00040909
-        apollosbow:
-          material: BOW
-          amount: 1
-          lore:
-           - Apollo's Bow
-          enchants:
-            power:
-              enchant: power
-              level: 5
-            ub:
-              enchant: unbreaking
-              level: 5
-            flame:
-              enchant: flame
-              level: 1
-            infinity:
-              enchant: infinity
-              level: 1
-      god5:
-        chance: 0.00040909
-        imcandopickaxe:
-          material: DIAMOND_PICKAXE
-          amount: 1
-          lore:
-           - Imcando Pickaxe
-          enchants:
-            efficiency:
-              enchant: efficiency
-              level: 5
-            ub:
-              enchant: unbreaking
-              level: 4
-          durability: 1500
-      godbook1:
-        chance: 0.00120909
-        power5book:
-          material: ENCHANTED_BOOK
-          amount: 1
-          stored_enchants:
-            power5:
-              enchant: power
-              level: 5
-      godbook2:
-        chance: 0.00120909
-        infinity:
-          material: ENCHANTED_BOOK
-          amount: 1
-          stored_enchants:
-            infinity:
-              enchant: infinity
-              level: 1
-      godbook3:
-        chance: 0.00120909
-        eff5:
-          material: ENCHANTED_BOOK
-          amount: 1
-          stored_enchants:
-            eff5:
-              enchant: efficiency
-              level: 5
-      godbook4:
-        chance: 0.00120909
-        ub3:
-          material: ENCHANTED_BOOK
-          amount: 1
-          stored_enchants:
-            ub3:
-              enchant: unbreaking
-              level: 3
-      godbook5:
-        chance: 0.00120909
-        sharpness5:
-          material: ENCHANTED_BOOK
-          amount: 1
-          stored_enchants:
-            sharpness5:
-              enchant: sharpness
-              level: 5
-      godbook6:
-        chance: 0.00110909
-        protection4:
-          material: ENCHANTED_BOOK
-          amount: 1
-          stored_enchants:
-            protection4:
-              enchant: protection
-              level: 4
-      godbook7:
-        chance: 0.00120909
-        silktouch:
-          material: ENCHANTED_BOOK
-          amount: 1
-          stored_enchants:
-            silktouch:
-              enchant: silk_touch
-              level: 1
-      high1:
-        chance: 0.0037038
-        item:
-          material: DIAMOND_HORSE_ARMOR
-          amount: 1
-      high2:
-        chance: 0.0037038
-        item:
-          material: SPONGE
-          amount: 1
-      high3:
-        chance: 0.0037038
-        item:
-          material: DIAMOND_PICKAXE
-          amount: 1
-      high4:
-        chance: 0.0037038
-        item:
-          material: DIAMOND_AXE
-          amount: 1
-      high5:
-        chance: 0.0037038
-        item:
-          material: DIAMOND_SPADE
-          amount: 1
-      high6:
-        chance: 0.0037038
-        item:
-          material: DIAMOND_CHESTPLATE
-          amount: 1
-      high7:
-        chance: 0.0037038
-        item:
-          material: DIAMOND_LEGGINGS
-          amount: 1
-      high8:
-        chance: 0.0037038
-        item:
-          material: DIAMOND_HELMET
-          amount: 1
-      high9:
-        chance: 0.0037038
-        item:
-          material: DIAMOND_BOOTS
-          amount: 1
-      high10:
-        chance: 0.0037038
-        item:
-          material: IRON_INGOT
-          amount: 64
-      high11:
-        chance: 0.0037038
-        item:
-          material: DIAMOND_BLOCK
-          amount: 1
-      high12:
-        chance: 0.0037038
-        creeper:
-          material: MONSTER_EGG
-          amount: 1
-          durability: 50
-      high13:
-        chance: 0.0037038
-        creeper:
-          material: MONSTER_EGG
-          amount: 1
-          durability: 54
-      high14:
-        chance: 0.0037038
-        skeleton:
-          material: MONSTER_EGG
-          amount: 1
-          durability: 51
-      high15:
-        chance: 0.0037038
-        spider:
-          material: MONSTER_EGG
-          amount: 1
-          durability: 52
-      high16:
-        chance: 0.0037038
-        blaze:
-          material: MONSTER_EGG
-          amount: 1
-          durability: 61
-      high17:
-        chance: 0.0037038
-        ghast:
-          material: MONSTER_EGG
-          amount: 1
-          durability: 56
-      high18:
-        chance: 0.0037038
-        guardian:
-          material: MONSTER_EGG
-          amount: 1
-          durability: 68
-      high19:
-        chance: 0.0037038
-        magmacube:
-          material: MONSTER_EGG
-          amount: 1
-          durability: 62
-      high20:
-        chance: 0.0037038
-        slime:
-          material: MONSTER_EGG
-          amount: 1
-          durability: 55
-      high21:
-        chance: 0.0037038
-        witch:
-          material: MONSTER_EGG
-          amount: 1
-          durability: 66
-      high22:
-        chance: 0.0037038
-        villager:
-          material: MONSTER_EGG
-          amount: 1
-          durability: 120
-      high23:
-        chance: 0.0037038
-        cavespider:
-          material: MONSTER_EGG
-          amount: 1
-          durability: 59
-      high24:
-        chance: 0.0037038
-        enderman:
-          material: MONSTER_EGG
-          amount: 1
-          durability: 58
-      high25:
-        chance: 0.0037038
-        zombiepigman:
-          material: MONSTER_EGG
-          amount: 1
-          durability: 57
-      high26:
-        chance: 0.0037038
-        item:
-          material: COAL
-          amount: 16
-          durability: 1
-          lore:
-           - Compacted Item
-      high27:
-        chance: 0.0037012
-        item:
-          material: COAL_ORE
-          amount: 2
-          lore:
-           - Cave Concentrate
-      mid1:
-        chance: 0.026176
-        item:
-          material: MONSTER_EGG
-          amount: 1
-          durability: 90
-      mid2:
-        chance: 0.026176
-        item:
-          material: MONSTER_EGG
-          amount: 1
-          durability: 92
-      mid3:
-        chance: 0.026176
-        item:
-          material: MONSTER_EGG
-          amount: 1
-          durability: 93
-      mid4:
-        chance: 0.026176
-        item:
-          material: MONSTER_EGG
-          amount: 1
-          durability: 94
-      mid5:
-        chance: 0.026176
-        item:
-          material: NOTE_BLOCK
-          amount: 5
-      mid6:
-        chance: 0.026176
-        item:
-          material: DIAMOND
-          amount: 1
-      mid7:
-        chance: 0.026176
-        item:
-          material: EMERALD_BLOCK
-          amount: 1
-      mid8:
-        chance: 0.026176
-        item:
-          material: IRON_BLOCK
-          amount: 1
-      mid9:
-        chance: 0.026176
-        item:
-          material: REDSTONE_BLOCK
-          amount: 1
-      mid10:
-        chance: 0.026176
-        item:
-          material: LAPIS_BLOCK
-          amount: 1
-      mid11:
-        chance: 0.026176
-        item:
-          material: GOLD_RECORD
-          amount: 1
-      mid12:
-        chance: 0.026176
-        item:
-          material: GREEN_RECORD
-          amount: 1
-      mid13:
-        chance: 0.026176
-        item:
-          material: RECORD_3
-          amount: 1
-      mid14:
-        chance: 0.026176
-        item:
-          material: RECORD_4
-          amount: 1
-      mid15:
-        chance: 0.026176
-        item:
-          material: RECORD_5
-          amount: 1
-      mid16:
-        chance: 0.026176
-        item:
-          material: RECORD_6
-          amount: 1
-      mid17:
-        chance: 0.026176
-        item:
-          material: RECORD_7
-          amount: 1
-      mid18:
-        chance: 0.026176
-        item:
-          material: RECORD_8
-          amount: 1
-      mid19:
-        chance: 0.026176
-        item:
-          material: RECORD_9
-          amount: 1
-      mid20:
-        chance: 0.026176
-        item:
-          material: RECORD_10
-          amount: 1
-      mid21:
-        chance: 0.026176
-        item:
-          material: RECORD_11
-          amount: 1
-      mid22:
-        chance: 0.026176
-        item:
-          material: RECORD_12
-          amount: 1
-      mid23:
-        chance: 0.026176
-        item:
-          material: MINECART
-          amount: 1
-      mid24:
-        chance: 0.026176
-        mooshroom:
-          material: MONSTER_EGG
-          amount: 1
-          durability: 96
-      mid25:
-        chance: 0.026176
-        horse:
-          material: MONSTER_EGG
-          amount: 1
-          durability: 100
-      mid26:
-        chance: 0.026176
-        rabbit:
-          material: MONSTER_EGG
-          amount: 1
-          durability: 101
-      mid27:
-        chance: 0.026176
-        ocelot:
-          material: MONSTER_EGG
-          amount: 1
-          durability: 98
-      mid28:
-        chance: 0.026176
-        squid:
-          material: MONSTER_EGG
-          amount: 1
-          durability: 94
-      mid29:
-        chance: 0.026176
-        wolf:
-          material: MONSTER_EGG
-          amount: 1
-          durability: 95
-      mid30:
-        chance: 0.026176
-        item:
-          material: IRON_HORSE_ARMOR
-          amount: 1
-      mid31:
-        chance: 0.026176
-        item:
-          material: BONE
-          amount: 32
-      mid32:
-        chance: 0.026176
-        item:
-          material: PRISMARINE_SHARD
-          amount: 5
-      mid33:
-        chance: 0.026176
-        item:
-          material: PRISMARINE_CRYSTALS
-          amount: 3
-      mid34:
-        chance: 0.026192
-        item:
-          material: JUKEBOX
-          amount: 1
-  Break_Fossil_Advanced:
-    type: RANDOM
-    name: Break Fossil
-    production_time: 5s
-    fuel_consumption_intervall: 5s
+    fuel_consumption_interval: 10s
     input:
       sapling:
         material: FLINT
@@ -10812,7 +9961,6 @@ recipes:
             ub:
               enchant: unbreaking
               level: 4
-          durability: 1500
       godbook1:
         chance: 0.00120909
         power5book:
@@ -10899,7 +10047,7 @@ recipes:
       high5:
         chance: 0.0037038
         item:
-          material: DIAMOND_SPADE
+          material: DIAMOND_SHOVEL
           amount: 1
       high6:
         chance: 0.0037038
@@ -10934,93 +10082,78 @@ recipes:
       high12:
         chance: 0.0037038
         creeper:
-          material: MONSTER_EGG
+          material: CREEPER_SPAWN_EGG
           amount: 1
-          durability: 50
       high13:
         chance: 0.0037038
-        creeper:
-          material: MONSTER_EGG
+        zombie:
+          material: ZOMBIE_SPAWN_EGG
           amount: 1
-          durability: 54
       high14:
         chance: 0.0037038
         skeleton:
-          material: MONSTER_EGG
+          material: SKELETON_SPAWN_EGG
           amount: 1
-          durability: 51
       high15:
         chance: 0.0037038
         spider:
-          material: MONSTER_EGG
+          material: SPIDER_SPAWN_EGG
           amount: 1
-          durability: 52
       high16:
         chance: 0.0037038
         blaze:
-          material: MONSTER_EGG
+          material: BLAZE_SPAWN_EGG
           amount: 1
-          durability: 61
       high17:
         chance: 0.0037038
         ghast:
-          material: MONSTER_EGG
+          material: GHAST_SPAWN_EGG
           amount: 1
-          durability: 56
       high18:
         chance: 0.0037038
         guardian:
-          material: MONSTER_EGG
+          material: GUARDIAN_SPAWN_EGG
           amount: 1
-          durability: 68
       high19:
         chance: 0.0037038
         magmacube:
-          material: MONSTER_EGG
+          material: MAGMA_CUBE_SPAWN_EGG
           amount: 1
-          durability: 62
       high20:
         chance: 0.0037038
         slime:
-          material: MONSTER_EGG
+          material: SLIME_SPAWN_EGG
           amount: 1
-          durability: 55
       high21:
         chance: 0.0037038
         witch:
-          material: MONSTER_EGG
+          material: WITCH_SPAWN_EGG
           amount: 1
-          durability: 66
       high22:
         chance: 0.0037038
         villager:
-          material: MONSTER_EGG
+          material: VILLAGER_SPAWN_EGG
           amount: 1
-          durability: 120
       high23:
         chance: 0.0037038
         cavespider:
-          material: MONSTER_EGG
+          material: CAVE_SPIDER_SPAWN_EGG
           amount: 1
-          durability: 59
       high24:
         chance: 0.0037038
         enderman:
-          material: MONSTER_EGG
+          material: ENDERMAN_SPAWN_EGG
           amount: 1
-          durability: 58
       high25:
         chance: 0.0037038
         zombiepigman:
-          material: MONSTER_EGG
+          material: ZOMBIE_PIGMAN_SPAWN_EGG
           amount: 1
-          durability: 57
       high26:
         chance: 0.0037038
         item:
-          material: COAL
+          material: CHARCOAL
           amount: 16
-          durability: 1
           lore:
            - Compacted Item
       high27:
@@ -11032,28 +10165,24 @@ recipes:
            - Cave Concentrate
       mid1:
         chance: 0.026176
-        item:
-          material: MONSTER_EGG
+        pig:
+          material: PIG_SPAWN_EGG
           amount: 1
-          durability: 90
       mid2:
         chance: 0.026176
-        item:
-          material: MONSTER_EGG
+        cow:
+          material: COW_SPAWN_EGG
           amount: 1
-          durability: 92
       mid3:
         chance: 0.026176
-        item:
-          material: MONSTER_EGG
+        chicken:
+          material: CHICKEN_SPAWN_EGG
           amount: 1
-          durability: 93
       mid4:
         chance: 0.026176
-        item:
-          material: MONSTER_EGG
+        squid:
+          material: SQUID_SPAWN_EGG
           amount: 1
-          durability: 94
       mid5:
         chance: 0.026176
         item:
@@ -11087,62 +10216,62 @@ recipes:
       mid11:
         chance: 0.026176
         item:
-          material: GOLD_RECORD
+          material: MUSIC_DISC_11
           amount: 1
       mid12:
         chance: 0.026176
         item:
-          material: GREEN_RECORD
+          material: MUSIC_DISC_13
           amount: 1
       mid13:
         chance: 0.026176
         item:
-          material: RECORD_3
+          material: MUSIC_DISC_BLOCKS
           amount: 1
       mid14:
         chance: 0.026176
         item:
-          material: RECORD_4
+          material: MUSIC_DISC_CAT
           amount: 1
       mid15:
         chance: 0.026176
         item:
-          material: RECORD_5
+          material: MUSIC_DISC_CHIRP
           amount: 1
       mid16:
         chance: 0.026176
         item:
-          material: RECORD_6
+          material: MUSIC_DISC_FAR
           amount: 1
       mid17:
         chance: 0.026176
         item:
-          material: RECORD_7
+          material: MUSIC_DISC_MALL
           amount: 1
       mid18:
         chance: 0.026176
         item:
-          material: RECORD_8
+          material: MUSIC_DISC_MELLOHI
           amount: 1
       mid19:
         chance: 0.026176
         item:
-          material: RECORD_9
+          material: MUSIC_DISC_STAL
           amount: 1
       mid20:
         chance: 0.026176
         item:
-          material: RECORD_10
+          material: MUSIC_DISC_STRAD
           amount: 1
       mid21:
         chance: 0.026176
         item:
-          material: RECORD_11
+          material: MUSIC_DISC_WAIT
           amount: 1
       mid22:
         chance: 0.026176
         item:
-          material: RECORD_12
+          material: MUSIC_DISC_WARD
           amount: 1
       mid23:
         chance: 0.026176
@@ -11152,39 +10281,476 @@ recipes:
       mid24:
         chance: 0.026176
         mooshroom:
-          material: MONSTER_EGG
+          material: MOOSHROOM_SPAWN_EGG
           amount: 1
-          durability: 96
       mid25:
         chance: 0.026176
         horse:
-          material: MONSTER_EGG
+          material: HORSE_SPAWN_EGG
           amount: 1
-          durability: 100
       mid26:
         chance: 0.026176
         rabbit:
-          material: MONSTER_EGG
+          material: RABBIT_SPAWN_EGG
           amount: 1
-          durability: 101
       mid27:
         chance: 0.026176
         ocelot:
-          material: MONSTER_EGG
+          material: OCELOT_SPAWN_EGG
           amount: 1
-          durability: 98
       mid28:
         chance: 0.026176
         squid:
-          material: MONSTER_EGG
+          material: SQUID_SPAWN_EGG
           amount: 1
-          durability: 94
       mid29:
         chance: 0.026176
         wolf:
-          material: MONSTER_EGG
+          material: WOLF_SPAWN_EGG
           amount: 1
-          durability: 95
+      mid30:
+        chance: 0.026176
+        item:
+          material: IRON_HORSE_ARMOR
+          amount: 1
+      mid31:
+        chance: 0.026176
+        item:
+          material: BONE
+          amount: 32
+      mid32:
+        chance: 0.026176
+        item:
+          material: PRISMARINE_SHARD
+          amount: 5
+      mid33:
+        chance: 0.026176
+        item:
+          material: PRISMARINE_CRYSTALS
+          amount: 3
+      mid34:
+        chance: 0.026192
+        item:
+          material: JUKEBOX
+          amount: 1
+  Break_Fossil_Advanced:
+    type: RANDOM
+    name: Break Fossil Advanced
+    production_time: 5s
+    fuel_consumption_interval: 5s
+    input:
+      sapling:
+        material: FLINT
+        amount: 1
+        lore:
+          - Fossil
+    outputs:
+      god1:
+        chance: 0.000001
+        dragonegg:
+          material: DRAGON_EGG
+          amount: 1
+          lore:
+           - Egg of Creation
+      god2:
+        chance: 0.0004081
+        ancientnote:
+          material: PAPER
+          amount: 1
+          lore:
+           - Gezo was here !!!
+      god3:
+        chance: 0.00040909
+        clockback:
+          material: CLOCK
+          amount: 1
+          lore:
+           - Clockback
+          enchants:
+            kb:
+              enchant: knockback
+              level: 3
+      god4:
+        chance: 0.00040909
+        apollosbow:
+          material: BOW
+          amount: 1
+          lore:
+           - Apollo's Bow
+          enchants:
+            power:
+              enchant: power
+              level: 5
+            ub:
+              enchant: unbreaking
+              level: 5
+            flame:
+              enchant: flame
+              level: 1
+            infinity:
+              enchant: infinity
+              level: 1
+      god5:
+        chance: 0.00040909
+        imcandopickaxe:
+          material: DIAMOND_PICKAXE
+          amount: 1
+          lore:
+           - Imcando Pickaxe
+          enchants:
+            efficiency:
+              enchant: efficiency
+              level: 5
+            ub:
+              enchant: unbreaking
+              level: 4
+      godbook1:
+        chance: 0.00120909
+        power5book:
+          material: ENCHANTED_BOOK
+          amount: 1
+          stored_enchants:
+            power5:
+              enchant: power
+              level: 5
+      godbook2:
+        chance: 0.00120909
+        infinity:
+          material: ENCHANTED_BOOK
+          amount: 1
+          stored_enchants:
+            infinity:
+              enchant: infinity
+              level: 1
+      godbook3:
+        chance: 0.00120909
+        eff5:
+          material: ENCHANTED_BOOK
+          amount: 1
+          stored_enchants:
+            eff5:
+              enchant: efficiency
+              level: 5
+      godbook4:
+        chance: 0.00120909
+        ub3:
+          material: ENCHANTED_BOOK
+          amount: 1
+          stored_enchants:
+            ub3:
+              enchant: unbreaking
+              level: 3
+      godbook5:
+        chance: 0.00120909
+        sharpness5:
+          material: ENCHANTED_BOOK
+          amount: 1
+          stored_enchants:
+            sharpness5:
+              enchant: sharpness
+              level: 5
+      godbook6:
+        chance: 0.00110909
+        protection4:
+          material: ENCHANTED_BOOK
+          amount: 1
+          stored_enchants:
+            protection4:
+              enchant: protection
+              level: 4
+      godbook7:
+        chance: 0.00120909
+        silktouch:
+          material: ENCHANTED_BOOK
+          amount: 1
+          stored_enchants:
+            silktouch:
+              enchant: silk_touch
+              level: 1
+      high1:
+        chance: 0.0037038
+        item:
+          material: DIAMOND_HORSE_ARMOR
+          amount: 1
+      high2:
+        chance: 0.0037038
+        item:
+          material: SPONGE
+          amount: 1
+      high3:
+        chance: 0.0037038
+        item:
+          material: DIAMOND_PICKAXE
+          amount: 1
+      high4:
+        chance: 0.0037038
+        item:
+          material: DIAMOND_AXE
+          amount: 1
+      high5:
+        chance: 0.0037038
+        item:
+          material: DIAMOND_SHOVEL
+          amount: 1
+      high6:
+        chance: 0.0037038
+        item:
+          material: DIAMOND_CHESTPLATE
+          amount: 1
+      high7:
+        chance: 0.0037038
+        item:
+          material: DIAMOND_LEGGINGS
+          amount: 1
+      high8:
+        chance: 0.0037038
+        item:
+          material: DIAMOND_HELMET
+          amount: 1
+      high9:
+        chance: 0.0037038
+        item:
+          material: DIAMOND_BOOTS
+          amount: 1
+      high10:
+        chance: 0.0037038
+        item:
+          material: IRON_INGOT
+          amount: 64
+      high11:
+        chance: 0.0037038
+        item:
+          material: DIAMOND_BLOCK
+          amount: 1
+      high12:
+        chance: 0.0037038
+        creeper:
+          material: CREEPER_SPAWN_EGG
+          amount: 1
+      high13:
+        chance: 0.0037038
+        zombie:
+          material: ZOMBIE_SPAWN_EGG
+          amount: 1
+      high14:
+        chance: 0.0037038
+        skeleton:
+          material: SKELETON_SPAWN_EGG
+          amount: 1
+      high15:
+        chance: 0.0037038
+        spider:
+          material: SPIDER_SPAWN_EGG
+          amount: 1
+      high16:
+        chance: 0.0037038
+        blaze:
+          material: BLAZE_SPAWN_EGG
+          amount: 1
+      high17:
+        chance: 0.0037038
+        ghast:
+          material: GHAST_SPAWN_EGG
+          amount: 1
+      high18:
+        chance: 0.0037038
+        guardian:
+          material: GUARDIAN_SPAWN_EGG
+          amount: 1
+      high19:
+        chance: 0.0037038
+        magmacube:
+          material: MAGMA_CUBE_SPAWN_EGG
+          amount: 1
+      high20:
+        chance: 0.0037038
+        slime:
+          material: SLIME_SPAWN_EGG
+          amount: 1
+      high21:
+        chance: 0.0037038
+        witch:
+          material: WITCH_SPAWN_EGG
+          amount: 1
+      high22:
+        chance: 0.0037038
+        villager:
+          material: VILLAGER_SPAWN_EGG
+          amount: 1
+      high23:
+        chance: 0.0037038
+        cavespider:
+          material: CAVE_SPIDER_SPAWN_EGG
+          amount: 1
+      high24:
+        chance: 0.0037038
+        enderman:
+          material: ENDERMAN_SPAWN_EGG
+          amount: 1
+      high25:
+        chance: 0.0037038
+        zombiepigman:
+          material: ZOMBIE_PIGMAN_SPAWN_EGG
+          amount: 1
+      high26:
+        chance: 0.0037038
+        item:
+          material: CHARCOAL
+          amount: 16
+          lore:
+           - Compacted Item
+      high27:
+        chance: 0.0037012
+        item:
+          material: COAL_ORE
+          amount: 2
+          lore:
+           - Cave Concentrate
+      mid1:
+        chance: 0.026176
+        pig:
+          material: PIG_SPAWN_EGG
+          amount: 1
+      mid2:
+        chance: 0.026176
+        cow:
+          material: COW_SPAWN_EGG
+          amount: 1
+      mid3:
+        chance: 0.026176
+        chicken:
+          material: CHICKEN_SPAWN_EGG
+          amount: 1
+      mid4:
+        chance: 0.026176
+        squid:
+          material: SQUID_SPAWN_EGG
+          amount: 1
+      mid5:
+        chance: 0.026176
+        item:
+          material: NOTE_BLOCK
+          amount: 5
+      mid6:
+        chance: 0.026176
+        item:
+          material: DIAMOND
+          amount: 1
+      mid7:
+        chance: 0.026176
+        item:
+          material: EMERALD_BLOCK
+          amount: 1
+      mid8:
+        chance: 0.026176
+        item:
+          material: IRON_BLOCK
+          amount: 1
+      mid9:
+        chance: 0.026176
+        item:
+          material: REDSTONE_BLOCK
+          amount: 1
+      mid10:
+        chance: 0.026176
+        item:
+          material: LAPIS_BLOCK
+          amount: 1
+      mid11:
+        chance: 0.026176
+        item:
+          material: MUSIC_DISC_11
+          amount: 1
+      mid12:
+        chance: 0.026176
+        item:
+          material: MUSIC_DISC_13
+          amount: 1
+      mid13:
+        chance: 0.026176
+        item:
+          material: MUSIC_DISC_BLOCKS
+          amount: 1
+      mid14:
+        chance: 0.026176
+        item:
+          material: MUSIC_DISC_CAT
+          amount: 1
+      mid15:
+        chance: 0.026176
+        item:
+          material: MUSIC_DISC_CHIRP
+          amount: 1
+      mid16:
+        chance: 0.026176
+        item:
+          material: MUSIC_DISC_FAR
+          amount: 1
+      mid17:
+        chance: 0.026176
+        item:
+          material: MUSIC_DISC_MALL
+          amount: 1
+      mid18:
+        chance: 0.026176
+        item:
+          material: MUSIC_DISC_MELLOHI
+          amount: 1
+      mid19:
+        chance: 0.026176
+        item:
+          material: MUSIC_DISC_STAL
+          amount: 1
+      mid20:
+        chance: 0.026176
+        item:
+          material: MUSIC_DISC_STRAD
+          amount: 1
+      mid21:
+        chance: 0.026176
+        item:
+          material: MUSIC_DISC_WAIT
+          amount: 1
+      mid22:
+        chance: 0.026176
+        item:
+          material: MUSIC_DISC_WARD
+          amount: 1
+      mid23:
+        chance: 0.026176
+        item:
+          material: MINECART
+          amount: 1
+      mid24:
+        chance: 0.026176
+        mooshroom:
+          material: MOOSHROOM_SPAWN_EGG
+          amount: 1
+      mid25:
+        chance: 0.026176
+        horse:
+          material: HORSE_SPAWN_EGG
+          amount: 1
+      mid26:
+        chance: 0.026176
+        rabbit:
+          material: RABBIT_SPAWN_EGG
+          amount: 1
+      mid27:
+        chance: 0.026176
+        ocelot:
+          material: OCELOT_SPAWN_EGG
+          amount: 1
+      mid28:
+        chance: 0.026176
+        squid:
+          material: SQUID_SPAWN_EGG
+          amount: 1
+      mid29:
+        chance: 0.026176
+        wolf:
+          material: WOLF_SPAWN_EGG
+          amount: 1
       mid30:
         chance: 0.026176
         item:
@@ -11221,9 +10787,8 @@ recipes:
         material: STONE
         amount: 64
       granite:
-        material: STONE
+        material: GRANITE
         amount: 64
-        durability: 1
       coalore:
         material: COAL_ORE
         amount: 16
@@ -11243,9 +10808,8 @@ recipes:
         material: STONE
         amount: 64
       granite:
-        material: STONE
+        material: GRANITE
         amount: 64
-        durability: 5
       coalore:
         material: COAL_ORE
         amount: 16
@@ -11264,10 +10828,9 @@ recipes:
       stone:
         material: STONE
         amount: 64
-      granite:
-        material: STONE
+      diorite:
+        material: DIORITE
         amount: 64
-        durability: 3
       coalore:
         material: COAL_ORE
         amount: 16
@@ -11284,7 +10847,7 @@ recipes:
     name: Produce basic ink splashed Hunter Component
     input:
       inksack:
-        material: INK_SACK
+        material: INK_SAC
         amount: 4
       bone:
         material: BONE
@@ -11302,7 +10865,7 @@ recipes:
   Produce_basic_sticky_Hunter_Component:
     type: PRODUCTION
     production_time: 2s
-    name: Produce basic sticky Hunter Component
+    name: Produce basic sticky Hunter Component (Spider Eye)
     input:
       inksack:
         material: SPIDER_EYE
@@ -11320,7 +10883,7 @@ recipes:
   Produce_basic_mysterious_Hunter_Component:
     type: PRODUCTION
     production_time: 2s
-    name: Produce basic mysterious Hunter Component
+    name: Produce basic mysterious Hunter Component (Ender Pearl)
     input:
       inksack:
         material: ENDER_PEARL
@@ -11442,7 +11005,7 @@ recipes:
         amount: 8
     output:
       decentHunter:
-        material: SULPHUR
+        material: GUNPOWDER
         name: Hunter Component
         lore: 
          - Decent Reinforcement Ingredient
@@ -11462,11 +11025,11 @@ recipes:
         material: MAGMA_CREAM
         amount: 8
       gunpowder:
-        material: SULPHUR
+        material: GUNPOWDER
         amount: 6
     output:
       decentHunter:
-        material: SULPHUR
+        material: GUNPOWDER
         name: Hunter Component
         lore: 
          - Decent Reinforcement Ingredient
@@ -11483,7 +11046,7 @@ recipes:
          - Decent Reinforcement Ingredient
         amount: 3
       decentHunter:
-        material: SULPHUR
+        material: GUNPOWDER
         name: Hunter Component
         lore: 
          - Decent Reinforcement Ingredient
@@ -11498,7 +11061,7 @@ recipes:
   Produce_strong_Hunter_Component:
     type: PRODUCTION
     production_time: 4s
-    name: Produce strong Hunter Component
+    name: Produce strong Hunter Component (Miner)
     input:
       decentMiner:
         material: QUARTZ
@@ -11510,8 +11073,7 @@ recipes:
         material: GHAST_TEAR
         amount: 6
       witherskull:
-        material: SKULL_ITEM
-        durability: 1
+        material: WITHER_SKELETON_SKULL
         amount: 2
     output:
       strongHunter:
@@ -11524,10 +11086,10 @@ recipes:
   Produce_strong_Hunter_Component2:
     type: PRODUCTION
     production_time: 4s
-    name: Produce strong Hunter Component
+    name: Produce strong Hunter Component (Hunter)
     input:
       decentHunter:
-        material: SULPHUR
+        material: GUNPOWDER
         name: Hunter Component
         lore: 
          - Decent Reinforcement Ingredient
@@ -11536,8 +11098,7 @@ recipes:
         material: GHAST_TEAR
         amount: 6
       witherskull:
-        material: SKULL_ITEM
-        durability: 1
+        material: WITHER_SKELETON_SKULL
         amount: 2
     output:
       strongHunter:
@@ -11553,7 +11114,7 @@ recipes:
     name: Produce strong Miner Component
     input:
       decentHunter:
-        material: SULPHUR
+        material: GUNPOWDER
         name: Hunter Component
         lore: 
          - Decent Reinforcement Ingredient
@@ -11562,8 +11123,7 @@ recipes:
         material: DIAMOND
         amount: 4
       lapis:
-        material: INK_SACK
-        durability: 4
+        material: LAPIS_LAZULI
         amount: 8
     output:
       strongMiner:
@@ -11588,8 +11148,7 @@ recipes:
         material: DIAMOND
         amount: 4
       lapis:
-        material: INK_SACK
-        durability: 4
+        material: LAPIS_LAZULI
         amount: 8
     output:
       strongMiner:
@@ -11629,19 +11188,17 @@ recipes:
     name: Produce Bracers
     input:
       stone:
-        material: STONE
-        durability: -1
+        material: STONE # ANY
         amount: 64
       sand:
-        material: SAND
-        durability: -1
+        material: SAND # ANY
         amount: 64
       gravel:
         material: GRAVEL
         amount: 64
     output:
       bracers:
-        material: NETHER_BRICK_ITEM
+        material: NETHER_BRICK
         lore:
          - Structure Bracing
         amount: 64
@@ -11695,7 +11252,7 @@ recipes:
         amount: 12
     output:
       goodInstantRein:
-        material: FIREWORK_CHARGE
+        material: FIREWORK_STAR
         lore:
          - Rapid Reinforcement
         amount: 32
@@ -11705,7 +11262,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Basic Fortification
     factory: Basic Fortifications
-    fuel_consumption_intervall: 10s
+    fuel_consumption_interval: 10s
     input:
       basicMiner:
         material: FLINT
@@ -11725,7 +11282,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Intermediate Fortification
     factory: Intermediate Fortifications
-    fuel_consumption_intervall: 1m
+    fuel_consumption_interval: 1m
     input:
       decentMiner:
         material: QUARTZ
@@ -11734,7 +11291,7 @@ recipes:
          - Decent Reinforcement Ingredient
         amount: 8
       decentHunter:
-        material: SULPHUR
+        material: GUNPOWDER
         name: Hunter Component
         lore: 
          - Decent Reinforcement Ingredient
@@ -11745,7 +11302,7 @@ recipes:
     type: UPGRADE
     name: Upgrade to Advanced Fortification
     factory: Advanced Fortifications
-    fuel_consumption_intervall: 15m
+    fuel_consumption_interval: 15m
     input:
       strongMiner:
         material: PRISMARINE

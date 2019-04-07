@@ -109,9 +109,14 @@ public class PylonRecipe extends InputRecipe {
 			res = out.get(0);
 		}
 		ItemMeta im = res.getItemMeta();
-		im.setDisplayName(getName());
+		im.setDisplayName(ChatColor.RESET + name);
 		res.setItemMeta(im);
 		return res;
+	}
+
+	@Override
+	public RecipeType getTypeIdentifier() {
+		return RecipeType.PYLON;
 	}
 
 	public static void addWeight(int weight) {
@@ -129,5 +134,4 @@ public class PylonRecipe extends InputRecipe {
 	public static int getGlobalLimit() {
 		return globalLimit;
 	}
-
 }

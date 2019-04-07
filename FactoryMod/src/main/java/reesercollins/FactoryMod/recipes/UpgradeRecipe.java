@@ -48,7 +48,7 @@ public class UpgradeRecipe extends InputRecipe {
 		ItemMeta im = res.getItemMeta();
 		im.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		im.setDisplayName(getName());
+		im.setDisplayName(ChatColor.RESET + name);
 		res.setItemMeta(im);
 		return res;
 	}
@@ -87,7 +87,7 @@ public class UpgradeRecipe extends InputRecipe {
 
 		ItemStack cr = new ItemStack(Material.CRAFTING_TABLE);
 		ItemMeta crMeta = cr.getItemMeta();
-		crMeta.setDisplayName(builder.getName());
+		crMeta.setDisplayName(ChatColor.RESET + builder.getName());
 		crMeta.setLore(
 				new ArrayList<String>(Arrays.asList(ChatColor.LIGHT_PURPLE + "Upgrade to get new and better recipes")));
 		cr.setItemMeta(crMeta);
@@ -95,7 +95,7 @@ public class UpgradeRecipe extends InputRecipe {
 
 		ItemStack fur = new ItemStack(Material.FURNACE);
 		ItemMeta furMeta = fur.getItemMeta();
-		furMeta.setDisplayName(builder.getName());
+		furMeta.setDisplayName(ChatColor.RESET + builder.getName());
 		List<String> furLore = new ArrayList<String>();
 		furLore.add(ChatColor.LIGHT_PURPLE + "Recipes:");
 		for (IRecipe rec : ((ProductionBuilder) builder).getRecipes()) {
@@ -111,7 +111,7 @@ public class UpgradeRecipe extends InputRecipe {
 		cheLore.add(ChatColor.LIGHT_PURPLE + "Careful, you can not");
 		cheLore.add(ChatColor.LIGHT_PURPLE + "revert upgrades!");
 		cheMeta.setLore(cheLore);
-		cheMeta.setDisplayName(builder.getName());
+		cheMeta.setDisplayName(ChatColor.RESET + builder.getName());
 		che.setItemMeta(cheMeta);
 		res.add(che);
 		return res;
@@ -119,6 +119,11 @@ public class UpgradeRecipe extends InputRecipe {
 
 	public IFactoryBuilder getBuilder() {
 		return builder;
+	}
+
+	@Override
+	public RecipeType getTypeIdentifier() {
+		return RecipeType.UPGRADE;
 	}
 
 }

@@ -67,12 +67,12 @@ public class FactoryManager {
 		possibleInteractionBlocks.add(Material.CHEST);
 
 		// Sorter
-		possibleCenterBlocks.add(Material.DROPPER);
-		possibleInteractionBlocks.add(Material.DROPPER);
+//		possibleCenterBlocks.add(Material.DROPPER);
+//		possibleInteractionBlocks.add(Material.DROPPER);
 
 		// Pipe
-		possibleCenterBlocks.add(Material.DISPENSER);
-		possibleInteractionBlocks.add(Material.DISPENSER);
+//		possibleCenterBlocks.add(Material.DISPENSER);
+//		possibleInteractionBlocks.add(Material.DISPENSER);
 	}
 
 	/**
@@ -482,9 +482,9 @@ public class FactoryManager {
 		recipes.put(recipe.getIdentifier(), recipe);
 	}
 
-	public void saveFactories() {
+	public void saveFactories(boolean onShutdown) {
 		plugin.info("Attempting to save factory data");
-		fileManager.save(getAllFactories());
+		fileManager.save(getAllFactories(), onShutdown);
 	}
 
 	public void loadFactories() {
@@ -497,7 +497,7 @@ public class FactoryManager {
 	 * deactivate them, so the deactivated block state is saved
 	 */
 	public void shutDown() {
-		saveFactories();
+		saveFactories(true);
 		for (Factory f : factories) {
 			f.deactivate();
 		}

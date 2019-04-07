@@ -104,7 +104,7 @@ public class ProductionRecipe extends InputRecipe {
 
 	@Override
 	public List<ItemStack> getOutputRepresentation(Inventory i, ProductionFactory pf) {
-		if (i == null || pf == null) {
+		if (i == null || pf == null || modifier == null) {
 			return output.getItemStackRepresentation();
 		}
 		ItemMap currentOut = getGuaranteedOutput(pf.getRecipeLevel(this), pf.getRunCount(this));
@@ -140,9 +140,14 @@ public class ProductionRecipe extends InputRecipe {
 			res = out.get(0);
 		}
 		ItemMeta im = res.getItemMeta();
-		im.setDisplayName(getName());
+		im.setDisplayName(ChatColor.RESET + name);
 		res.setItemMeta(im);
 		return res;
+	}
+
+	@Override
+	public RecipeType getTypeIdentifier() {
+		return RecipeType.PRODUCTION;
 	}
 
 }

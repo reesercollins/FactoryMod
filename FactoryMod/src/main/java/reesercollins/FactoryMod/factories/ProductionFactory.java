@@ -47,9 +47,8 @@ public class ProductionFactory extends Factory {
 
 	private static HashSet<ProductionFactory> pylonFactories;
 
-	public ProductionFactory(IInteractionManager im, IRepairManager rm, IPowerManager ipm,
-			ProductionStructure mbs, int updateTime, String name, List<IRecipe> recipes,
-			double citadelBreakReduction) {
+	public ProductionFactory(IInteractionManager im, IRepairManager rm, IPowerManager ipm, ProductionStructure mbs,
+			int updateTime, String name, List<IRecipe> recipes, double citadelBreakReduction) {
 		super(im, rm, ipm, mbs, updateTime, name);
 		this.active = false;
 		this.runCount = new HashMap<IRecipe, Integer>();
@@ -248,7 +247,7 @@ public class ProductionFactory extends Factory {
 	public Block getChest() {
 		return ((ProductionStructure) mbs).getChest();
 	}
-	
+
 	/**
 	 * @return The crafting table of this factory
 	 */
@@ -347,7 +346,8 @@ public class ProductionFactory extends Factory {
 						deactivate();
 						return;
 					}
-					sendActivatorMessage(ChatColor.GOLD + currentRecipe.getName().toString() + " in " + name + " completed");
+					sendActivatorMessage(
+							ChatColor.GOLD + currentRecipe.getName().toString() + " in " + name + " completed");
 					if (currentRecipe instanceof UpgradeRecipe || currentRecipe instanceof RecipeScalingUpgradeRecipe) {
 						// this if else might look a bit weird, but because
 						// upgrading changes the current recipe and a lot of

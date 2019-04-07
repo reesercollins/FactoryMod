@@ -58,13 +58,18 @@ public class RepairRecipe extends InputRecipe {
 	public ItemStack getRecipeRepresentation() {
 		ItemStack res = new ItemStack(Material.GOLDEN_APPLE);
 		ItemMeta resResult = res.getItemMeta();
-		resResult.setDisplayName(getName());
+		resResult.setDisplayName(ChatColor.RESET + name);
 		res.setItemMeta(resResult);
 		return res;
 	}
 
 	public int getHealth() {
 		return healthPerRun;
+	}
+
+	@Override
+	public RecipeType getTypeIdentifier() {
+		return RecipeType.REPAIR;
 	}
 
 }
