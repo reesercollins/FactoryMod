@@ -4765,7 +4765,11 @@ recipes:
         material: COOKED_BEEF
         amount: 768
       pork:
+<<<<<<< HEAD
         material: COOKED_PORKCHOP
+=======
+        material: COOKED_PORK
+>>>>>>> branch 'master' of https://github.com/reesercollins/FactoryMod.git
         amount: 768
       mutton:
         material: COOKED_MUTTON
