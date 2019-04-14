@@ -48,8 +48,8 @@ public class ProductionFactory extends Factory {
 	private static HashSet<ProductionFactory> pylonFactories;
 
 	public ProductionFactory(IInteractionManager im, IRepairManager rm, IPowerManager ipm, ProductionStructure mbs,
-			int updateTime, String name, List<IRecipe> recipes, double citadelBreakReduction) {
-		super(im, rm, ipm, mbs, updateTime, name);
+			int updateTime, String name, Material representation, List<IRecipe> recipes, double citadelBreakReduction) {
+		super(im, rm, ipm, mbs, updateTime, name, representation);
 		this.active = false;
 		this.runCount = new HashMap<IRecipe, Integer>();
 		this.recipeLevel = new HashMap<IRecipe, Integer>();
@@ -502,7 +502,7 @@ public class ProductionFactory extends Factory {
 		pylonFactories.remove(f);
 	}
 
-	public void upgrade(String name, List<IRecipe> recipes, ItemStack fuel, int fuelConsumptionIntervall,
+	public void upgrade(String name, List<IRecipe> recipes, ItemStack fuel, int fuelConsumptionInterval,
 			int updateTime, int maximumHealth, int damageAmountPerDecayIntervall, long gracePeriod,
 			double citadelBreakReduction) {
 		LoggingUtils.log("Upgrading " + getLogData() + " to " + name);
@@ -512,7 +512,7 @@ public class ProductionFactory extends Factory {
 		this.recipes = recipes;
 		this.updateTime = updateTime;
 		this.citadelBreakReduction = citadelBreakReduction;
-		this.pm = new FurnacePowerManager(getFurnace(), fuel, fuelConsumptionIntervall);
+		this.pm = new FurnacePowerManager(getFurnace(), fuel, fuelConsumptionInterval);
 		this.rm = new PercentageHealthRepairManager(maximumHealth, maximumHealth, 0, damageAmountPerDecayIntervall,
 				gracePeriod);
 		if (recipes.size() != 0) {

@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import reesercollins.FactoryMod.FMPlugin;
 import reesercollins.FactoryMod.builders.IFactoryBuilder;
 import reesercollins.FactoryMod.builders.ProductionBuilder;
 import reesercollins.FactoryMod.factories.ProductionFactory;
@@ -29,7 +30,8 @@ public class UpgradeRecipe extends InputRecipe {
 	}
 
 	public void applyEffect(Inventory i, ProductionFactory pf) {
-		logAfterRecipeRun(i, pf);
+		logBeforeRecipeRun(i, pf);
+		FMPlugin.getManager().setSafeToSave(false);
 		if (input.isContainedIn(i)) {
 			if (input.removeSafelyFrom(i)) {
 				ProductionBuilder e = (ProductionBuilder) builder;
@@ -38,6 +40,7 @@ public class UpgradeRecipe extends InputRecipe {
 						e.getBreakReduction());
 			}
 		}
+		FMPlugin.getManager().setSafeToSave(true);
 		logAfterRecipeRun(i, pf);
 	}
 

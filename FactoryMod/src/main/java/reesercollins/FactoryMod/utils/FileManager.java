@@ -186,7 +186,7 @@ public class FileManager {
 		} catch (Exception e) {
 			// In case anything goes wrong while saving we always keep the
 			// latest valid backup
-			plugin.error("Fatal error while trying to save factory data", true);
+			plugin.error("Fatal error while trying to save factory data: ", false);
 			e.printStackTrace();
 			saveFile.delete();
 		}

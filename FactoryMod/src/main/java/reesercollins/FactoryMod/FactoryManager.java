@@ -42,6 +42,7 @@ public class FactoryManager {
 	private HashMap<Class<? extends MultiBlockStructure>, HashMap<ItemMap, IFactoryBuilder>> factoryCreationRecipes;
 	private HashMap<IFactoryBuilder, ItemMap> totalSetupCosts;
 	private Set<String> compactLore;
+	private boolean safeToSave;
 
 	public FactoryManager(FMPlugin plugin, Material factoryInteractionMaterial, boolean logInventories,
 			Map<String, String> factoryRenames) {
@@ -125,10 +126,12 @@ public class FactoryManager {
 	 * @param f Factory to add
 	 */
 	public void addFactory(Factory f) {
+		safeToSave = false;
 		factories.add(f);
 		for (Block b : f.getMultiBlockStructure().getReleventBlocks()) {
 			locations.put(b.getLocation(), f);
 		}
+		safeToSave = true;
 	}
 
 	/**
@@ -137,6 +140,7 @@ public class FactoryManager {
 	 * @param f Factory to remove
 	 */
 	public void removeFactory(Factory f) {
+		safeToSave = false;
 		if (f.isActive()) {
 			f.deactivate();
 		}
@@ -145,6 +149,7 @@ public class FactoryManager {
 		for (Location b : f.getMultiBlockStructure().getAllBlocks()) {
 			locations.remove(b);
 		}
+		safeToSave = true;
 	}
 
 	/**
@@ -481,10 +486,22 @@ public class FactoryManager {
 	public void registerRecipe(IRecipe recipe) {
 		recipes.put(recipe.getIdentifier(), recipe);
 	}
+	
+	public boolean isSafeToSave() {
+		return safeToSave;
+	}
+	
+	public void setSafeToSave(boolean safeToSave) {
+		this.safeToSave = safeToSave;
+	}
 
 	public void saveFactories(boolean onShutdown) {
 		plugin.info("Attempting to save factory data");
-		fileManager.save(getAllFactories(), onShutdown);
+		if (safeToSave) {
+			fileManager.save(getAllFactories(), onShutdown);
+		} else {
+			plugin.info("Cannot save factory data, it is not safe.");
+		}
 	}
 
 	public void loadFactories() {

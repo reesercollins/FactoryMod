@@ -132,6 +132,7 @@ factories:
     #Basic Contraption --> Stone Smelter
     type: PRODUCTION_UPGRADE
     name: Stone Smelter
+    representation: STONE
     citadelBreakReduction: 0.4
     recipes:
     - Smelt_Stone_Advanced
@@ -148,6 +149,7 @@ factories:
     #Basic Contraption --> Stone Smelter --> Ore Smelter
     type: PRODUCTION_UPGRADE
     name: Ore Smelter
+    representation: COAL_ORE
     citadelBreakReduction: 0.1
     recipes:
     - Smelt_Coal_Ore_Advanced
@@ -162,6 +164,7 @@ factories:
     #Basic Contraption --> Stone Smelter --> Ore Smelter --> Ore Forge
     type: PRODUCTION_UPGRADE
     name: Ore Forge
+    representation: IRON_ORE
     citadelBreakReduction: 0.05
     recipes:
     - Smelt_Coal_Ore_Expert
@@ -174,6 +177,7 @@ factories:
     #Basic Contraption --> Stone Smelter --> Ore Smelter --> Gem Extractor
     type: PRODUCTION_UPGRADE
     name: Gem Extractor
+    representation: DIAMOND_ORE
     citadelBreakReduction: 0.05
     recipes:
     - Extract_Diamonds
@@ -189,6 +193,7 @@ factories:
     #Basic Contraption --> Stone Smelter --> Sand Smelter
     type: PRODUCTION_UPGRADE
     name: Sand Smelter
+    representation: SAND
     citadelBreakReduction: 0.2
     recipes:
     - Smelt_Glass_Advanced
@@ -204,6 +209,7 @@ factories:
     #Basic Contraption --> Stone Smelter --> Sand Smelter --> Glass Dying Factory
     type: PRODUCTION_UPGRADE
     name: Glass Dying Factory
+    representation: WHITE_STAINED_GLASS
     citadelBreakReduction: 0.1    
     recipes:
     - Dye_Glass_White
@@ -244,6 +250,7 @@ factories:
     #Basic Contraption --> Stone Smelter --> Sand Smelter --> Glass Blowing Workshop
     type: PRODUCTION_UPGRADE
     name: Glass Blowing Workshop
+    representation: GLASS_BOTTLE
     citadelBreakReduction: 0.1
     recipes:
     - Smelt_Glass_Expert
@@ -255,6 +262,7 @@ factories:
     #Basic Contraption --> Stone Smelter --> Sand Smelter --> Sandstone Smelter
     type: PRODUCTION_UPGRADE
     name: Sandstone Smelter
+    representation: SANDSTONE
     citadelBreakReduction: 0.1
     recipes:
     - Smelt_Sandstone_Advanced
@@ -275,6 +283,7 @@ factories:
     #Basic Contraption --> Stone Smelter --> Brick Smelter
     type: PRODUCTION_UPGRADE
     name: Brick Smelter
+    representation: BRICKS
     citadelBreakReduction: 0.2
     recipes:
     - Smelt_Stone_Advanced
@@ -291,6 +300,7 @@ factories:
     #Basic Contraption --> Stone Smelter --> Brick Smelter --> Fancy Stone Smelter
     type: PRODUCTION_UPGRADE
     name: Fancy Stone Smelter
+    representation: POLISHED_ANDESITE
     citadelBreakReduction: 0.1
     recipes:
     - Smelt_Stone_Expert
@@ -302,6 +312,7 @@ factories:
     #Basic Contraption --> Stone Smelter --> Brick Smelter --> Stonebrick Smelter
     type: PRODUCTION_UPGRADE
     name: Stonebrick Smelter
+    representation: STONE_BRICKS
     citadelBreakReduction: 0.1
     recipes:
     - Craft_Stonebricks_Advanced
@@ -315,6 +326,7 @@ factories:
     #Basic Contraption --> Stone Smelter --> Brick Smelter --> Netherbrick Smelter
     type: PRODUCTION_UPGRADE
     name: Netherbrick Smelter
+    representation: NETHER_BRICK
     citadelBreakReduction: 0.1
     recipes:
     - Smelt_Netherbrick_Advanced
@@ -327,6 +339,7 @@ factories:
     #Basic Contraption --> Stone Smelter --> Brick Smelter --> Aquatic Brick Smelter
     type: PRODUCTION_UPGRADE
     name: Aquatic Brick Smelter
+    representation: PRISMARINE_BRICKS
     citadelBreakReduction: 0.1
     recipes:
     - Smelt_Prismarine
@@ -339,6 +352,7 @@ factories:
     #Basic Contraption --> Stone Smelter --> Brick Smelter --> Quartz Factory
     type: PRODUCTION_UPGRADE
     name: Quartz Factory
+    representation: QUARTZ_BLOCK
     citadelBreakReduction: 0.1
     recipes:
     - Craft_Quartz_Slabs
@@ -353,6 +367,7 @@ factories:
     #Basic Contraption --> Stone Smelter --> Kiln
     type: PRODUCTION_UPGRADE
     name: Kiln
+    representation: TERRACOTTTA
     citadelBreakReduction: 0.1
     recipes:
     - Smelt_Clay_Bricks
@@ -364,6 +379,7 @@ factories:
   woodprocessor:
     type: PRODUCTION_UPGRADE
     name: Wood Processor
+    representation: OAK_LOG
     citadelBreakReduction: 0.4
     recipes:
     - Burn_Charcoal_from_Logs_Advanced
@@ -376,6 +392,7 @@ factories:
   carpentry:
     type: PRODUCTION_UPGRADE
     name: Carpentry
+    representation: OAK_PLANKS
     citadelBreakReduction: 0.2
     recipes:
     - Craft_Boat
@@ -389,6 +406,7 @@ factories:
   finewoodworking:
     type: PRODUCTION_UPGRADE
     name: Fine Woodworking
+    representation: OAK_FENCE
     citadelBreakReduction: 0.2
     recipes:
     - Craft_any_type_of_fence
@@ -399,6 +417,7 @@ factories:
   coalburner:
     type: PRODUCTION_UPGRADE
     name: Coal Burner
+    representation: CHARCOAL
     citadelBreakReduction: 0.2
     recipes:
     - Burn_Charcoal_from_Logs_Expert
@@ -407,6 +426,7 @@ factories:
   farmsteadfactory:
     type: PRODUCTION_UPGRADE
     name: Farmstead Factory
+    representation: COOKED_BEEF
     citadelBreakReduction: 0.4
     recipes:
     - Bake_Bread_Advanced
@@ -423,6 +443,7 @@ factories:
   bakery:
     type: PRODUCTION_UPGRADE
     name: Bakery
+    representation: BREAD
     citadelBreakReduction: 0.1
     recipes:
     - Bake_Potatoes
@@ -435,6 +456,7 @@ factories:
   grill:
     type: PRODUCTION_UPGRADE
     name: Grill
+    representation: COOKED_PORKCHOP
     citadelBreakReduction: 0.1
     recipes:
     - Grill_Steak_Advanced
@@ -448,6 +470,7 @@ factories:
   stewmaker:
     type: PRODUCTION_UPGRADE
     name: Soup kitchen
+    representation: MUSHROOM_STEW
     citadelBreakReduction: 0.1
     recipes:
     - Make_Rabbit_Stew
@@ -458,6 +481,7 @@ factories:
   animalhusbandryfactorybasic:
     type: PRODUCTION_UPGRADE
     name: Animal Husbandry Factory
+    representation: NAMETAG
     citadelBreakReduction: 0.1
     recipes:
     - Craft_Saddles_Basic
@@ -466,7 +490,8 @@ factories:
     - Repair_Factory
   woolprocessor:
     type: PRODUCTION_UPGRADE
-    name: WHITE_WOOL Processing
+    name: Wool Processing
+    representation: WHITE_WOOL
     citadelBreakReduction: 0.2
     recipes:
     - Dye_Wool_Orange
@@ -488,6 +513,7 @@ factories:
   biolab:
     type: PRODUCTION_UPGRADE
     name: Bio Lab
+    representation: POPPY
     citadelBreakReduction: 0.2
     recipes:
     - Create_Poppy_Advanced
@@ -502,6 +528,7 @@ factories:
   grassgardening:
     type: PRODUCTION_UPGRADE
     name: Grass Gardening
+    representaion: GRASS
     citadelBreakReduction: 0.1
     recipes:
     - Mutate_Tall_Grass_Advanced
@@ -515,6 +542,7 @@ factories:
   flowergardening:
     type: PRODUCTION_UPGRADE
     name: Flower Gardening
+    representation: BLUE_ORCHID
     citadelBreakReduction: 0.1
     recipes:
     - Grow_random_flower
@@ -522,6 +550,7 @@ factories:
   treemutator:
     type: PRODUCTION_UPGRADE
     name: Tree Mutator
+    representation: OAK_SAPLING
     citadelBreakReduction: 0.1
     recipes:
     - Mutate_random_sapling
@@ -531,6 +560,7 @@ factories:
   organicblockfactory:
     type: PRODUCTION_UPGRADE
     name: Organic Block Factory
+    representation: MYCELIUM
     citadelBreakReduction: 0.1
     recipes:
     - Create_Podzol_Advanced
@@ -540,6 +570,7 @@ factories:
   blacksmith:
     type: PRODUCTION_UPGRADE
     name: Blacksmith
+    representation: STONE_SWORD
     citadelBreakReduction: 0.4
     recipes:
     - Forge_Stone_Sword
@@ -553,6 +584,7 @@ factories:
   ironforgebasic:
     type: PRODUCTION_UPGRADE
     name: Iron Forge
+    representation: ANVIL
     citadelBreakReduction: 0.1
     recipes:
     - Craft_Rail_Basic
@@ -564,6 +596,7 @@ factories:
   ironforgeadvanced:
     type: PRODUCTION_UPGRADE
     name: Steel Forge
+    representation: ANVIL
     citadelBreakReduction: 0.05
     recipes:
     - Craft_Shears
@@ -576,6 +609,7 @@ factories:
   railfactory:
     type: PRODUCTION_UPGRADE
     name: Rail Factory
+    representation: RAIL
     citadelBreakReduction: 0.05
     recipes:
     - Create_Rail_Advanced
@@ -586,6 +620,7 @@ factories:
   ironequipmentforge:
     type: PRODUCTION_UPGRADE
     name: Iron Equipment Forge
+    representation: IRON_SWORD
     citadelBreakReduction: 0.1
     recipes:
     - Forge_Iron_Pickaxe
@@ -604,6 +639,7 @@ factories:
   goldequipmentforge:
     type: PRODUCTION_UPGRADE
     name: Gold Equipment Forge
+    representation: GOLDENPICKAXE
     citadelBreakReduction: 0.1
     recipes:
     - Forge_Gold_Pickaxe_Basic
@@ -616,6 +652,7 @@ factories:
   diamondequipmentforge:
     type: PRODUCTION_UPGRADE
     name: Diamond Equipment Forge
+    representation: DIAMOND_PICKAXE
     citadelBreakReduction: 0.05
     recipes:
     - Forge_Diamond_Pickaxe_Basic
@@ -628,6 +665,7 @@ factories:
   goldarmourforge:
     type: PRODUCTION_UPGRADE
     name: Gold Armour Forge
+    representation: GOLDEN_CHESTPLATE
     citadelBreakReduction: 0.1
     recipes:
     - Forge_Gold_Helmet
@@ -639,6 +677,7 @@ factories:
   goldtoolsforge:
     type: PRODUCTION_UPGRADE
     name: Gold Tools Forge
+    representation: GOLDEN_SWORD
     citadelBreakReduction: 0.1
     recipes:
     - Forge_Gold_Pickaxe
@@ -650,6 +689,7 @@ factories:
   diamondarmourforge:
     type: PRODUCTION_UPGRADE
     name: Diamond Armour Forge
+    representation: DIAMOND_CHESTPLATE
     citadelBreakReduction: 0.025
     recipes:
     - Forge_Diamond_Helmet
@@ -661,6 +701,7 @@ factories:
   diamondtoolsforge:
     type: PRODUCTION_UPGRADE
     name: Diamond Tools Forge
+    representation: DIAMOND_SHOWD
     citadelBreakReduction: 0.025
     recipes:
     - Forge_Diamond_Pickaxe
@@ -672,6 +713,7 @@ factories:
   laboratory:
     type: PRODUCTION_UPGRADE
     name: Laboratory
+    representation: REDSTONE_REPEATER
     citadelBreakReduction: 0.4
     recipes:
     - Craft_Redstone_Repeater_Basic
@@ -691,6 +733,7 @@ factories:
   printingpress:
     type: PRODUCTION_UPGRADE
     name: Printing Press
+    representation: WRITABLE_BOOK
     citadelBreakReduction: 0.1
     recipes:
     - Bind_Books
@@ -699,6 +742,7 @@ factories:
   compactorbasic:
     type: PRODUCTION_UPGRADE
     name: Compactor Basic
+    representation: PISTON
     citadelBreakReduction: 0.2
     recipes:
     - Compact_Stack_Basic
@@ -709,6 +753,7 @@ factories:
   dedicatedcompactor:
     type: PRODUCTION_UPGRADE
     name: Dedicated Compactor
+    representation: PISTON
     citadelBreakReduction: 0.1
     updatetime: 5t
     recipes:
@@ -717,6 +762,7 @@ factories:
   dedicateddecompactor:
     type: PRODUCTION_UPGRADE
     name: Dedicated De-Compactor
+    representation: PISTON
     citadelBreakReduction: 0.1
     recipes:
     - De-compact_Stack_Advanced
@@ -724,6 +770,7 @@ factories:
   redstonefactorybasic:
     type: PRODUCTION_UPGRADE
     name: Redstone Techniques
+    representation: DISPENSER
     citadelBreakReduction: 0.1
     recipes:
     - Craft_Redstone_Repeater_Advanced
@@ -736,6 +783,7 @@ factories:
   redstonecircularityfactory:
     type: PRODUCTION_UPGRADE
     name: Redstone Electronics
+    representation: REDSTONE_COMPARATOR
     citadelBreakReduction: 0.05
     recipes:
     - Craft_Redstone_Repeater_Advanced
@@ -748,6 +796,8 @@ factories:
   redstonemechanicsfactory:
     type: PRODUCTION_UPGRADE
     name: Redstone Mechanics
+    representation: REDSTONE_LAMP
+    representation: 
     citadelBreakReduction: 0.05
     recipes:
     - Craft_Piston
@@ -784,6 +834,7 @@ factories:
   crystallizationfactory:
     type: PRODUCTION_UPGRADE
     name: Crystallization Factory
+    representation: ICE
     citadelBreakReduction: 0.1
     recipes:
      - Pack_Snow_To_Ice
@@ -793,6 +844,7 @@ factories:
   basicforge:
     type: PRODUCTION_UPGRADE
     name: Basic Forge
+    representation: ENCHANTED_BOOK
     citadelBreakReduction: 0.1
     recipes:
      - Enchant_Efficiency_Pickaxe_Basic
@@ -816,6 +868,7 @@ factories:
   emberforge:
     type: PRODUCTION_UPGRADE
     name: Ember Forge
+    representation: ENCHANTED_BOOK
     citadelBreakReduction: 0.1
     recipes:
      - Enchant_Helmet_FireP_I
@@ -836,6 +889,7 @@ factories:
   magmaforge:
     type: PRODUCTION_UPGRADE
     name: Magma Forge
+    representation: ENCHANTED_BOOK
     citadelBreakReduction: 0.05
     recipes:
      - Enchant_Helmet_FireP_I
@@ -870,6 +924,7 @@ factories:
   riverforge:
     type: PRODUCTION_UPGRADE
     name: River Forge
+    representation: ENCHANTED_BOOK
     citadelBreakReduction: 0.1
     recipes:
      - Enchant_DepthStrider_I
@@ -881,6 +936,7 @@ factories:
   oceanforge:
     type: PRODUCTION_UPGRADE
     name: Ocean Forge
+    representation: ENCHANTED_BOOK
     citadelBreakReduction: 0.05
     recipes:
      - Enchant_DepthStrider_I
@@ -897,6 +953,7 @@ factories:
   magicforge:
     type: PRODUCTION_UPGRADE
     name: Magic Forge
+    representation: ENCHANTED_BOOK
     citadelBreakReduction: 0.1
     recipes:
      - Enchant_FeatherFalling_I
@@ -909,6 +966,7 @@ factories:
   arcaneforge:
     type: PRODUCTION_UPGRADE
     name: Arcane Forge
+    representation: ENCHANTED_BOOK
     citadelBreakReduction: 0.05
     recipes:
      - Enchant_Infinity_I
@@ -929,6 +987,7 @@ factories:
   mithrilforge:
     type: PRODUCTION_UPGRADE
     name: Mithril Forge
+    representation: ENCHANTED_BOOK
     citadelBreakReduction: 0.1
     recipes:
      - Enchant_Helmet_Protection_I
@@ -945,6 +1004,7 @@ factories:
   titaniumforge:
     type: PRODUCTION_UPGRADE
     name: Titanium Forge
+    representation: ENCHANTED_BOOK
     citadelBreakReduction: 0.05
     recipes:
      - Enchant_Helmet_Protection_I
@@ -978,6 +1038,7 @@ factories:
   Meteorforge:
     type: PRODUCTION_UPGRADE
     name: Meteor Forge
+    representation: ENCHANTED_BOOK
     citadelBreakReduction: 0.025
     recipes:
      - Enchant_Helmet_Protection_I
@@ -1020,6 +1081,7 @@ factories:
   archerforge:
     type: PRODUCTION_UPGRADE
     name: Archer Forge
+    representation: ENCHANTED_BOOK
     citadelBreakReduction: 0.1
     recipes:
      - Enchant_Power_I
@@ -1033,6 +1095,7 @@ factories:
   marksmanforge:
     type: PRODUCTION_UPGRADE
     name: Marksman Forge
+    representation: ENCHANTED_BOOK
     citadelBreakReduction: 0.05
     recipes:
      - Enchant_Power_I
@@ -1057,6 +1120,7 @@ factories:
   sniperforge:
     type: PRODUCTION_UPGRADE
     name: Sniper Forge
+    representation: ENCHANTED_BOOK
     citadelBreakReduction: 0.025
     recipes:
      - Enchant_Power_I
@@ -1087,6 +1151,7 @@ factories:
   daggerforge:
     type: PRODUCTION_UPGRADE
     name: Dagger Forge
+    representation: ENCHANTED_BOOK
     citadelBreakReduction: 0.1
     recipes:
      - Enchant_Sharpness_I
@@ -1098,6 +1163,7 @@ factories:
   swordforge:
     type: PRODUCTION_UPGRADE
     name: Sword Forge
+    representation: ENCHANTED_BOOK
     citadelBreakReduction: 0.05
     recipes:
      - Enchant_Sharpness_I
@@ -1114,6 +1180,7 @@ factories:
   bladeforge:
     type: PRODUCTION_UPGRADE
     name: Blade Forge
+    representation: ENCHANTED_BOOK
     citadelBreakReduction: 0.025
     recipes:
      - Enchant_Sharpness_I
@@ -1133,6 +1200,7 @@ factories:
   quickforge:
     type: PRODUCTION_UPGRADE
     name: Quick Forge
+    representation: ENCHANTED_BOOK
     citadelBreakReduction: 0.1
     recipes:
      - Enchant_Pickaxe_Efficiency_I
@@ -1146,6 +1214,7 @@ factories:
   rapidforge:
     type: PRODUCTION_UPGRADE
     name: Rapid Forge
+    representation: ENCHANTED_BOOK
     citadelBreakReduction: 0.05
     recipes:
      - Enchant_Pickaxe_Efficiency_I
@@ -1165,6 +1234,7 @@ factories:
   sonicforge:
     type: PRODUCTION_UPGRADE
     name: Sonic Forge
+    representation: ENCHANTED_BOOK
     citadelBreakReduction: 0.025
     recipes:
      - Enchant_Pickaxe_Efficiency_I
@@ -1187,6 +1257,7 @@ factories:
   rockforge:
     type: PRODUCTION_UPGRADE
     name: Rock Forge
+    representation: ENCHANTED_BOOK
     citadelBreakReduction: 0.1
     recipes:
      - Enchant_Pickaxe_Unbreaking_I
@@ -1204,6 +1275,7 @@ factories:
   metalforge:
     type: PRODUCTION_UPGRADE
     name: Metal Forge
+    representation: ENCHANTED_BOOK
     citadelBreakReduction: 0.05
     recipes:
      - Enchant_Pickaxe_Unbreaking_I
@@ -1269,6 +1341,7 @@ factories:
   apprenticetransmuter:
     type: PRODUCTION_UPGRADE
     name: Apprentice Transmuter
+    representation: EXPERIENCE_BOTTLE
     citadelBreakReduction: 0.1
     recipes:
      - Aspen_Enrichment
@@ -1279,6 +1352,7 @@ factories:
   adepttransmuter:
     type: PRODUCTION_UPGRADE
     name: Adept Transmuter
+    representation: EXPERIENCE_BOTTLE
     citadelBreakReduction: 0.05
     recipes:
      - Aspen_Enrichment
@@ -1292,6 +1366,7 @@ factories:
   grandmastertransmuter:
     type: PRODUCTION_UPGRADE
     name: Grandmaster Transmuter
+    representation: EXPERIENCE_BOTTLE
     citadelBreakReduction: 0.025
     recipes:
      - Aspen_Enrichment
@@ -4765,11 +4840,7 @@ recipes:
         material: COOKED_BEEF
         amount: 768
       pork:
-<<<<<<< HEAD
         material: COOKED_PORKCHOP
-=======
-        material: COOKED_PORK
->>>>>>> branch 'master' of https://github.com/reesercollins/FactoryMod.git
         amount: 768
       mutton:
         material: COOKED_MUTTON

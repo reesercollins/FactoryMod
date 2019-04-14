@@ -226,6 +226,18 @@ public class ConfigParser {
 		return result;
 	}
 
+	public static String getFactoryName(String[] args) {
+		if (args.length == 0) {
+			return "";
+		}
+		StringBuilder sb = new StringBuilder();
+		for (String arg : args) {
+			sb.append(arg);
+			sb.append(" ");
+		}
+		return sb.toString().substring(0, sb.length() - 1);
+	}
+
 	private static long getLastNumber(String arg) {
 		StringBuilder number = new StringBuilder();
 		for (int i = arg.length() - 2; i >= 0; i--) {
@@ -936,6 +948,7 @@ public class ConfigParser {
 
 	public IFactoryBuilder parseProductionFactory(ConfigurationSection config) {
 		String name = config.getString("name");
+		Material representation = Material.getMaterial(config.getString("representation", "CRAFTING_TABLE"));
 		double returnRate = config.getDouble("return_rate", defaultReturnRate);
 		;
 		int update;
@@ -972,8 +985,8 @@ public class ConfigParser {
 		}
 		int healthPerDamageInterval = config.getInt("decay_amount", defaultDamagePerBreakPeriod);
 		double citadelBreakReduction = config.getDouble("citadelBreakReduction", 1.0);
-		ProductionBuilder builder = new ProductionBuilder(name, update, null, fuel, fuelInterval, returnRate, health,
-				gracePeriod, healthPerDamageInterval, citadelBreakReduction);
+		ProductionBuilder builder = new ProductionBuilder(name, representation, update, null, fuel, fuelInterval,
+				returnRate, health, gracePeriod, healthPerDamageInterval, citadelBreakReduction);
 		recipeLists.put(builder, config.getStringList("recipes"));
 		return builder;
 	}

@@ -21,15 +21,17 @@ public abstract class Factory implements Runnable {
 	protected int updateTime;
 	protected String name;
 	protected int threadId;
+	protected Material representation;
 
 	public Factory(IInteractionManager im, IRepairManager rm, IPowerManager pm, MultiBlockStructure mbs, int updateTime,
-			String name) {
+			String name, Material representation) {
 		this.im = im;
 		this.rm = rm;
 		this.mbs = mbs;
 		this.pm = pm;
 		this.updateTime = updateTime;
 		this.name = name;
+		this.representation = representation;
 	}
 	
 	public enum FactoryType {

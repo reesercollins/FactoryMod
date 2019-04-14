@@ -22,6 +22,7 @@ import reesercollins.FactoryMod.structures.ProductionStructure;
 public class ProductionBuilder implements IFactoryBuilder {
 
 	private String name;
+	private Material representation;
 	private int updateTime;
 	private List<IRecipe> recipes;
 	private ItemStack fuel;
@@ -32,10 +33,11 @@ public class ProductionBuilder implements IFactoryBuilder {
 	private double returnRateOnDestruction;
 	private double breakReduction;
 
-	public ProductionBuilder(String name, int updateTime, List<IRecipe> recipes, ItemStack fuel,
+	public ProductionBuilder(String name, Material representation, int updateTime, List<IRecipe> recipes, ItemStack fuel,
 			int fuelConsumptionInterval, double returnRateOnDestruction, int maximumHealth, long breakGracePeriod,
 			int healthPerDamagePeriod, double breakReduction) {
-		this.name = name;	
+		this.name = name;
+		this.representation = representation;
 		this.updateTime = updateTime;
 		this.recipes = recipes;
 		this.fuel = fuel;
@@ -82,6 +84,10 @@ public class ProductionBuilder implements IFactoryBuilder {
 	public double getBreakReduction() {
 		return breakReduction;
 	}
+	
+	public Material getRepresentation() {
+		return representation;
+	}
 
 	public Factory revive(List<Location> blocks, int health, String selectedRecipe, int productionTimer, long breakTime,
 			List<String> recipeStrings) {
@@ -109,7 +115,7 @@ public class ProductionBuilder implements IFactoryBuilder {
 				}
 			}
 		}
-		ProductionFactory pf = new ProductionFactory(pim, phrm, fpm, ps, updateTime, name, currRecipes,
+		ProductionFactory pf = new ProductionFactory(pim, phrm, fpm, ps, updateTime, name, representation, currRecipes,
 				breakReduction);
 		pim.setFactory(pf);
 		phrm.setFactory(pf);
@@ -137,7 +143,7 @@ public class ProductionBuilder implements IFactoryBuilder {
 		ProductionInteractionManager pim = new ProductionInteractionManager();
 		PercentageHealthRepairManager phrm = new PercentageHealthRepairManager(maximumHealth, maximumHealth, 0,
 				healthPerDamagePeriod, breakGracePeriod);
-		ProductionFactory pf = new ProductionFactory(pim, phrm, fpm, ps, updateTime, name, recipes, breakReduction);
+		ProductionFactory pf = new ProductionFactory(pim, phrm, fpm, ps, updateTime, name, representation, recipes, breakReduction);
 		pim.setFactory(pf);
 		phrm.setFactory(pf);
 		if (recipes.size() != 0) {

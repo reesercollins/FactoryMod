@@ -112,7 +112,7 @@ public class ProductionInteractionManager implements IInteractionManager {
 				}
 			}
 		} else if (b.equals(pf.getCraftingTable())) {
-			int rows = (pf.getRecipes().size() / 9) + 1;
+			int rows = ((pf.getRecipes().size() + 2) / 9) + 1;
 			ClickableInventory ci = new ClickableInventory(rows * 9, "Select a recipe");
 			for (IRecipe rec : pf.getRecipes()) {
 				InputRecipe recipe = (InputRecipe) rec;
